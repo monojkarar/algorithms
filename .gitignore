@@ -20,6 +20,12 @@
 # User-specific stuff:
 .idea/workspace.xml
 .idea/tasks.xml
+.idea/.name
+.idea/checkstyle-idea.xml
+.idea/compiler.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
 
 # Sensitive or high-churn files:
 .idea/dataSources/
@@ -36,6 +42,8 @@
 
 # Mongo Explorer plugin:
 .idea/mongoSettings.xml
+
+algorithms.iml
 
 ## File-based project format:
 *.iws
