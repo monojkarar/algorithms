@@ -147,8 +147,7 @@ public class QueueStack<T> {
     }
 
     /**
-     * Removes all items off the stack.
-     * Inserting first N items takes time proportional to N (not N^2)
+     * Resize the stack.
      */
     private void resize(int capacity) {
         assert capacity >= n;

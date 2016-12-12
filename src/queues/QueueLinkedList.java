@@ -1,5 +1,7 @@
 package queues;
 
+import edu.princeton.cs.algs4.Queue;
+
 import java.util.Iterator;
 
 /**
@@ -133,23 +135,6 @@ public class QueueLinkedList<T> implements Iterable<T> {
     }
 
     /**
-     * Display the queue
-     * Average time complexity for traversing list: O(n).
-     * Start at the reference stored in firstLink and keep getting the references stored in next for every Link until
-     * next returns null
-     */
-    private void display() {
-
-        QueueLinkedList.Node theLink = first;
-
-        while (theLink != null) {
-            System.out.println(theLink.toString());
-            theLink = theLink.next;
-        }
-        System.out.println();
-    }
-
-    /**
      * Returns an iterator that iterates over the items in this queue in FIFO order.
      *
      * @return an iterator that iterates over the items in this queue in FIFO order
@@ -185,10 +170,13 @@ public class QueueLinkedList<T> implements Iterable<T> {
         q.enqueue(2);
         q.enqueue(3);
         q.enqueue(5);
-        q.display();
+        for (Integer item : q)
+            System.out.println(item);
+        System.out.println();
         q.dequeue();    // remove 2
         q.dequeue();    // remove 3
         q.enqueue(10);
-        q.display();
+        for (Integer item : q)
+            System.out.println(item);
     }
 }
