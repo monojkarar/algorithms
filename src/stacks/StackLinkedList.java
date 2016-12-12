@@ -1,5 +1,8 @@
 package stacks;
 
+import queues.QueueLinkedList;
+
+import java.util.Iterator;
 import java.util.Scanner;
 
 /**
@@ -35,7 +38,7 @@ import java.util.Scanner;
  * makeEmpty: removes all the elements
  */
 
-public class StackLinkedList<T> {
+public class StackLinkedList<T> implements Iterable {
 
     private class Node {
         T item;
@@ -148,6 +151,36 @@ public class StackLinkedList<T> {
         System.out.println();
     }
 
+    /**
+     * Returns an iterator that iterates over the items in this queue in FIFO order.
+     *
+     * @return an iterator that iterates over the items in this queue in FIFO order
+     */
+    public Iterator<T> iterator() { return new ListIterator();
+    }
+
+    // an iterator, doesn't implement remove() since it's optional
+    private class ListIterator implements Iterator<T> {
+
+        private Node current = head;
+
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+
+        public T next() {
+
+            T item = current.item;
+            current = current.next;
+            return item;
+        }
+    }
+
+
     public static void main(String[] args) {
 
         StackLinkedList<String> stack = new StackLinkedList<>();
@@ -158,7 +191,9 @@ public class StackLinkedList<T> {
         stack.push("The Lord of the Rings");
         stack.push("Harry Potter and the Sorcerer's Stone");
 
-        stack.display();
+        for (Object item: stack)
+            System.out.println(item);
+
         System.out.println("Value of first item in the stack is " + stack.peek() + "\n");
 
         Scanner in = new Scanner(System.in);
