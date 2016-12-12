@@ -63,6 +63,14 @@ import java.lang.reflect.Array;
  * <p>
  * This operation should take linear time O(n)
  * popAll: removes all the elements
+ *
+ * Stack Applications
+ * - Parsing in a compiler
+ * - Java Virtual Machine
+ * - Undo in a word processor
+ * - Back button in a web browser
+ * - PostScript language for printers
+ * - Implementing function calls in a compiler
  */
 public class StackArray<T> {
 
