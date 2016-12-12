@@ -32,12 +32,11 @@ import java.util.NoSuchElementException;
  * <p>
  * QUEUE ILLUSTRATED
  * <p>
- * q.enqueue(2)		q.enqueue(3)	q.enqueue(5)	    q.dequeue()		    q.dequeue()		q.enqueue(10)
- * item = 2			item = 3
+ * q.enqueue(2)		    q.enqueue(3)	q.enqueue(5)        q.dequeue()		    q.dequeue()		q.enqueue(10)
  * front/rear	2	0	front	2	0	front	2	0			x	0				x	0				x	0
- * 1	rear	3	1			3	1	front	3	1				x	1				x	1
- * 2		        2	rear	5	2	rear	5	2	front/rear	5	2		front	5	2
- * 3		        3				3				3					3		rear	10	3
+ * 1	rear	3	1			3	1	front	3	1			3	1		        x	1               x   1
+ * 2		        2	rear	5	2	rear	5	2	front/rear	5	2	front	5	2               x   2
+ * 3		        3				3				3					3	rear	10	3   front/rear  10  3
  * <p>
  * Note: front and rear are variables used by the implementation to carry out the operations
  * <p>
@@ -67,10 +66,10 @@ import java.util.NoSuchElementException;
  * <p>
  * q.enqueue(2)		q.enqueue(3)	q.enqueue(5)	q.enqueue(10)		q.enqueue(15)
  * front/rear	2	0	front	2	0	front	2	0	front	2	0		front	2	0
- * 1	rear	3	1			3	1		    3	1				3	1
- * 2		        2	rear	5	2	    	5	2	    	    5	2
- * 3		        3				3	rear   10	3			   10 	3
- * 4               4               4               4       rear   15   4
+ * 1	            1   rear	3	1			3	1		    3	1				3	1
+ * 2		        2	            2    rear	5	2	    	5	2	    	    5	2
+ * 3		        3				3	            3   rear   10	3			   10 	3
+ * 4                4               4               4               4       rear   15   4
  * q.enqueue(2);
  * q.enqueue(3);
  * q.enqueue(5);
@@ -79,12 +78,12 @@ import java.util.NoSuchElementException;
  * ----------------------------------------------------------------------------------------------------------------------
  * - When is it empty? (rear+1)%queueSize == front
  * <p>
- * q.dequeue()		    q.dequeue()	    q.dequeue()	                q.dequeue()		    q.dequeue(15)
- * x	0		    x	0	     	x	0		        x	0		front	x	0
- * front       3   1		    x	1			x	1		        x	1				x	1
- * 5   2	front	5   2		    x	2	    	    x	2	    	    x	2
- * 10   3		   10   3	front  10	3	            x	3			    x 	3
- * rear       15   4   rear   15   4   rear   15   4   front/rear  15  4       rear    x   4
+ * q.dequeue()		    q.dequeue()	    q.dequeue()     q.dequeue()		    q.dequeue(15)
+ *          x	0		        x	0	     	x	0		        x	0		front	x	0
+ * front    3   1		        x	1			x	1               x	1				x	1
+ *          5   2	    front	5   2		    x	2	    	    x	2	    	    x	2
+ *         10   3		       10   3	front  10	3	            x	3			    x 	3
+ * rear    15   4       rear   15   4   rear   15   4   front/rear  15  4       rear    x   4
  * <p>
  * STACK ARRAY IMPLEMENTATION
  * <p>
