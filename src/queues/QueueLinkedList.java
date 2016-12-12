@@ -1,5 +1,7 @@
 package queues;
 
+import java.util.Iterator;
+
 /**
  * Queue: a data structure that holds a collection of elements of the same type.
  * - The elements are accessed according to FIFO order: first in, first out
@@ -59,7 +61,7 @@ package queues;
  * - linked list is probably better for large objects if space is scarce or copying is expensive (resizing)
  */
 
-public class QueueLinkedList<T> {
+public class QueueLinkedList<T> implements Iterable<T> {
 
     private class Node {
         T item;
@@ -147,9 +149,38 @@ public class QueueLinkedList<T> {
         System.out.println();
     }
 
+    /**
+     * Returns an iterator that iterates over the items in this queue in FIFO order.
+     *
+     * @return an iterator that iterates over the items in this queue in FIFO order
+     */
+    public Iterator<T> iterator() { return new ListIterator();
+    }
+
+    // an iterator, doesn't implement remove() since it's optional
+    private class ListIterator implements Iterator<T> {
+
+        private Node current = first;
+
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+
+        public T next() {
+
+            T item = current.item;
+            current = current.next;
+            return item;
+        }
+    }
+
     public static void main(String[] args) {
 
-        QueueLinkedList<Integer> q = new QueueLinkedList<Integer>();
+        QueueLinkedList<Integer> q = new QueueLinkedList<>();
 
         q.enqueue(2);
         q.enqueue(3);

@@ -100,7 +100,7 @@ public class QueueStack<T> {
 
     private T[] queue;          // queue elements
     private int n;              // number of elements in the queue
-    private int first;           // index of first element of queue
+    private int first;          // index of first element of queue
     private int last;           // index of last element of queue
 
     /**
@@ -234,26 +234,23 @@ public class QueueStack<T> {
      * @return an iterator that iterates over the items in this queue in FIFO order
      */
     public Iterator<T> iterator() {
-        return new ArrayIterator();
+        return new ReverseArrayIterator();
     }
 
     // an iterator, doesn't implement remove() since it's optional
-    private class ArrayIterator implements Iterator<T> {
-        private int i = 0;
+    private class ReverseArrayIterator implements Iterator<T> {
 
-        public boolean hasNext() {
-            return i < n;
-        }
+        private int i = n;
+
+        public boolean hasNext() { return i > 0; }
 
         public void remove() {
             throw new UnsupportedOperationException();
         }
 
         public T next() {
-            if (!hasNext()) throw new NoSuchElementException();
-            T item = queue[(i + first) % queue.length];
-            i++;
-            return item;
+            if (hasNext()) throw new NoSuchElementException();
+            return queue[--i];
         }
     }
 
