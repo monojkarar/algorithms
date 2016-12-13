@@ -1,4 +1,4 @@
-package analysis_of_algorithms;
+package analysis_of_algorithms.week1;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

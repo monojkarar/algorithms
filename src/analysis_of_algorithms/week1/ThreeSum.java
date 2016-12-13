@@ -1,4 +1,4 @@
-package analysis_of_algorithms;
+package analysis_of_algorithms.week1;
 
 import edu.princeton.cs.algs4.In;
 
