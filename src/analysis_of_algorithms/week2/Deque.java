@@ -12,22 +12,22 @@ public class Deque<T> implements Iterable<T> {
 
     private class Node {
         T item;
-        Node before, after;
+        Node previous, next;
 
         /* Constructor for the Node class */
         Node(T item) { this.item = item; }
 
         /* function to set link to previous Node */
-        void setBefore(Node n) { before = n; }
+        void setPrevious(Node n) { previous = n; }
 
         /* Function to get link to previous node */
-        Node getBefore() { return before; }
+        Node getPrevious() { return previous; }
 
         /* function to set link to next Node */
-        void setAfter(Node n) { after = n; }
+        void setNext(Node n) { next = n; }
 
         /* Function to get link to next node */
-        Node getAfter() { return after; }
+        Node getNext() { return next; }
 
         /* Function to get data from current Node */
         T getItem() { return item; }
@@ -91,8 +91,8 @@ public class Deque<T> implements Iterable<T> {
             front = node;
             rear = front;
         } else {
-            node.setAfter(front);
-            front.setBefore(node);
+            node.setNext(front);
+            front.setPrevious(node);
             front = node;
 
         }
@@ -114,8 +114,8 @@ public class Deque<T> implements Iterable<T> {
             rear = node;
             front = rear;
         } else {
-            node.setBefore(rear);
-            rear.setAfter(node);
+            node.setPrevious(rear);
+            rear.setNext(node);
             rear = node;
         }
     }
@@ -132,8 +132,8 @@ public class Deque<T> implements Iterable<T> {
         }
 
         Node node = front;
-        front = node.getAfter();
-        front.setBefore(null);
+        front = node.getNext();
+        front.setPrevious(null);
 
         if (front == null)
             rear = null;
@@ -156,8 +156,8 @@ public class Deque<T> implements Iterable<T> {
             throw new NoSuchElementException("Underflow Exception");
         Node node = rear;
         T item = rear.getItem();
-        rear = rear.getBefore();
-        rear.setAfter(null);
+        rear = rear.getPrevious();
+        rear.setNext(null);
 
         if (rear == null)
             front = null;
@@ -214,7 +214,7 @@ public class Deque<T> implements Iterable<T> {
             //if (current.link == null) throw new NoSuchElementException("Out of bounds exception. ");
 
             T item = current.item;
-            current = current.getAfter();
+            current = current.getNext();
             return item;
         }
     }
