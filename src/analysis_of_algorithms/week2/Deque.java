@@ -4,7 +4,16 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * Created by Owner on 12/12/2016.
+ *  A double-ended queue or deque (pronounced "deck") is a generalization of a stack and a queue that supports adding
+ *  and removing items from either the front or the back of the data structure.
+ *
+ *  Requirements:
+ *  Your randomized queue implementation must support each randomized queue operation (besides creating an iterator) in
+ *  constant amortized time. That is, any sequence of m randomized queue operations (starting from an empty queue)
+ *  should take at most cm steps in the worst case, for some constant c. A randomized queue containing n items must use
+ *  at most 48n + 192 bytes of memory. Additionally, your iterator implementation must support operations next() and
+ *  hasNext() in constant worst-case time.  Construction in linear time; you may (and will need to) use a linear amount
+ *  of extra memory per iterator.
  *
  * @param <T> the type parameter
  */
