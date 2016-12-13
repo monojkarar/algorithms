@@ -1,0 +1,261 @@
+package analysis_of_algorithms.week2;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+/**
+ * Created by Owner on 12/12/2016.
+ *
+ * @param <T> the type parameter
+ */
+public class Deque<T> implements Iterable<T> {
+
+    private class Node {
+        T item;
+        Node before, after;
+
+        /* Constructor for the Node class */
+        Node(T item) { this.item = item; }
+
+        /* function to set link to previous Node */
+        void setBefore(Node n) { before = n; }
+
+        /* Function to get link to previous node */
+        Node getBefore() { return before; }
+
+        /* function to set link to next Node */
+        void setAfter(Node n) { after = n; }
+
+        /* Function to get link to next node */
+        Node getAfter() { return after; }
+
+        /* Function to get data from current Node */
+        T getItem() { return item; }
+    }
+
+    private Deque()
+    {
+        front = null;
+        rear = null;
+        size = 0;
+    }
+
+    private Node front, rear;   // reference to first and last link in queue
+    private int size;           // number of items in the queue
+
+    /**
+     * Returns true or false if queue is empty.
+     * Average time complexity: O(1)
+     *
+     * @return true if queue is empty.
+     */
+    boolean isEmpty() {
+
+        return (front == null && rear == null);
+    }
+
+    /**
+     * Returns the size of the queue.
+     *
+     * @return the size of the queue
+     */
+    public int size() {
+
+        return size;
+    }
+
+    /**
+     * Clear the queue
+     */
+    private void clear() {
+
+        front = null;
+        rear = null;
+        size = 0;
+    }
+
+    /**
+     * Add the item to the front
+     *
+     * @param item the item to add to the front
+     */
+    private void addFirst(T item) {
+
+        if (item == null)
+            throw new NullPointerException("Item is null");
+
+        Node node = new Node(item);
+        size++;
+
+        if (front == null) {
+            front = node;
+            rear = front;
+        } else {
+            node.setAfter(front);
+            front.setBefore(node);
+            front = node;
+
+        }
+    }
+
+    /**
+     * Add the item to the end
+     *
+     * @param item the item to add to the end
+     */
+    private void addLast(T item) {
+
+        if (item == null)
+            throw new NullPointerException("Item is null");
+
+        Node node = new Node(item);
+        size++;
+        if (rear == null) {
+            rear = node;
+            front = rear;
+        } else {
+            node.setBefore(rear);
+            rear.setAfter(node);
+            rear = node;
+        }
+    }
+
+    /**
+     * Remove and return an item from the front
+     *
+     * @return the item
+     */
+    private T removeFirst() {
+
+        if (isEmpty()) {
+            throw new NoSuchElementException("Underflow Exception");
+        }
+
+        Node node = front;
+        front = node.getAfter();
+        front.setBefore(null);
+
+        if (front == null)
+            rear = null;
+        size --;
+
+        T item = node.getItem();
+        node = null;                // to avoid loitering
+
+        return item;
+    }
+
+    /**
+     * Remove and return an item from the end
+     *
+     * @return the item
+     */
+    private T removeLast() {
+
+        if (isEmpty())
+            throw new NoSuchElementException("Underflow Exception");
+        Node node = rear;
+        T item = rear.getItem();
+        rear = rear.getBefore();
+        rear.setAfter(null);
+
+        if (rear == null)
+            front = null;
+
+        node = null;
+        size--;
+
+        return item;
+    }
+
+    /**
+     * Return the item at the front of the queue without removing it
+     *
+     * @return the item
+     */
+        private T peekAtFront() {
+
+            if (isEmpty()) {
+                throw new NoSuchElementException("Underflow exception");
+            }
+            return front.getItem();
+        }
+
+    /**
+     *  Return the item at the end of the queue without removing it
+     *
+     *  @return the item
+     */
+        private T peekAtRear() {
+            if (isEmpty()) {
+                throw new NoSuchElementException("Underflow Exception");
+            }
+            return rear.getItem();
+        }
+
+    /**
+     * Returns an iterator that iterates over the items in this queue in FIFO order.
+     *
+     * @return an iterator that iterates over the items in this queue in FIFO order
+     */
+    public Iterator<T> iterator() { return new ListIterator(); }
+
+    // an iterator, doesn't implement remove() since it's optional
+    private class ListIterator implements Iterator<T> {
+
+        private Node current = front;
+
+        public boolean hasNext() { return  current != null; }
+
+        public void remove() { throw new UnsupportedOperationException(); }
+
+        public T next() {
+
+            //if (current.link == null) throw new NoSuchElementException("Out of bounds exception. ");
+
+            T item = current.item;
+            current = current.getAfter();
+            return item;
+        }
+    }
+
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
+    public static void main(String[] args) {
+
+        Deque<Integer> deque = new Deque<>();
+        deque.addFirst(3);
+        deque.addFirst(2);
+        deque.addFirst(1);
+        deque.addLast(6);
+        deque.addLast(5);
+        deque.addLast(4);
+
+        System.out.println("Deque: ");
+        for (Integer item : deque)
+            System.out.println(item);
+
+        System.out.println("Size of deque is " + deque.size());
+        System.out.println("Item at front: " + deque.peekAtFront());
+        System.out.println("Item at back: " + deque.peekAtRear());
+
+        System.out.println("Remove item at front: " + deque.removeFirst());
+        System.out.println("Deque: ");
+        for (Integer item : deque)
+            System.out.println(item);
+
+        System.out.println("Remove item at rear: " + deque.removeLast());
+        System.out.println("Deque: ");
+        for (Integer item : deque)
+            System.out.println(item);
+
+        System.out.println("Clear the queue.");
+        deque.clear();
+        System.out.println("Deque: ");
+        for (Integer item : deque)
+            System.out.println(item);
+    }
+}
