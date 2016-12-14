@@ -1,5 +1,3 @@
-package analysisOfAlgorithms.week2;
-
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
 
@@ -25,12 +23,12 @@ import static edu.princeton.cs.algs4.StdRandom.shuffle;
  * independent; each iterator must maintain its own
  * random order.
  *
- * @param <T>
+ * @param <Item>
  */
-public class RandomizedQueue<T> implements Iterable<T> {
+public class RandomizedQueue<Item> implements Iterable<Item> {
 
     /** queue elements. */
-    private T[] queue;
+    private Item[] queue;
     /** number of elements in the queue. */
     private int length;
 
@@ -38,9 +36,9 @@ public class RandomizedQueue<T> implements Iterable<T> {
     /**
      * Constructor for randomized queue that initializes an empty queue.
      */
-    RandomizedQueue() {
+    public RandomizedQueue() {
 
-        queue = (T[]) new Object[2];
+        queue = (Item[]) new Object[2];
         length = 0;
     }
 
@@ -50,7 +48,7 @@ public class RandomizedQueue<T> implements Iterable<T> {
      *
      * @return true if queue is empty; false otherwise
      */
-    boolean isEmpty() {
+    public boolean isEmpty() {
 
         return length == 0;
     }
@@ -73,7 +71,7 @@ public class RandomizedQueue<T> implements Iterable<T> {
 
         assert capacity >= length;
 
-        T[] copy = (T[]) new Object[capacity];
+        Item[] copy = (Item[]) new Object[capacity];
         for (int i = 0; i < length; i++) {
             copy[i] = queue[i];
         }
@@ -85,7 +83,7 @@ public class RandomizedQueue<T> implements Iterable<T> {
      *
      * @param item the item to add
      */
-    void enqueue(final T item) {
+    public void enqueue(final Item item) {
 
         if (item == null) {
             throw new NullPointerException("Item is null");
@@ -102,18 +100,18 @@ public class RandomizedQueue<T> implements Iterable<T> {
      * @return the random item that was removed.
      * @throws NoSuchElementException if this queue is empty.
      */
-    T dequeue() {
+    public Item dequeue() {
 
         if (isEmpty()) {
             throw new NoSuchElementException("Queue underflow");
         }
         int random = StdRandom.uniform(length);
-        T item = queue[random];
+        Item item = queue[random];
         if (random != length - 1) {
             queue[random] = queue[length - 1];
         }
 
-        //Loitering: holding reference to an object when it is no longer needed.
+        // Loitering:holding reference to an object when it is no longer needed.
         queue[length - 1 ] = null;  // to avoid loitering.
         length--;
         if (length > 0 && length == queue.length / 4) {
@@ -127,7 +125,7 @@ public class RandomizedQueue<T> implements Iterable<T> {
      *
      * @return the random item
      */
-    public T sample() {
+    public Item sample() {
         if (isEmpty()) {
             throw new NoSuchElementException("Queue underflow");
         }
@@ -141,17 +139,17 @@ public class RandomizedQueue<T> implements Iterable<T> {
      *
      * @return iterator that iterates over the items in the queue in FIFO order.
      */
-    public Iterator<T> iterator() {
+    public Iterator<Item> iterator() {
         return new ArrayIterator();
     }
 
     /** an iterator, doesn't implement remove() since it's optional. */
-    private class ArrayIterator implements Iterator<T> {
+    private class ArrayIterator implements Iterator<Item> {
 
         /** A counter. */
         private int i = 0;
         /** An array that allows queue to be shuffled. */
-        T[] array = (T[]) new Object[length];
+        private Item[] array = (Item[]) new Object[length];
 
         /** The constructor. */
         private ArrayIterator() {
@@ -165,7 +163,7 @@ public class RandomizedQueue<T> implements Iterable<T> {
          * @return boolean
          */
         public boolean hasNext() {
-            return i <  length - 1;
+            return i <  length ;
         }
         /** method not implemented. */
         public void remove() {
@@ -175,7 +173,7 @@ public class RandomizedQueue<T> implements Iterable<T> {
          * Iterates through a list.
          * @return T
          */
-        public T next() {
+        public Item next() {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
