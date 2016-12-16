@@ -50,15 +50,19 @@ public class SortUtility {
     static void printHorizontalArray(final Comparable[] theArray, final int
             arraySize, final int i, final int j) {
 
-        for (int n = 0; n < SIZE; n++) {
+        for (int n = 0; n < 2 * SIZE; n++) {
             System.out.print("-");
         }
         System.out.println();
         for (int n = 0; n < arraySize; n++) {
-            System.out.print("| " + n + "  ");
+            if (n < 10) {
+                System.out.print("|  " + n + " ");
+            } else {
+                System.out.print("| " + n + " ");
+            }
         }
         System.out.println("|");
-        for (int n = 0; n < SIZE; n++) {
+        for (int n = 0; n < 2 * SIZE; n++) {
             System.out.print("-");
         }
         System.out.println();
@@ -66,7 +70,7 @@ public class SortUtility {
             System.out.print("| " + theArray[n] + " ");
         }
         System.out.println("|");
-        for (int n = 0; n < SIZE; n++) {
+        for (int n = 0; n < 2 * SIZE; n++) {
             System.out.print("-");
         }
         System.out.println();
