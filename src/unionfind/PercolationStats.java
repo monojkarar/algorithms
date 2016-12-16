@@ -21,11 +21,12 @@ public class PercolationStats {
      * @param n      size of an NxN grid
      * @param trials the number of trials
      */
-    public PercolationStats(int n, int trials) {
+    public PercolationStats(final int n, final int trials) {
 
-        if (n <= 0 || trials <= 0)
-            throw new IllegalArgumentException("Size of row/column and number of trials must be larger than 0");
-
+        if (n <= 0 || trials <= 0) {
+            throw new IllegalArgumentException("Size of row/column and number"
+                    + "of trials must be larger than 0");
+        }
         this.N = n;
         this.trials = trials;
         this.threshold = new double[trials];
@@ -35,9 +36,10 @@ public class PercolationStats {
     }
 
     /**
-     * Perform independent computational experiment for a number of trials on an n-by-n grid
+     * Perform independent computational experiment for a number of trials on
+     * an n-by-n grid.
      */
-    private void runTrials(int N, int trials) {
+    private void runTrials(final int N, final int trials) {
         for (int i = 0; i < trials; i++) {
             Percolation percolation = new Percolation(N);
 
@@ -56,41 +58,41 @@ public class PercolationStats {
     }
 
     /**
-     * Sample mean of percolation threshold
+     * Sample mean of percolation threshold.
      *
      * @return the sample mean as a double
      */
-    public double mean() {
+    private double mean() {
 
         return StdStats.mean(threshold);
     }
 
     /**
-     * Sample standard deviation of percolation threshold
+     * Sample standard deviation of percolation threshold.
      *
      * @return the standard deiviation as a double
      */
-    public double stddev() {
+    private double stddev() {
 
         return StdStats.stddev(threshold);
     }
 
     /**
-     * Low endpoint of 95% confidence interval
+     * Low endpoint of 95% confidence interval.
      *
-     * @return the low endpoint as a double
+     * @return the low endpoint as a double.
      */
-    public double confidenceLo() {
+    private double confidenceLo() {
 
         return mean() - 1.96 * stddev() / Math.sqrt(threshold.length);
     }
 
     /**
-     * High endpoint of 95% confidence interval
+     * High endpoint of 95% confidence interval.
      *
      * @return the high endpoint as a double
      */
-    public double confidenceHi() {
+    private double confidenceHi() {
 
         return mean() + 1.96 * stddev() / Math.sqrt(threshold.length);
     }
