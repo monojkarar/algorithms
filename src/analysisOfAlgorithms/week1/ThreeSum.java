@@ -1,4 +1,4 @@
-package analysis_of_algorithms.week1;
+package analysisOfAlgorithms.week1;
 
 import edu.princeton.cs.algs4.In;
 
@@ -14,7 +14,7 @@ import java.util.Arrays;
  * in the worst case. You may assume that you can sort the N integers in time
  * proportional to N^2 or better.
  * <p>
- * The analysis_of_algorithms.ThreeSum class provides methods for counting and printing the number of triples in an
+ * The analysisOfAlgorithms.ThreeSum class provides methods for counting and printing the number of triples in an
  * array of distinct integer that sum to 0(ignoring integer overflow). This implementation uses sorting and binary
  * search and time proportional to n^2 log n, where n is the number of integers.
  */
@@ -22,6 +22,7 @@ public class ThreeSum {
 
     // do not instantiate
     private ThreeSum() {
+
     }
 
     /**
