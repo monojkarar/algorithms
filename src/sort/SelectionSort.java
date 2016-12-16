@@ -1,6 +1,5 @@
 package sort;
 
-
 import static sort.SortUtility.generateRandomArray;
 import static sort.SortUtility.printHorizontalArray;
 
@@ -28,47 +27,65 @@ import static sort.SortUtility.printHorizontalArray;
  *  Inner loop executes N-1, then N-2, then N-3, ... then once.
  *  Total number of comparisons (in inner loop) is the sum of 1 to N-1 is
  *  N(N + 1) /2.
- *  Efficiency of algorith is O(N2).
+ *  Efficiency of algorithm is O(N^2).
  */
 
-public class SelectionSort {
+public final class SelectionSort {
 
     /** The array to sort. */
-    private int[] theArray = new int[50];
-    /** The size of the array. */
-    private int arraySize = 10;
+    private Comparable[] theArray;
 
     /**
-     * SwapValues.
-     * @param indexOne the indexOne
-     * @param indexTwo the index Two
+     * The constructor.
+     * @param n the size of the array
      */
-    private void swapValues(final int indexOne, final int indexTwo) {
-
-        int temp = theArray[indexOne];
-        theArray[indexOne] = theArray[indexTwo];
-        theArray[indexTwo] = temp;
+    private SelectionSort(final int n) {
+        theArray = new Comparable[n];
     }
 
     /**
+     * SwapValues.
+     * @param array the array
+     * @param indexOne the indexOne
+     * @param indexTwo the index Two
+     */
+    private void exch(final Comparable[] array, final int indexOne, final
+    int indexTwo) {
+
+        Comparable temp = array[indexOne];
+        array[indexOne] = array[indexTwo];
+        array[indexTwo] = temp;
+    }
+
+    /**
+     * Return true if v < w; false otherwise.
+     * @param v the variable v
+     * @param w tje variable y
+     * @return boolean true if v < y; false otherwise.
+     */
+    private boolean less(final Comparable v, final Comparable w) {
+            return v.compareTo(w) < 0;
+    }
+    /**
      * On each pass, the smallest (minimum) element in the rest of the list is
      * exchanged (swapped) with element at the current position. and then
-     * repeats searching through the entire array each time */
+     * repeats searching through the entire array each time
+     * @param array the array
+     */
 
-    private void selectionSort() {
+    private void selectionSort(final Comparable[] array) {
 
-        for (int x = 0; x < arraySize; x++) {
-            int minimum = x;
+        for (int i = 0; i < array.length; i++) {
+            int min = i;
 
-            for (int y = x; y < arraySize; y++) {
-                // To change direction of sort just change this from > to <
-                if (theArray[y] < theArray[minimum]) {
-                    minimum = y;
+            for (int j = i; j < array.length; j++) {
+                if (less(array[j], array[min])) {
+                    min = j;
                 }
             }
 
-            swapValues(x, minimum);
-            printHorizontalArray(theArray, arraySize, x, -1);
+            exch(array, i, min);
+            printHorizontalArray(array, array.length, i, -1);
         }
     }
 
@@ -78,9 +95,9 @@ public class SelectionSort {
      */
     public static void main(final String[] args) {
 
-        SelectionSort newArray = new SelectionSort();
-        generateRandomArray(newArray.theArray, newArray.arraySize);
-        printHorizontalArray(newArray.theArray, newArray.arraySize, -1, -1);
-        newArray.selectionSort();
+        SelectionSort ss = new SelectionSort(Integer.parseInt(args[0]));
+        generateRandomArray(ss.theArray, ss.theArray.length);
+        printHorizontalArray(ss.theArray, ss.theArray.length, -1, -1);
+        ss.selectionSort(ss.theArray);
     }
 }
