@@ -1,4 +1,5 @@
-package unionfind; /******************************************************************************
+package unionfind;
+/******************************************************************************
  *  Compilation:  javac PercolationVisualizer.java
  *  Execution:    java PercolationVisualizer input.txt
  *  Dependencies: Percolation.java
@@ -18,23 +19,35 @@ package unionfind; /************************************************************
 
 import edu.princeton.cs.algs4.StdDraw;
 
-import java.awt.*;
+import java.awt.Font;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
 
-public class PercolationVisualizer {
+/**
+ * The type Percolation visualizer.
+ */
+public final class PercolationVisualizer {
 
-    // delay in miliseconds (controls animation speed)
+    /** delay in miliseconds (controls animation speed). */
     private static final int DELAY = 100;
+    /** Test file. */
     private static final String file = "src\\unionfind\\test\\wayne98.txt";
 
-    // draw n-by-n percolation system
-    public static void draw(Percolation perc, int n) {
+    /** The constructor. */
+    private PercolationVisualizer() { }
+    /**
+     * Draw.
+     *
+     * @param perc the perc
+     * @param n    the n
+     */
+// draw n-by-n percolation system
+    private static void draw(final Percolation perc, final int n) {
         StdDraw.clear();
         StdDraw.setPenColor(StdDraw.BLACK);
         StdDraw.setXscale(-0.05 * n, 1.05 * n);
-        StdDraw.setYscale(-0.05 * n, 1.05 * n);   // leave a border to write text
+        StdDraw.setYscale(-0.05 * n, 1.05 * n);  // leave a border to write text
         StdDraw.filledSquare(n / 2.0, n / 2.0, n / 2.0);
 
         // draw n-by-n grid
@@ -47,9 +60,10 @@ public class PercolationVisualizer {
                 } else if (perc.isOpen(row, col)) {
                     StdDraw.setPenColor(StdDraw.WHITE);
                     opened++;
-                } else
+                } else {
                     StdDraw.setPenColor(StdDraw.BLACK);
-                StdDraw.filledSquare(col - 0.5, n - row + 0.5, 0.45);
+                }
+                StdDraw.filledSquare(col - 0.5,  n - row + 0.5,0.45);
             }
         }
 
@@ -57,12 +71,20 @@ public class PercolationVisualizer {
         StdDraw.setFont(new Font("SansSerif", Font.PLAIN, 12));
         StdDraw.setPenColor(StdDraw.BLACK);
         StdDraw.text(0.25 * n, -0.025 * n, opened + " open sites");
-        if (perc.percolates()) StdDraw.text(0.75 * n, -0.025 * n, "percolates");
-        else StdDraw.text(0.75 * n, -0.025 * n, "does not percolate");
+        if (perc.percolates()) {
+            StdDraw.text(0.75 * n, -0.025 * n, "percolates");
+        } else {
+            StdDraw.text(0.75 * n, -0.025 * n, "does not percolate");
+        }
 
     }
 
-    public static void main(String[] args) {
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
+    public static void main(final String[] args) {
 
         try {
             Scanner in = new Scanner(new FileReader(file));
