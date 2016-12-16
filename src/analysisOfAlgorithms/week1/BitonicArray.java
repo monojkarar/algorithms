@@ -17,40 +17,48 @@ import java.util.Scanner;
  * <p>
  * Standard version: Use ~3lgN compares in the worst case.
  * Signing bonus: Use ~2lgN compares in the worst case (and prove that no
- * algorithm can guarantee to perform fewer than ~2lgN compares in the worst case).
+ * algorithm can guarantee to perform fewer than ~2lgN compares in worst case).
  * <p>
  * Number of comparisons to find the largest element, in the worst case = logn
- * Number of comparisons to find the element in the increasing part of the array = logn1
- * Number of comparisons to find the element in the decreasing part of the array = logn2
+ * Number of comparisons to find the element in the increasing part of the
+ * array = logn1
+ * Number of comparisons to find the element in the decreasing part of the
+ * array = logn2
  * Where n1+n2 = n = number of elements in the array
  * Therefore, total number of comparisons = 3 log n
  * <p>
- * Hints: Standard version. First, find the maximum integer using ∼1lgn compares—this
+ * Hints: Standard version. First, find the maximum integer using ∼1lgn
+ * compares—this
  * divides the array into the increasing and decreasing pieces.
  * Signing bonus. Do it without finding the maximum integer.
  */
 public class BitonicArray {
 
     /**
-     * returns true if the sorted array contains any duplicated integers
+     * returns true if the sorted array contains any duplicated integers.
      *
      * @param a the array of integers
+     * @return boolean the boolean
      */
-    private static boolean containsDuplicates(Integer[] a) {
+    private static boolean containsDuplicates(final Integer[] a) {
         for (int i = 1; i < a.length; i++) {
-            if (a[i].equals(a[i - 1])) return true;
+            if (a[i].equals(a[i - 1])) {
+                return true;
+            }
         }
         return false;
     }
 
     /**
-     * returns true if the sorted array contains any duplicated integers
+     * returns true if the sorted array contains any duplicated integers.
      *
-     * @param array the array of integers
-     * @param start the index of the first element (inclusive) to be searched
-     * @param end   the index of the last element (exclusive) to be searched
+     * @param array the array of integers.
+     * @param start the index of the first element (inclusive) to be searched.
+     * @param end   the index of the last element (exclusive) to be searched.
+     * @return int the  int.
      */
-    private static int findMax(Integer[] array, int start, int end) {
+    private static int findMax(final Integer[] array, final int start, final
+    int end) {
 
         int middle = (start + end) / 2;
         if (start == end) {
@@ -63,14 +71,17 @@ public class BitonicArray {
     }
 
     /**
-     * returns index if the sorted array contains any duplicated integers
+     * returns index if the sorted array contains any duplicated integers.
      *
      * @param array the array
-     * @param start the index of the first element (inclusive) to be searched
-     * @param end   the index of the last element (inclusive) to be searched
-     * @param key   index of the search key, if it is contained in the bitonic array within the specified range
+     * @param start the index of the first element (inclusive) to be searched.
+     * @param end   the index of the last element (inclusive) to be searched.
+     * @param key   index of the search key, if it is contained in the bitonic
+     *              array within the specified range.
+     * @return int the int.
      */
-    private static int bitonicBinarySearch(Object[] array, int start, int end, int key) {
+    private static int bitonicBinarySearch(final Object[] array, final int
+            start, final int end, final int key) {
 
         int middle = (start + end) / 2;
         if (array[middle].equals(key)) {
@@ -93,13 +104,16 @@ public class BitonicArray {
     }
 
     /**
-     * returns index if the sorted array contains any duplicated integers
+     * returns index if the sorted array contains any duplicated integers.
      *
-     * @param array the array of integers
-     * @param max   the maximum element in the bitonic array
-     * @param key   index of the search key, if it is contained in the bitonic array within the specified range
+     * @param array the array of integers.
+     * @param max   the maximum element in the bitonic array/
+     * @param key   index of the search key, if it is contained in the bitonic.
+     *              array within the specified range.
+     * @return int the int
      */
-    public static int find(Integer[] array, int max, int key) {
+    private static int find(final Integer[] array, final int max, final int
+            key) {
 
         int k = bitonicBinarySearch(array, 0, max, key);
         // Search increasing part of the array using binary search
@@ -110,12 +124,13 @@ public class BitonicArray {
     }
 
     /**
-     * Reads in a bitonic sequence of distinct integers from a file, specified as a command-line argument;
+     * Reads in a bitonic sequence of distinct integers from a file, specified
+     * as a command-line argument;
      * Determines whether an integer is in a bitonic array.
      *
      * @param args the command-line arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 
         //initialize array
         ArrayList<Integer> arraylist = new ArrayList<>();
@@ -128,18 +143,25 @@ public class BitonicArray {
             Integer[] array = new Integer[arraylist.size()];
             arraylist.toArray(array);
 
-            if (containsDuplicates(array)) throw new IllegalArgumentException("array contains duplicate integers");
+            if (containsDuplicates(array)) {
+                throw new IllegalArgumentException("array contains duplicate integers");
+            }
 
             int max = findMax(array, 0, array.length - 1);
-            System.out.println("Max integer " + array[max] + " is in bitonic array at index " + max);
+            System.out.println("Max integer " + array[max] + " is in bitonic "
+                    + "array at index " + max);
             int key = 1;
-            System.out.println("Integer " + key + " is in bitonic array at index " + find(array, max, key));
+            System.out.println("Integer " + key + " is in bitonic array at "
+                    + "index " + find(array, max, key));
             key = 4;
-            System.out.println("Integer " + key + " is in bitonic array at index " + find(array, max, key));
+            System.out.println("Integer " + key + " is in bitonic array at "
+                    + "index " + find(array, max, key));
             key = 5;
-            System.out.println("Integer " + key + " is in bitonic array at index " + find(array, max, key));
+            System.out.println("Integer " + key + " is in bitonic array at "
+                    + "index " + find(array, max, key));
             key = 9;
-            System.out.println("Integer " + key + " is in bitonic array at index " + find(array, max, key));
+            System.out.println("Integer " + key + " is in bitonic array at "
+                    + "index " + find(array, max, key));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
