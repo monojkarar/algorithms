@@ -85,7 +85,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
      *
      * @param item the item to add
      */
-    public void enqueue(final Item item) {
+    void enqueue(final Item item) {
 
         if (item == null) {
             throw new NullPointerException("Item is null");
@@ -102,7 +102,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
      * @return the random item that was removed.
      * @throws NoSuchElementException if this queue is empty.
      */
-    public Item dequeue() {
+    Item dequeue() {
 
         if (isEmpty()) {
             throw new NoSuchElementException("Queue underflow");
@@ -188,8 +188,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
      *
      * @param args the input arguments
      */
-    public static void main(String[] args) {
-        RandomizedQueue<Integer> randomQueue = new RandomizedQueue<Integer>();
+    public static void main(final String[] args) {
+        RandomizedQueue<Integer> randomQueue = new RandomizedQueue<>();
 
         randomQueue.enqueue(1);
         randomQueue.enqueue(2);
