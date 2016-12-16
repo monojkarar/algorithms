@@ -1,3 +1,5 @@
+package analysisOfAlgorithms.week2;
+
 import edu.princeton.cs.algs4.StdOut;
 
 import java.util.Iterator;
@@ -278,7 +280,7 @@ public class Deque<Item> implements Iterable<Item> {
         deque.addLast(5);
         deque.addLast(4);
 
-        StdOut.println("Deque: ");
+        StdOut.println("analysisOfAlgorithms.week2.wee2ysisOfAlgorithms.week2.Deque: ");
         for (Integer item : deque) {
             StdOut.println(item);
         }
@@ -286,13 +288,13 @@ public class Deque<Item> implements Iterable<Item> {
         StdOut.println("Size of deque is " + deque.size());
 
         StdOut.println("Remove item at front: " + deque.removeFirst());
-        StdOut.println("Deque: ");
+        StdOut.println("analysisOfAlgorithms.week2.wee2ysisOfAlgorithms.week2.Deque: ");
         for (Integer item : deque) {
             StdOut.println(item);
         }
 
         StdOut.println("Remove item at rear: " + deque.removeLast());
-        StdOut.println("Deque: ");
+        StdOut.println("analysisOfAlgorithms.week2.DequeAlgorithms.week2.wee2.Deque: ");
         for (Integer item : deque) {
             StdOut.println(item);
         }

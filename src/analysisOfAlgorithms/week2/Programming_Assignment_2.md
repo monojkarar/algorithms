@@ -8,11 +8,11 @@ data structures using arrays and linked lists, and to introduce you to generics 
 A double-ended queue or deque (pronounced "deck") is a generalization of a stack and a queue that supports adding and 
 removing items from either the front or the back of the data structure. 
 
-Create a generic data type Deque that implements the following API:
+Create a generic data type analysisOfAlgorithms.week2.wee2ysisOfAlgorithms.week2.Deque that implements the following API:
 
-public class Deque<Item> implements Iterable<Item> {
+public class analysisOfAlgorithms.week2.wee2ysisOfAlgorithms.week2.Deque<Item> implements Iterable<Item> {
 
-   public Deque()                           // construct an empty deque
+   public analysisOfAlgorithms.week2.DequeAlgorithms.week2.wee2.Deque()                           // construct an empty deque
    
    public boolean isEmpty()                 // is the deque empty?
    
@@ -51,11 +51,11 @@ public class Deque<Item> implements Iterable<Item> {
 #Randomized queue. 
 
 A randomized queue is similar to a stack or queue, except that the item removed is chosen uniformly at random from items 
-in the data structure. Create a generic data type RandomizedQueue that implements the following API:
+in the data structure. Create a generic data type analysisOfAlgorithms.week2.RandomizedQueue.week2.wee2.RandomizedQueue that implements the following API:
 
-public class RandomizedQueue<Item> implements Iterable<Item> {
+public class analysisOfAlgorithms.week2.wee2ysisOfAlgorithms.week2.RandomizedQueue<Item> implements Iterable<Item> {
 
-   public RandomizedQueue()                 // construct an empty randomized queue
+   public analysisOfAlgorithms.week2.RandomizedQueue.week2.wee2.RandomizedQueue()                 // construct an empty randomized queue
 
    public boolean isEmpty()                 // is the queue empty?
 
@@ -84,13 +84,13 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 * Additionally, your iterator implementation must support operations next() and hasNext() in constant worst-case time; 
 * Construction in linear time; you may (and will need to) use a linear amount of extra memory per iterator.
 
-#Subset client. 
+#analysisOfAlgorithms.week2.Subsetlgorithms.week2.wee2.Subset client. 
 
-Write a client program Subset.java that takes a command-line integer k; reads in a sequence of N strings from standard 
+Write a client program analysisOfAlgorithms.week2.Subsetlgorithms.week2.wee2.Subset.java that takes a command-line integer k; reads in a sequence of N strings from standard 
 input using StdIn.readString(); and prints out exactly k of them, uniformly at random. Each item from the sequence can 
 be printed out at most once. You may assume that 0 ≤ k ≤ n, where n is the number of string on standard input.
 
-% echo A B C D E F G H I | java Subset 3       % echo AA BB BB BB BB BB CC CC | java Subset 8
+% echo A B C D E F G H I | java analysisOfAlgorithms.week2.Subsetlgorithms.week2.wee2.Subset 3       % echo AA BB BB BB BB BB CC CC | java analysisOfAlgorithms.week2.Subsetlgorithms.week2.wee2.Subset 8
 
 C                                              BB
 
@@ -98,7 +98,7 @@ G                                              AA
 
 A                                              BB
                                                CC
-% echo A B C D E F G H I | java Subset 3       BB
+% echo A B C D E F G H I | java analysisOfAlgorithms.week2.wee2ysisOfAlgorithms.week2.Subset 3       BB
 
 E                                              BB
 
@@ -107,14 +107,14 @@ F                                              CC
 G                                              BB
 
 ###Performance Requirements
-* The running time of Subset must be linear in the size of the input. 
-* You may use only a constant amount of memory plus either one Deque or RandomizedQueue object of maximum size at most 
+* The running time of analysisOfAlgorithms.week2.Subsetlgorithms.week2.wee2.Subset must be linear in the size of the input. 
+* You may use only a constant amount of memory plus either one analysisOfAlgorithms.week2.DequeAlgorithms.week2.wee2.Deque or analysisOfAlgorithms.week2.RandomizedQueue.week2.wee2.RandomizedQueue object of maximum size at most 
   n, where n is the number of strings on standard input. 
-* (For an extra challenge, use only one Deque or RandomizedQueue object of maximum size at most k.) 
+* (For an extra challenge, use only one analysisOfAlgorithms.week2.DequeAlgorithms.week2.wee2.Deque or analysisOfAlgorithms.week2.RandomizedQueue.week2.wee2.RandomizedQueue object of maximum size at most k.) 
 
 It should have the following API.
 
-public class Subset {
+public class analysisOfAlgorithms.week2.Subsetlgorithms.week2.wee2.Subset {
 
    public static void main(String[] args)
 
@@ -122,7 +122,7 @@ public class Subset {
 
 ### Deliverables. 
 
-Submit only Deque.java, RandomizedQueue.java, and Subset.java. 
+Submit only analysisOfAlgorithms.week2.DequeAlgorithms.week2.wee2.Deque.java, analysisOfAlgorithms.week2.RandomizedQueue.week2.wee2.RandomizedQueue.java, and analysisOfAlgorithms.week2.wee2ysisOfAlgorithms.week2.Subset.java. 
 
 We will supply algs4.jar. 
 
