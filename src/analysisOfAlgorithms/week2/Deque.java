@@ -120,7 +120,7 @@ public class Deque<Item> implements Iterable<Item> {
      *
      * @param item the item to add to the front.
      */
-    public void addFirst(final Item item) {
+    private void addFirst(final Item item) {
 
         if (item == null) {
             throw new NullPointerException("Item is null");
@@ -143,7 +143,7 @@ public class Deque<Item> implements Iterable<Item> {
      *
      * @param item the item to add to the end.
      */
-    public void addLast(final Item item) {
+    private void addLast(final Item item) {
 
         if (item == null) {
             throw new NullPointerException("Item is null");
@@ -166,7 +166,7 @@ public class Deque<Item> implements Iterable<Item> {
      *
      * @return the item
      */
-    public  Item removeFirst() {
+    private  Item removeFirst() {
 
         if (isEmpty()) {
             throw new NoSuchElementException("Underflow Exception");
@@ -193,13 +193,13 @@ public class Deque<Item> implements Iterable<Item> {
      *
      * @return the item
      */
-    public Item removeLast() {
+    private Item removeLast() {
 
         if (isEmpty()) {
             throw new NoSuchElementException("Underflow Exception");
         }
         Item item = rear.getItem();
-        if (size == 1){
+        if (size == 1) {
             front = null;
             rear = null;
         } else {
@@ -261,7 +261,7 @@ public class Deque<Item> implements Iterable<Item> {
      *
      * @param args the input arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 
         Deque<Integer> deque = new Deque<>();
 
@@ -280,7 +280,8 @@ public class Deque<Item> implements Iterable<Item> {
         deque.addLast(5);
         deque.addLast(4);
 
-        StdOut.println("analysisOfAlgorithms.week2.wee2ysisOfAlgorithms.week2.Deque: ");
+        StdOut.println("analysisOfAlgorithms.week2.wee2ysisOfAlgorithms.week2."
+                + "Deque: ");
         for (Integer item : deque) {
             StdOut.println(item);
         }
@@ -288,13 +289,15 @@ public class Deque<Item> implements Iterable<Item> {
         StdOut.println("Size of deque is " + deque.size());
 
         StdOut.println("Remove item at front: " + deque.removeFirst());
-        StdOut.println("analysisOfAlgorithms.week2.wee2ysisOfAlgorithms.week2.Deque: ");
+        StdOut.println("analysisOfAlgorithms.week2.wee2ysisOfAlgorithms.week2."
+                + "Deque: ");
         for (Integer item : deque) {
             StdOut.println(item);
         }
 
         StdOut.println("Remove item at rear: " + deque.removeLast());
-        StdOut.println("analysisOfAlgorithms.week2.DequeAlgorithms.week2.wee2.Deque: ");
+        StdOut.println("analysisOfAlgorithms.week2.DequeAlgorithms.week2.wee2."
+                + "Deque: ");
         for (Integer item : deque) {
             StdOut.println(item);
         }
