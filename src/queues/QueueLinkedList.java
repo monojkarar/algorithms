@@ -3,6 +3,7 @@ package queues;
 import edu.princeton.cs.algs4.Queue;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Queue: a data structure that holds a collection of elements of the same type.
@@ -157,6 +158,10 @@ public class QueueLinkedList<T> implements Iterable<T> {
 
         public T next() {
 
+            if (current == null) {
+
+                throw new NoSuchElementException();
+            }
             T item = current.item;
             current = current.next;
             return item;

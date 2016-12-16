@@ -3,6 +3,7 @@ package stacks;
 import queues.QueueLinkedList;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -174,6 +175,10 @@ public class StackLinkedList<T> implements Iterable {
 
         public T next() {
 
+            if (current == null) {
+
+                throw new NoSuchElementException();
+            }
             T item = current.item;
             current = current.next;
             return item;
