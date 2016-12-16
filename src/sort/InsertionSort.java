@@ -105,7 +105,7 @@ public final class InsertionSort {
      * @param array the array.
      * @param value the value.
      */
-    private void binarySearchForValue(final Comparable[] array, final int value) {
+    private void binarySearch(final Comparable[] array, final int value) {
         int lowIndex = 0;
         int highIndex = array.length - 1;
 
