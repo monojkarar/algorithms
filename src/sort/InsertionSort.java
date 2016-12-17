@@ -12,6 +12,8 @@ import static sort.SortUtility.printHorizontalArray;
  *  Best    Average     Worst
  *  O(n)    O(n*n)      O(n*n)
  *
+ * Insertion sort is going to be about twice as fast as selection sort.
+ *
  * Insertion sort is a simple sorting algorithm that is appropriate for
  * small inputs. The basic action of insertion sort is to sort the
  * elements in positions 0 through p (where p ranges from 1 through
