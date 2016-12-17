@@ -62,18 +62,29 @@ public final class InsertionSort {
      */
     private void insertionSort(final Comparable[] array) {
         for (int i = 1; i < array.length; i++) {
-            Comparable temp = array[i];
             int j;
-            for (j = i; j > 0 && more(array[j - 1], temp); j--) {
-                array[j] = array[j - 1];
+            for (j = i; j > 0 ; j--) {
+                if (less(array[j], array[j - 1])) {
+                    exch(array, j, j - 1);
+                }
                 printHorizontalArray(array, array.length, i, j);
             }
-
-            array[j] = temp;
             printHorizontalArray(array, array.length, i, j);
-            System.out.println("\nArray[i] = " + array[i] + " Array[j] = "
-                    + array[j] + " toInsert = " + temp + "\n");
         }
+    }
+
+    /**
+     * SwapValues.
+     * @param array the array
+     * @param indexOne the indexOne
+     * @param indexTwo the index Two
+     */
+    private void exch(final Comparable[] array, final int indexOne, final
+    int indexTwo) {
+
+        Comparable temp = array[indexOne];
+        array[indexOne] = array[indexTwo];
+        array[indexTwo] = temp;
     }
 
     /**
