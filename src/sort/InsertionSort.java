@@ -65,6 +65,8 @@ public final class InsertionSort {
             for (int j = i; j > 0; j--) {
                 if (less(array[j], array[j - 1])) {
                     exch(array, j, j - 1);
+                } else {
+                    break;
                 }
                 printHorizontalArray(array, array.length, i, j);
             }
