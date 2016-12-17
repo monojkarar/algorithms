@@ -12,22 +12,22 @@ import static sort.SortUtility.printHorzArray;
  * are less far apart, and so on, gradually shrinking toward the basic
  * insertion sort.  Shell sort is known as a diminishing gap sort. When gap
  * is 1 the loop is identical to an insertion sort.
- * <p>
+ *
  * The running time of Shell sort depends heavily on the choice of increment
  * sequences.  A sequence which performs well in practice but has no
  * theoretical basis, is to have a starting gap of N/2.2. This divisor
- * appears to bring the average running time to below O(pow(N, 5/4)).  For
- * 100, 000, to 1,000,000 items, it typically improves performance by about
- * to 25 to 35 percent over Shell's Increments, although nobody knows why. The
+ * appears to bring the average running time to below O(N^5/4).  For
+ * 100,000, to 1,000,000 items, it typically improves performance by about
+ * 25 to 35 percent over Shell's Increments, although nobody knows why. The
  * performance of Shell sort is quite acceptable in practice, even for N in
  * the tens of thousands. The simplicity of the code makes it the algorithm
- * of choice for sorting up to moderately large input.  it is also a fine
+ * of choice for sorting up to moderately large input.  It is also a fine
  * example of a very simple algorithm with an extremely complex analysis.
- * <p>
+ *
  * Runtime analysis
  * Best        Average         Worst
  * O(n log n)  depends on gap  O(n log n * log n)
- * <p>
+ *
  * Original        81  94  11  96  12  35  17  95  28  58  41  75  15
  * After 5-sort    35  17  11  28  12  41  75  15  96  58  81  94  95
  * --                  --                  --
@@ -69,9 +69,9 @@ public final class ShellSort {
                     theArray[j] = theArray[j - gap];
                 theArray[j] = temp;
 
-                System.out.println("inner= " + (i - gap) + " outer= " + i + "" +
-                        " temp= " + temp + " interval= " + gap);
-                printHorzArray(theArray, j, i, gap);
+                //System.out.println("inner= " + (i - gap) + " outer= " + i
+                // + " temp= " + temp + " interval= " + gap);
+                //printHorzArray(theArray, j, i, gap);
             }
         }
     }
