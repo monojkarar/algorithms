@@ -24,6 +24,11 @@ import static sort.SortUtility.printHorzArray;
  * of choice for sorting up to moderately large input.  It is also a fine
  * example of a very simple algorithm with an extremely complex analysis.
  *
+ * Useful in practice.
+ * - Fast unless array size is huge.
+ * - Tiny, fixed footprint for code(used in embedded systems).
+ * - Hardware sort prototype.
+ *
  * Runtime analysis
  * Best        Average         Worst
  * O(n log n)  depends on gap  O(n log n * log n)
