@@ -62,15 +62,23 @@ public final class InsertionSort {
      */
     private void insertionSort(final Comparable[] array) {
         for (int i = 1; i < array.length; i++) {
-            int j;
-            for (j = i; j > 0 ; j--) {
+            for (int j = i; j > 0; j--) {
                 if (less(array[j], array[j - 1])) {
                     exch(array, j, j - 1);
                 }
                 printHorizontalArray(array, array.length, i, j);
             }
-            printHorizontalArray(array, array.length, i, j);
         }
+    }
+
+    /**
+     * Return true if v < w; false otherwise.
+     * @param v the variable v
+     * @param w tje variable y
+     * @return boolean true if v < y; false otherwise.
+     */
+    private boolean less(final Comparable v, final Comparable w) {
+        return v.compareTo(w) < 0;
     }
 
     /**
@@ -85,16 +93,6 @@ public final class InsertionSort {
         Comparable temp = array[indexOne];
         array[indexOne] = array[indexTwo];
         array[indexTwo] = temp;
-    }
-
-    /**
-     * Return true if v < w; false otherwise.
-     * @param v the variable v
-     * @param w tje variable y
-     * @return boolean true if v < y; false otherwise.
-     */
-    private boolean less(final Comparable v, final Comparable w) {
-        return v.compareTo(w) < 0;
     }
 
     /**
