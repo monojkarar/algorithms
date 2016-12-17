@@ -100,13 +100,12 @@ public class SortUtility {
      * Print horz array.
      *
      * @param theArray  the the array
-     * @param arraySize the array size
      * @param i         the
      * @param j         the j
      * @param h         the h
      */
-    static void printHorzArray(final int[] theArray, final int arraySize,
-                               int i, final int j, final int h) {
+    static void printHorzArray(final Comparable[] theArray, int i, final int j,
+                               final int h) {
         if (i == j) {
             i = i - h;
         }
@@ -115,7 +114,7 @@ public class SortUtility {
         }
         System.out.println();
 
-        for (int n = 0; n < arraySize; n++) {
+        for (int n = 0; n < theArray.length; n++) {
             System.out.print("|  " + n + " ");
         }
         System.out.println("|");
@@ -125,7 +124,7 @@ public class SortUtility {
         }
         System.out.println();
 
-        for (int n = 0; n < arraySize; n++) {
+        for (int n = 0; n < theArray.length; n++) {
             System.out.print("| " + theArray[n] + " ");
         }
         System.out.println("|");
