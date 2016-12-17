@@ -61,13 +61,10 @@ public final class ShellSort {
         for (int gap = theArray.length / 2; gap > 0; gap = (gap == 2) ? 1
                 : (new Double(gap / 2.2)).intValue()) {
             for (int i = gap; i < theArray.length; i++) {
-                temp = theArray[i];
-
                 // While there is a number bigger than temp move it further up
                 // in the array
-                for (j = i; j >= gap && less(temp, theArray[j - gap]); j -= gap)
-                    theArray[j] = theArray[j - gap];
-                theArray[j] = temp;
+                for (j = i; j >= gap && less(theArray[j], theArray[j - gap]); j -= gap)
+                    exch(theArray, j, j - gap);
 
                 //System.out.println("inner= " + (i - gap) + " outer= " + i
                 // + " temp= " + temp + " interval= " + gap);
@@ -84,6 +81,20 @@ public final class ShellSort {
      */
     private boolean less(final Comparable v, final Comparable w) {
         return v.compareTo(w) < 0;
+    }
+
+    /**
+     * SwapValues.
+     * @param array the array
+     * @param indexOne the indexOne
+     * @param indexTwo the index Two
+     */
+    private void exch(final Comparable[] array, final int indexOne, final
+    int indexTwo) {
+
+        Comparable temp = array[indexOne];
+        array[indexOne] = array[indexTwo];
+        array[indexTwo] = temp;
     }
 
     /**
