@@ -1,115 +1,118 @@
 package sort;
 
-import java.util.Arrays;
+import static sort.SortUtility.generateRandomArray;
+import static sort.SortUtility.printHorizontalArray;
 
-public class MergeSort {
-    public static void main(String a[]) {
-
-        int array[] = { 10, 8, 4, 80, 13, 1, 3, 11 };
-
-        System.out.println("STARTING ARRAY\n");
-        printHorzArray(array, 49);
-        System.out.println();
-
-        // Send the array, 0 and the array size
-        mergeSort_srt(array, 0, array.length - 1);
-        System.out.print("FINAL SORTED ARRAY\n");
-        printHorzArray(array, 49);
+/**
+ * The type Merge sort.
+ */
+public final class MergeSort {
+    /** The array to sort. */
+    private Comparable[] theArray;
+    /**
+     *  The constructor.
+     *  @param n the number of items in array.
+     */
+    private MergeSort(final int n) {
+        theArray = new Comparable[n];
+        generateRandomArray(this.theArray, this.theArray.length);
     }
-
-    // Receives the array, 0 and the array size
-    private static void mergeSort_srt(int array[], int lo, int n) {
+    /**
+     * Merge sort algorithm.
+     * @param array the array to sort
+     * @param lo the lo
+     * @param n the n
+     */
+    private void mergesort(final Comparable[] array, final int lo,
+                                  final int n) {
         int low = lo;
         int high = n;
 
-        if (low >= high)
+        if (low >= high) {
             return;
-
-        // Find the middle index of the array
+        }
         int middle = (low + high) / 2;
+        mergesort(array, low, middle);
+        mergesort(array, middle + 1, high);
+        int endLow = middle;
+        int startHigh = middle + 1;
 
-        // CREATE 2 ARRAYS FROM THE ONE
-        // Send the array, 0 and the middle index of the array
-        mergeSort_srt(array, low, middle);
-
-        // Send the array, the middle index + 1 and the highest index of the array
-        mergeSort_srt(array, middle + 1, high);
-
-        // Store the last index of the first array
-        int end_low = middle;
-
-        // Store the first index of the second array
-        int start_high = middle + 1;
-
-        // If the lowest index is less than or equal to the bottom arrays highest index & the lowest index of the
-        // 2nd array is less than or equal to its highest index
-        while ((lo <= end_low) && (start_high <= high)) {
-            System.out.println("\nBOTTOM ARRAY");
-            printSmallArray(array, lo, middle);
-            System.out.println("\nTOP ARRAY");
-            printSmallArray(array, start_high, high);
-            printHorzArray(array, 49);
-
-            // If the value in the 1st index of the 1st array is less than the value in the 1st index of the 2nd array
-            System.out.println("Is " + array[low] + " < " + array[start_high] + "? " + (array[low] < array[start_high]));
-
-            if (array[low] < array[start_high]) {
-                // Increment to the next index in the 1st array
-                low++;
+        // If the lowest index is <= the bottom arrays highest index & the
+        // lowest index of the 2nd array is <= to its highest index
+        while ((lo <= endLow) && (startHigh <= high)) {
+            // If value in 1st index of 1st array is < the value in the 1st
+            // index of the 2nd array
+            if (less(array[low], array[startHigh])) {
+                low++; // Increment to the next index in the 1st array
             } else {
-                // Store the value in the 1st index of the 2nd array
-                int Temp = array[start_high];
-                System.out.println("Temp: " + Temp);
-
-                // Decrement backwards through the first array starting at the last index in the first array
-                for (int k = start_high - 1; k >= low; k--) {
-                    System.out.println("array[" + k + "] = " + array[k] + " Stored in array index " + (k + 1));
+                Comparable temp = array[startHigh];
+                // Decrement backwards through the first array starting at the
+                // last index in the first array
+                for (int k = startHigh - 1; k >= low; k--) {
                     array[k + 1] = array[k];
                 }
-                System.out.println(Temp + " is stored in index " + low);
-                printHorzArray(array, 49);
-
-                array[low] = Temp;
+                array[low] = temp;
                 low++;
-                end_low++;
-                start_high++;
+                endLow++;
+                startHigh++;
             }
         }
-        printHorzArray(array, 49);
     }
 
-    // Used to print out the smaller arrays
-    private static void printSmallArray(int theArray[], int lo, int high) {
-        int[] tempArray = Arrays.copyOfRange(theArray, lo, high);
-        int tempArrayDashes = tempArray.length * 6;
-        System.out.println("Array Index Start " + lo + " and End " + high);
-        printHorzArray(tempArray, tempArrayDashes);
+    /**
+     * Return true if v < w; false otherwise.
+     * @param v the variable v
+     * @param w tje variable y
+     * @return boolean true if v < y; false otherwise.
+     */
+    private boolean less(final Comparable v, final Comparable w) {
+        return v.compareTo(w) < 0;
     }
 
-    private static void printHorzArray(int theArray[], int numDashes) {
-        for (int n = 0; n < numDashes; n++)
-            System.out.print("-");
+    /**
+     *  Our strategy will be to compare every element to its successor.
+     *  The array is considered unsorted. if a successor has a greater value
+     *  than its predecessor. If we reach the end of the loop without finding
+     *  that the array is unsorted, then it must be sorted instead.
+     *  @param a the array to check.
+     *  @return true if sorted; false otherwise.
+     */
+    private boolean isSorted(final Comparable[] a) {
 
+        for (int i = 0; i < a.length - 1; i++) {
+            if (less(a[i + 1], a[i])) {
+                return false; // It is proven that the array is not sorted.
+            }
+        }
+
+        return true; // If this part has been reached, the array must be sorted.
+    }
+
+    /**
+     * Main.
+     *
+     * @param args the args
+     */
+    public static void main(final String[] args) {
+
+        long startTime;
+        long endTime;
+
+        MergeSort ms = new MergeSort(Integer.parseInt(args[0]));
+
+        System.out.println("STARTING ARRAY\n");
+        printHorizontalArray(ms.theArray, ms.theArray.length, -1, -1);
         System.out.println();
 
-        for (int n = 0; n < theArray.length; n++)
-            System.out.format("| %2s " + " ", n);
+        startTime = System.currentTimeMillis();
+        // Send the array, 0 and the array size
+        ms.mergesort(ms.theArray, 0, ms.theArray.length - 1);
+        endTime = System.currentTimeMillis();
 
-        System.out.println("|");
-
-        for (int n = 0; n < numDashes; n++)
-            System.out.print("-");
-
+        System.out.print("FINAL SORTED ARRAY\n");
+        printHorizontalArray(ms.theArray, ms.theArray.length, -1, -1);
         System.out.println();
-
-        for (int n = 0; n < theArray.length; n++)
-            System.out.print(String.format("| %2s " + " ", theArray[n]));
-
-        System.out.println("|");
-
-        for (int n = 0; n < numDashes; n++)
-            System.out.print("-");
-
-        System.out.println();
+        System.out.println("Mergesort took " + (endTime - startTime)
+                + " milliseconds.");
     }
 }
