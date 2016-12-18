@@ -1,9 +1,6 @@
 package sort;
 
-import edu.princeton.cs.algs4.Stack;
-import edu.princeton.cs.algs4.Point2D;
-
-import java.util.Arrays;
+import edu.princeton.cs.algs4.*;
 
 /**
  *  Graham Scan
@@ -41,6 +38,30 @@ import java.util.Arrays;
  *  - Dealing with degenerate cases.
  *  - Coping with floatig-point precision.
  */
-public class GrahamScan {
+public class TestGrahamScan {
+    /**
+     * Unit tests the {@code GrahamScan} data type.
+     * Reads in an integer {@code n} and {@code n} points (specified by
+     * their <em>x</em>- and <em>y</em>-coordinates) from standard input;
+     * computes their convex hull; and prints out the points on the
+     * convex hull to standard output.
+     *
+     * @param args the command-line arguments
+     */
+    public static void main(final String[] args) {
+        int x0 = Integer.parseInt(args[0]);
+        int y0 = Integer.parseInt(args[1]);
+        int n = Integer.parseInt(args[2]);
 
+        Point2D[] points = new Point2D[n];
+        for (int i = 0; i < n; i++) {
+            int x = StdRandom.uniform(100);
+            int y = StdRandom.uniform(100);
+            points[i] = new Point2D(x, y);
+        }
+        GrahamScan graham = new GrahamScan(points);
+        for (Point2D p : graham.hull()) {
+            StdOut.println(p);
+        }
+    }
 }
