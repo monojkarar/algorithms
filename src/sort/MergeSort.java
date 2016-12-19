@@ -25,7 +25,7 @@ public final class MergeSort {
      * @param high the hi
      */
     private void mergesort(final Comparable[] array, final Comparable[] aux,
-                           int low, final int high) {
+                           final int low, final int high) {
 
         int middle = (low + high) / 2;
         mergesort(array, low, middle);
@@ -44,6 +44,8 @@ public final class MergeSort {
             else if (less(aux[j], aux[i])) array[k] = aux[j++];
             else                           array[k] = aux[i++];
         }
+
+        assert (isSorted(array));
     }
 
     /**
@@ -52,9 +54,13 @@ public final class MergeSort {
      * @param lo the lo
      * @param hi the hi
      */
-    private void mergesort(final Comparable[] array, final int lo, final int hi) {
+    private void mergesort(final Comparable[] array,
+                           final int lo,
+                           final int hi) {
         Comparable[] aux = new Comparable[array.length];
-        if (lo >= hi) { return; }
+        if (lo >= hi) {
+            return;
+        }
         mergesort(array, aux, lo, hi);
     }
 
