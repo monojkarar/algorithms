@@ -20,43 +20,42 @@ public final class MergeSort {
     /**
      * Merge sort algorithm.
      * @param array the array to sort
-     * @param lo the lo
-     * @param n the n
+     * @param aux the aux
+     * @param low the lo
+     * @param high the hi
      */
-    private void mergesort(final Comparable[] array, final int lo,
-                                  final int n) {
-        int low = lo;
-        int high = n;
+    private void mergesort(final Comparable[] array, final Comparable[] aux,
+                           int low, final int high) {
 
-        if (low >= high) {
-            return;
-        }
         int middle = (low + high) / 2;
         mergesort(array, low, middle);
         mergesort(array, middle + 1, high);
-        int endLow = middle;
-        int startHigh = middle + 1;
 
-        // If the lowest index is <= the bottom arrays highest index & the
-        // lowest index of the 2nd array is <= to its highest index
-        while ((lo <= endLow) && (startHigh <= high)) {
-            // If value in 1st index of 1st array is < the value in the 1st
-            // index of the 2nd array
-            if (less(array[low], array[startHigh])) {
-                low++; // Increment to the next index in the 1st array
-            } else {
-                Comparable temp = array[startHigh];
-                // Decrement backwards through the first array starting at the
-                // last index in the first array
-                for (int k = startHigh - 1; k >= low; k--) {
-                    array[k + 1] = array[k];
-                }
-                array[low] = temp;
-                low++;
-                endLow++;
-                startHigh++;
-            }
+        // copy to aux[]
+        for (int k = low; k <= high; k++) {
+            aux[k] = array[k];
         }
+
+        // merge back to a[]
+        int i = low, j = middle + 1;
+        for (int k = low; k <= high; k++) {
+            if      (i > middle)           array[k] = aux[j++];
+            else if (j > high)             array[k] = aux[i++];
+            else if (less(aux[j], aux[i])) array[k] = aux[j++];
+            else                           array[k] = aux[i++];
+        }
+    }
+
+    /**
+     * Merge sort algorithm.
+     * @param array the array to sort
+     * @param lo the lo
+     * @param hi the hi
+     */
+    private void mergesort(final Comparable[] array, final int lo, final int hi) {
+        Comparable[] aux = new Comparable[array.length];
+        if (lo >= hi) { return; }
+        mergesort(array, aux, lo, hi);
     }
 
     /**
