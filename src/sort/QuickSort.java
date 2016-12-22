@@ -37,6 +37,7 @@ public final class QuickSort {
      *  @param array the array to sort
      */
     private static void quickSort(final Comparable[] array) {
+        // shuffle needed for performance guarantee.
         StdRandom.shuffle(array);
         quickSort(array, 0, array.length - 1);
     }
