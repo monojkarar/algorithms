@@ -49,8 +49,6 @@ public class TestGrahamScan {
      * @param args the command-line arguments
      */
     public static void main(final String[] args) {
-        int x0 = Integer.parseInt(args[0]);
-        int y0 = Integer.parseInt(args[1]);
         int n = Integer.parseInt(args[2]);
 
         Point2D[] points = new Point2D[n];
