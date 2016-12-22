@@ -47,7 +47,6 @@ public class FastCollinearPoints {
      */
     public FastCollinearPoints(final Point[] points) {
 
-        checkForDuplicates(points);
         if (points == null) {
             throw new NullPointerException("Array of points of null");
         }
@@ -56,6 +55,7 @@ public class FastCollinearPoints {
                 throw new NullPointerException("Point is null.");
             }
         }
+        checkForDuplicates(points);
 
         segments = new ArrayList<>();
 
@@ -68,7 +68,7 @@ public class FastCollinearPoints {
 
             for (int i = 1; i < sortedPoints.length; i++) {
                 double currentSlope = points[k].slopeTo(sortedPoints[i]);
-                if (currentSlope == previousSlope) {
+                if ((int) currentSlope == (int) previousSlope) {
                     high++;
                 } else {
                     if ((high - low) >= 2 && sortedPoints[high] != lastPoint) {
@@ -90,6 +90,10 @@ public class FastCollinearPoints {
         }
 
         lineSegments = segments.toArray(new LineSegment[segments.size()]);
+    }
+
+    private LineSegment[] getLineSegments() {
+        return Arrays.copyOf(lineSegments, lineSegments.length);
     }
 
     /**
@@ -124,7 +128,7 @@ public class FastCollinearPoints {
      * @return an array of collinear line segments.
      */
     public LineSegment[] segments() {
-        return null;
+        return this.getLineSegments();
     }
 
     /**
