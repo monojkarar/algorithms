@@ -50,7 +50,7 @@ import static sort.SortUtility.printHorizontalArray;
  * 2 1 3 7 8 9     !(2<1) swap, 2<3<7<8<9
  * - -
  * 1 2 3 7 8 9     finished pass 5, did one swap
- * 1 2 3 7 8 9	   1<2<3<7<8<9, no swaps finished pass 6, no swaps, list
+ * 1 2 3 7 8 9     1<2<3<7<8<9, no swaps finished pass 6, no swaps, list
  * is sorted!
  */
 public class BubbleSort {
@@ -135,8 +135,7 @@ public class BubbleSort {
 
         long startTime;
         long endTime;
-
-		BubbleSort bs = new BubbleSort(Integer.parseInt(args[0]));
+        BubbleSort bs = new BubbleSort(Integer.parseInt(args[0]));
         generateRandomArray(bs.theArray, bs.theArray.length);
 
         startTime = System.currentTimeMillis();
