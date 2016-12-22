@@ -4,7 +4,9 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 /**
  *  FastCollinearPoints.
@@ -34,7 +36,9 @@ public class FastCollinearPoints {
     private LineSegment[] lineSegments;
     /** Dynamic array of found collinear line segments found. */
     private ArrayList<LineSegment> segments;
+    /** Array of sorted points. */
     private Point[] sortedPoints;
+    /** Last point. */
     private Point lastPoint = null;
 
     /**
@@ -43,7 +47,7 @@ public class FastCollinearPoints {
      */
     public FastCollinearPoints(final Point[] points) {
 
-        CheckForDuplicates(points);
+        checkForDuplicates(points);
         if (points == null) {
             throw new NullPointerException("Array of points of null");
         }
@@ -92,7 +96,7 @@ public class FastCollinearPoints {
      * Checks for duplicate points in an array of points.
      * @param points the array of points to check.
      */
-    private void CheckForDuplicates(final Point[] points) {
+    private void checkForDuplicates(final Point[] points) {
         for (int i = 0; i < points.length - 1; i++) {
             for (int j = i + 1; j < points.length; j++) {
                 if (points[i].compareTo(points[j]) == 0) {
