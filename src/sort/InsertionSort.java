@@ -62,7 +62,7 @@ public final class InsertionSort {
      *  The insertionSort method.
      *  @param array the array to sort.
      */
-    public static void insertionSort(final Comparable[] array) {
+    static void insertionSort(final Comparable[] array) {
         for (int i = 1; i < array.length; i++) {
             for (int j = i; j > 0; j--) {
                 if (less(array[j], array[j - 1])) {
@@ -124,7 +124,7 @@ public final class InsertionSort {
 
         while (lowIndex <= highIndex) {
 
-            int middleIndex = (highIndex + lowIndex) / 2;
+            int middleIndex = highIndex + lowIndex >>> 1;
             if (less(array[middleIndex], value)) {
                 lowIndex = middleIndex + 1;
             } else if (more(array[middleIndex], value)) {
@@ -149,7 +149,7 @@ public final class InsertionSort {
         generateRandomArray(is.theArray, is.theArray.length);
         printHorizontalArray(is.theArray, is.theArray.length, -1, -1);
 
-        is.insertionSort(is.theArray);
+        InsertionSort.insertionSort(is.theArray);
         printHorizontalArray(is.theArray, is.theArray.length, -1, -1);
     }
 }
