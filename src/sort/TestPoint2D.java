@@ -41,7 +41,8 @@ public class TestPoint2D {
         p.draw();
 
 
-        // draw line segments from p to each point, one at a time, in polar order
+        // draw line segments from p to each point, one at a time, in polar
+        // order
         StdDraw.setPenRadius();
         StdDraw.setPenColor(StdDraw.BLUE);
         Arrays.sort(points, p.polarOrder());
