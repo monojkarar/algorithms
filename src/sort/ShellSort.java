@@ -3,7 +3,6 @@ package sort;
 import java.util.Arrays;
 
 import static sort.SortUtility.generateRandomArray;
-import static sort.SortUtility.printHorzArray;
 
 /**
  * Shell sort is a sub quadratic algorithm whose code is only slightly longer
@@ -68,12 +67,9 @@ public final class ShellSort {
             for (int i = gap; i < theArray.length; i++) {
                 // While there is a number bigger than temp move it further up
                 // in the array
-                for (j = i; j >= gap && less(theArray[j], theArray[j - gap]); j -= gap)
+                for (j = i; j >= gap && less(theArray[j], theArray[j - gap]); j -= gap) {
                     exch(theArray, j, j - gap);
-
-                //System.out.println("inner= " + (i - gap) + " outer= " + i
-                // + " temp= " + temp + " interval= " + gap);
-                //printHorzArray(theArray, j, i, gap);
+                }
             }
         }
     }
