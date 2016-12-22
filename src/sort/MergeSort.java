@@ -23,7 +23,7 @@ import static sort.SortUtility.printHorizontalArray;
  */
 public final class MergeSort {
     /** A variable to determine when number of items to sort is small. */
-    private  final static int CUTOFF = 7;
+    private static final int CUTOFF = 7;
 
     /** The array to sort. */
     private Comparable[] theArray;
@@ -51,7 +51,7 @@ public final class MergeSort {
             return;
         }
 
-        int middle = (low + high) / 2;
+        int middle = (low + high) >>> 1;
 
         mergesort(array, low, middle);
         mergesort(array, middle + 1, high);
