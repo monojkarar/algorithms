@@ -3,6 +3,8 @@ package sort;
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.Insertion;
 
+import java.util.Arrays;
+
 import static sort.SortUtility.generateRandomArray;
 
 /**
@@ -196,11 +198,11 @@ public final class QuickSort {
         long endTime;
 
         QuickSort theSort = new QuickSort(Integer.parseInt(args[0]));
-        //System.out.println(Arrays.toString(theSort.theArray));
+        System.out.println(Arrays.toString(theSort.theArray));
         startTime = System.currentTimeMillis();
         QuickSort.quickSort(theSort.theArray);
         endTime = System.currentTimeMillis();
-        //System.out.println(Arrays.toString(theSort.theArray));
+        System.out.println(Arrays.toString(theSort.theArray));
         System.out.println();
         System.out.println("Quicksort took " + (endTime - startTime)
                 + " milliseconds.");
