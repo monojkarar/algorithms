@@ -224,6 +224,8 @@ public class StackArray<T> implements Iterable {
 
     public static void main(String[] args) {
 
+        String peek;
+        String pop;
         StackArray<String> theStack = new StackArray<>(String[].class);
 
         theStack.push("10");
@@ -234,10 +236,12 @@ public class StackArray<T> implements Iterable {
             System.out.println(s);
 
         // Look at the top item on the stack
-        String peek = theStack.peek();
+        peek = theStack.peek();
+        System.out.println("Peek at top of the stack: " + peek);
 
         // Remove value from the stack (LIFO)
-        theStack.pop();
+        pop = theStack.pop();
+        System.out.println("Pop the top of the stack: " + pop);
 
         // Remove all from the stack
         theStack.popAll();
