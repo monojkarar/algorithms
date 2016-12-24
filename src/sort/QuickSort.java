@@ -173,7 +173,7 @@ public final class QuickSort {
      */
     private static int medianOf3(final Comparable[] array, final int left,
                                        final int right) {
-        int center = (left + right) / 2;
+        int center = (left + right) >>> 1;
 
         if (less(array[center], array[left])) {
             exch(array, left, center);
