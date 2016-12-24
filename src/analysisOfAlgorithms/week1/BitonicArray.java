@@ -60,7 +60,7 @@ public class BitonicArray {
     private static int findMax(final Integer[] array, final int start, final
     int end) {
 
-        int middle = (start + end) / 2;
+        int middle = (start + end) >>> 1;
         if (start == end) {
             return middle;
         } else if (array[middle] < array[middle + 1]) {
@@ -83,7 +83,7 @@ public class BitonicArray {
     private static int bitonicBinarySearch(final Object[] array, final int
             start, final int end, final int key) {
 
-        int middle = (start + end) / 2;
+        int middle = (start + end) >>> 1;
         if (array[middle].equals(key)) {
             return middle;
         }
