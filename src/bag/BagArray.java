@@ -1,18 +1,22 @@
 package bag;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- *  The BagArray claas represents an unordered collection of generic objects of the same type.  It supports iterating
- *  over items in an arbitrary way.
+ *  The BagArray claas represents an unordered collection of generic objects
+ *  of the same type.  It supports iterating over items in an arbitrary way.
  *
- *  Implemented using a fixed size array. This implementation uses a resizing array.
+ *  Implemented using a fixed size array. This implementation uses a resizing
+ *  array.
  *
  *  Advantages of array over linked list:
- *  1. Arrays allow random access to element: array[i] while linked lists only allow sequential access to elements
- *  2. Arrays do no require extra storage for 'links'. Linked lists are impractical for lists of characters or
- *  booleans (pointer value is bigger than data value).
+ *  1. Arrays allow random access to element: array[i] while linked lists only
+ *  allow sequential access to elements
+ *  2. Arrays do no require extra storage for 'links'. Linked lists are
+ *  impractical for lists of characters or booleans (pointer value is bigger
+ *  than data value).
  *
  *  Average Time Complexity
  *  add:                constant amortized time
@@ -27,14 +31,16 @@ import java.util.NoSuchElementException;
  *  add(value):         add a value to the bag
  *  remove(value):      removes an value from the bag (if it exists)
  *  occurrences(value): how many times is value in the bag
+ *  @param <T> the generic item.
  */
-public class BagArray<T> implements Iterable<T>{
-
+public final class BagArray<T> implements Iterable<T> {
+    /** An array of elements in a bag. */
     private T[] data;   // bag elements
+    /** Number of elements in the bag. */
     private int count;  // number of elements in the bag
 
     /**
-     * Constructor for bag that initializes an empty bag
+     * Constructor for bag that initializes an empty bag.
      * Average time complexity: O(1)
      */
     private BagArray() {
@@ -60,7 +66,7 @@ public class BagArray<T> implements Iterable<T>{
      * @return true if bag is full; false otherwise
      */
     boolean isFull() {
-        return (count == data.length-1);
+        return (count == data.length - 1);
     }
 
     /**
@@ -74,27 +80,27 @@ public class BagArray<T> implements Iterable<T>{
 
     /**
      * Resize the bag.
+     * @param capacity the capacity
      */
-    private void resize(int capacity) {
+    private void resize(final int capacity) {
 
         assert capacity >= count;
 
         T[] copy = (T[]) new Object[capacity];
-        for (int i = 0; i < count; i++) {
-            copy[i] = data[i];
-        }
+        copy = Arrays.copyOf(data, data.length);
         data = copy;
     }
 
     /**
      * Add an item into the bag.
      * Average time complexity: O(1)
+     * @param value the value
      */
-    private void add(T value) {
+    private void add(final T value) {
 
-        if (isFull())
+        if (isFull()) {
             resize(2 * data.length);
-
+        }
         data[count] = value;
         count++;
     }
@@ -102,13 +108,15 @@ public class BagArray<T> implements Iterable<T>{
     /**
      * Remove an item from the bag.
      * Average time complexity: O(N)
+     * @param value the value
      */
-    private void remove(T value) {
+    private void remove(final T value) {
 
         int index = -1;
         for (int i = 0; i < count && index == -1; i++) {
-            if (data[i] == value)
+            if (data[i] == value) {
                 index = i;
+            }
             if (index != -1) {
                 data[index] = data[count - 1];
             }
@@ -119,45 +127,62 @@ public class BagArray<T> implements Iterable<T>{
     /**
      * Count the number of items in the bag that equal a certain value.
      * Average time complexity: O(N)
-     *
+     * @param value the value
      * @return The number of items in the bag that equal a certain value.
      */
-    private int occurrences(T value) {
+    private int occurrences(final T value) {
         int occurrences = 0;
         for (int i = 0; i < count; i++) {
-            if (data[i] == value)
+            if (data[i] == value) {
                 occurrences++;
+            }
         }
         return occurrences;
     }
 
     /**
-     * Returns an iterator that iterates over the items in this bag in LIFO order.
+     * Returns iterator that iterates over the items in this bag in LIFO order.
      *
-     * @return an iterator that iterates over the items in this bag in LIFO order
+     * @return iterator that iterates over the items in this bag in LIFO order
      */
     public Iterator<T> iterator() {
         return new ArrayIterator();
     }
 
-    // an iterator, doesn't implement remove() since it's optional
+    /** an iterator, doesn't implement remove() since it's optional. */
     private class ArrayIterator implements Iterator<T> {
-
+        /** The index of the array. */
         private int i = 0;
 
-        public boolean hasNext() { return i < count; }
+        /**
+         * @return true if there is a next item; false otherwise.
+         */
+        public boolean hasNext() {
+            return i < count; }
 
+        /**
+         * Unsupported method.
+         */
         public void remove() {
             throw new UnsupportedOperationException();
         }
 
+        /**
+         * Returns next item in the array.
+         * @return returns next item in the array
+         */
         public T next() {
-            if (!hasNext()) throw new NoSuchElementException();
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
             return data[i++];
         }
     }
 
-    public static void main(String[] args) {
+    /**
+     * @param args the arguments
+     */
+    public static void main(final String[] args) {
 
         BagArray<Integer> bag = new BagArray<>();
         System.out.println("Is bag empty? " + bag.isEmpty());
@@ -165,10 +190,9 @@ public class BagArray<T> implements Iterable<T>{
         bag.add(8);
         bag.add(4);
 
-        for (Integer item : bag)
+        for (Integer item : bag) {
             System.out.println(item);
-
-
+        }
         System.out.println("size " + bag.size());
         System.out.println("how many 4's? " + bag.occurrences(4));
         bag.remove(4);
