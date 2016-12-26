@@ -57,7 +57,7 @@ public final class BinarySearch {
      * @param  key the search key
      * @return index of key in array {@code a} if present; {@code -1} otherwise
      */
-    public static int indexOf(final int[] a, final int key) {
+    private static int indexOf(final int[] a, final int key) {
         int lo = 0;
         int hi = a.length - 1;
         while (lo <= hi) {
