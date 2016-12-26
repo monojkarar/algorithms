@@ -51,13 +51,30 @@ public final class BinarySearch {
     private BinarySearch() { }
 
     /**
-     * Return true if v < w; false otherwise.
-     * @param v the variable v
-     * @param w tje variable y
-     * @return boolean true if v < y; false otherwise.
+     * Given the key get the value in the array.
+     * @param a the array
+     * @param key the key
+     * @return the value
      */
-    private static boolean less(final Comparable v, final Comparable w) {
-        return v.compareTo(w) < 0;
+    public int get(final int[] a, final int key) {
+        if (isEmpty(a)) {
+            return -1;
+        }
+        int i = rank(key, a);
+        if (i < a.length && i == key) {
+            return a[i];
+        } else {
+            return -1;
+        }
+    }
+    /**
+     * Returns true or false if bag is empty.
+     * Average time complexity: O(1)
+     *
+     * @return true if bag is empty; false otherwise
+     */
+    boolean isEmpty(int[] a {
+        return (a.length == 0);
     }
     /**
      * Returns the index of the specified key in the specified array.
