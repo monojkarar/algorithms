@@ -51,6 +51,15 @@ public final class BinarySearch {
     private BinarySearch() { }
 
     /**
+     * Return true if v < w; false otherwise.
+     * @param v the variable v
+     * @param w tje variable y
+     * @return boolean true if v < y; false otherwise.
+     */
+    private static boolean less(final Comparable v, final Comparable w) {
+        return v.compareTo(w) < 0;
+    }
+    /**
      * Returns the index of the specified key in the specified array.
      *
      * @param  a the array of integers, must be sorted in ascending order
@@ -63,9 +72,9 @@ public final class BinarySearch {
         while (lo <= hi) {
             // Key is in a[lo..hi] or not present.
             int mid = lo + (hi - lo) / 2;
-            if      (key < a[mid]) {
+            if (less(key, a[mid])) {
                 hi = mid - 1;
-            } else if (key > a[mid]) {
+            } else if (less(a[mid], key)) {
                 lo = mid + 1;
             } else {
                 return mid;
