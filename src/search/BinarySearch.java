@@ -32,11 +32,17 @@ import java.util.Arrays;
 
 /**
  *  The {@code BinarySearch} class provides a static method for binary
- *  searching for an integer in a sorted array of integers.
+ *  searching for an integer in a sorted array of integers.  Good data structure
+ *  for symbol tables that is static(the values don't change much) and most of
+ *  the operations are search.
  *
- *  The indexOf operations takes logarithmic time in the worst case.
+ *  worst-case          average case        ordered         key
+ *  (after n inserts)   (after n inserts)   iteration?      interface
+ *  seart   insert      search  insert
+ *  log n   N           log N   N/2         yes             compareTo()
  *
  *  Problem. To insert, need to shift all greater keys over.
+ *  Challenge. Efficient implementations of BOTH search and insert.
  *
  *  For additional documentation, see
  *  <a href="http://algs4.cs.princeton.edu/11model">Section 1.1</a> of
