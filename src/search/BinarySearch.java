@@ -33,15 +33,14 @@ import java.util.Arrays;
 /**
  *  The {@code BinarySearch} class provides a static method for binary
  *  searching for an integer in a sorted array of integers.
- *  <p>
- *  The <em>indexOf</em> operations takes logarithmic time in the worst case.
- *  <p>
+ *
+ *  The indexOf operations takes logarithmic time in the worst case.
+ *
+ *  Problem. To insert, need to shift all greater keys over.
+ *
  *  For additional documentation, see
  *  <a href="http://algs4.cs.princeton.edu/11model">Section 1.1</a> of
  *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
  */
 public final class BinarySearch {
 
@@ -71,9 +70,10 @@ public final class BinarySearch {
      * Returns true or false if bag is empty.
      * Average time complexity: O(1)
      *
+     * @param a the array
      * @return true if bag is empty; false otherwise
      */
-    boolean isEmpty(int[] a {
+    private boolean isEmpty(final int[] a) {
         return (a.length == 0);
     }
     /**
@@ -89,9 +89,9 @@ public final class BinarySearch {
         while (lo <= hi) {
             // Key is in a[lo..hi] or not present.
             int mid = lo + (hi - lo) / 2;
-            if (less(key, a[mid])) {
+            if (key < a[mid]) {
                 hi = mid - 1;
-            } else if (less(a[mid], key)) {
+            } else if ((key > a[mid])) {
                 lo = mid + 1;
             } else {
                 return mid;
