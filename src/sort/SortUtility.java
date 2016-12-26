@@ -14,7 +14,8 @@ public class SortUtility {
      * @param arraySize the array size
      */
 // Fills the Array with random values
-    static  void generateRandomArray(final Comparable[] theArray, final int
+    public static  void generateRandomArray(final Comparable[] theArray, final
+    int
             arraySize) {
 
         for (int i = 0; i < arraySize; i++) {
