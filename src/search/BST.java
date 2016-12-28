@@ -30,17 +30,15 @@ import java.util.NoSuchElementException;
 /**
  *  The BST class represents an ordered symbol table of generic key-value pairs.
  *  It supports the usual put, get, contains, delete, size, and is-empty
- *  methods.
- *  It also provides ordered methods for finding the minimum, >maximum,
+ *  methods. It also provides ordered methods for finding the minimum, >maximum,
  *  floor, select, ceiling.
  *  It also provides a keys method for iterating over all of the keys.
  *  A symbol table implements the associative array abstraction:
  *  when associating a value with a key that is already in the symbol table,
  *  the convention is to replace the old value with the new value.
  *  Unlike {@link java.util.Map}, this class uses the convention that
- *  values cannot be null—setting the
- *  value associated with a key to null is equivalent to deleting the
- *  key from the symbol table.
+ *  values cannot be null—setting the value associated with a key to null is
+ *  equivalent to deleting the key from the symbol table.
  *
  *  This implementation uses an (unbalanced) binary search tree. It requires
  *  that the key type implements the Comparable interface and calls the
@@ -49,6 +47,19 @@ import java.util.NoSuchElementException;
  *  ceiling, floor, select, and rank operations each take linear time in the
  *  worst case, if the tree becomes unbalanced. The size, and is-empty
  *  operations take constant time. Construction takes constant time.
+ *
+ *  operation           running time
+                        (unbalanced tree)
+ *  put                 N
+ *  contains            N
+ *  delete              N
+ *  min/max             N
+ *  floor/ceiling       N
+ *  rank                N
+ *  select              N
+ *  size                1
+ *  is-empty            1
+ *  construction        1
  *
  *  For additional documentation, see
  *  <a href="http://algs4.cs.princeton.edu/32bst">Section 3.2</a> of
@@ -59,14 +70,18 @@ import java.util.NoSuchElementException;
  *
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
- */
-
-/**
- * Class BST.
+ *
+ * Class BST. A BST is a binary tree in symmetric order.  the tree shapes
+ * depends on the order the data comes in.Binary search trees correspond to
+ * Quicksort partitioning.
+ *
+ * Problem: We don't get to randomize the order because the client is
+ * providing the keys.
+ *
  * @param <Key> the Key
  * @param <Value> teh Value
  */
-public class BST<Key extends Comparable<Key>, Value> {
+public final class BST<Key extends Comparable<Key>, Value> {
     /** Root of BST. */
     private Node root;
 
@@ -115,8 +130,10 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @return the number of key-value pairs in this symbol table
      */
     public int size() {
+
         return size(root);
     }
+
     /**
      * Return number of key-value pairs in BST rooted at x.
      * @param x the x
@@ -125,9 +142,8 @@ public class BST<Key extends Comparable<Key>, Value> {
     private int size(final Node x) {
         if (x == null) {
             return 0;
-        } else {
-            return x.size;
         }
+        return x.size;
     }
 
     /**
@@ -224,6 +240,7 @@ public class BST<Key extends Comparable<Key>, Value> {
         x.size = 1 + size(x.left) + size(x.right);
         return x;
     }
+
     /**
      * Removes the smallest key and associated value from the symbol table.
      *
@@ -401,9 +418,9 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
     /**
      * The floor.
-     * @param x the x
+     * @param x the node x
      * @param key the key
-     * @return the Node
+     * @return the Node that is the floor
      */
     private Node floor(final Node x, final Key key) {
         if (x == null) {
@@ -548,7 +565,7 @@ public class BST<Key extends Comparable<Key>, Value> {
      *
      * @return all keys in the symbol table
      */
-    public Iterable<Key> keys() {
+    private Iterable<Key> keys() {
         return keys(min(), max());
     }
 
@@ -563,7 +580,7 @@ public class BST<Key extends Comparable<Key>, Value> {
      * @throws IllegalArgumentException if either {@code lo} or {@code hi}
      *         is {@code null}
      */
-    public Iterable<Key> keys(final Key lo, final Key hi) {
+    private Iterable<Key> keys(final Key lo, final Key hi) {
         if (lo == null) {
             throw new IllegalArgumentException("first argument to keys() is "
                     + "null");
