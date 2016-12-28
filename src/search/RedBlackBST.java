@@ -4,11 +4,12 @@
  *  Dependencies: StdIn.java StdOut.java
  *  Data files:   http://algs4.cs.princeton.edu/33balanced/tinyST.txt
  *
+ *  Red Black Binary Search Tree is a simple data structure that allows us to
+ *  implement 2-3 Trees with very little extra code beyond the basic binary
+ *  search tree.
+ *
  *  A symbol table implemented using a left-leaning red-black BST.
  *  This is the 2-3 version.
- *
- *  Note: commented out assertions because DrJava now enables assertions
- *        by default.
  *
  *  % more tinyST.txt
  *  S E A R C H E X A M P L E
@@ -34,31 +35,28 @@ import edu.princeton.cs.algs4.BST;
 import java.util.NoSuchElementException;
 
 /**
- *  The {@code BST} class represents an ordered symbol table of generic
- *  key-value pairs.
- *  It supports the usual <em>put</em>, <em>get</em>, <em>contains</em>,
- *  <em>delete</em>, <em>size</em>, and <em>is-empty</em> methods.
- *  It also provides ordered methods for finding the <em>minimum</em>,
- *  <em>maximum</em>, <em>floor</em>, and <em>ceiling</em>.
- *  It also provides a <em>keys</em> method for iterating over all of the keys.
- *  A symbol table implements the <em>associative array</em> abstraction:
+ *  The BST class represents an ordered symbol table of generic key-value pairs.
+ *  It supports the usual put, get, contains, delete, size, and is-empty
+ *  methods.
+ *  It also provides ordered methods for finding the minimum, maximum, floor,
+ *  and ceiling. It also provides a keys method for iterating over all of the
+ *  keys. A symbol table implements the associative array abstraction:
  *  when associating a value with a key that is already in the symbol table,
  *  the convention is to replace the old value with the new value.
  *  Unlike {@link java.util.Map}, this class uses the convention that
- *  values cannot be {@code null}—setting the
- *  value associated with a key to null is equivalent to deleting the key
- *  from the symbol table.
+ *  values cannot be null—setting the value associated with a key to null is
+ *  equivalent to deleting the key from the symbol table.
  *
  *  This implementation uses a left-leaning red-black BST. It requires that
- *  the key type implements the {@code Comparable} interface and calls the
- *  {@code compareTo()} and method to compare two keys. It does not call either
- *  {@code equals()} or {@code hashCode()}.
- *  The <em>put</em>, <em>contains</em>, <em>remove</em>, <em>minimum</em>,
- *  <em>maximum</em>, <em>ceiling</em>, and <em>floor</em> operations each take
- *  logarithmic time in the worst case, if the tree becomes unbalanced.
- *  The <em>size</em>, and <em>is-empty</em> operations take constant time.
+ *  the key type implements the Comparable interface and calls the
+ *  compareTo() and method to compare two keys. It does not call either
+ *  equals() or hashCode().
+ *  The put, contains, remove, minimum, maximum, ceiling, and floor
+ *  operations each take logarithmic time in the worst case, if the tree
+ *  becomes unbalanced.
+ *  The size, and is-empty operations take constant time.
  *  Construction takes constant time.
- *  <p>
+ *
  *  For additional documentation, see
  *  <a href="http://algs4.cs.princeton.edu/33balanced">Section 3.3</a> of
  *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
