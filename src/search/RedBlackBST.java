@@ -470,7 +470,7 @@ public final class RedBlackBST<Key extends Comparable<Key>, Value> {
      * @param h the node h
      * @return Node
      */
-    private Node moveRedLeft(final Node h) {
+    private Node moveRedLeft(Node h) {
         // assert (h != null);
         // assert isRed(h) && !isRed(h.left) && !isRed(h.left.left);
 
@@ -489,7 +489,7 @@ public final class RedBlackBST<Key extends Comparable<Key>, Value> {
      * @param h the node h
      * @return Node
      */
-    private Node moveRedRight(final Node h) {
+    private Node moveRedRight(Node h) {
         // assert (h != null);
         // assert isRed(h) && !isRed(h.right) && !isRed(h.right.left);
         flipColors(h);
@@ -555,7 +555,7 @@ public final class RedBlackBST<Key extends Comparable<Key>, Value> {
      * @return the smallest key in the symbol table
      * @throws NoSuchElementException if the symbol table is empty
      */
-    public Key min() {
+    private Key min() {
         if (isEmpty()) {
             throw new NoSuchElementException("called min() with empty "
                     + "symbol table");
@@ -782,7 +782,7 @@ public final class RedBlackBST<Key extends Comparable<Key>, Value> {
      */
     public Iterable<Key> keys() {
         if (isEmpty()) {
-            return new Queue<Key>();
+            return new Queue<>();
         }
         return keys(min(), max());
     }
@@ -808,7 +808,7 @@ public final class RedBlackBST<Key extends Comparable<Key>, Value> {
                     + "is null");
         }
 
-        Queue<Key> queue = new Queue<Key>();
+        Queue<Key> queue = new Queue<>();
         // if (isEmpty() || lo.compareTo(hi) > 0) return queue;
         keys(root, queue, lo, hi);
         return queue;
