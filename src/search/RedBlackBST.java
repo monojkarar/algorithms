@@ -155,7 +155,6 @@ public final class RedBlackBST<Key extends Comparable<Key>, Value> {
         return root == null;
     }
 
-
     //**************************************************************************
     //  Standard BST search.
     //*************************************************************************/
@@ -177,7 +176,8 @@ public final class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     /**
      * Value associated with the given key in subtree rooted at x; null if no.
-     * such key.
+     * such key.  Search is the same as for elementary BST but runs much
+     * faster because of better balance.
      * @param x the node x
      * @param key the key
      * @return value associated with key in subtree rooted at x; null if no
@@ -243,6 +243,7 @@ public final class RedBlackBST<Key extends Comparable<Key>, Value> {
      * @return the node h
      */
     private Node put(Node h, final Key key, final Value val) {
+
         if (h == null) {
             return new Node(key, val, RED, 1);
         }
@@ -417,6 +418,7 @@ public final class RedBlackBST<Key extends Comparable<Key>, Value> {
     //  Red-black tree helper functions.
     //*************************************************************************/
     /**
+     * Invariant: maintains symmetric order and perfect black balance.
      * Make a left-leaning link lean to the right.
      * @param h the node h
      * @return Node
@@ -434,6 +436,7 @@ public final class RedBlackBST<Key extends Comparable<Key>, Value> {
     }
 
     /**
+     * Invariant: maintains symmetric order and perfect black balance.
      * Make a right-leaning link lean to the left.
      * @param h the node h
      * @return Node
@@ -452,13 +455,13 @@ public final class RedBlackBST<Key extends Comparable<Key>, Value> {
 
     /**
      * Flip the colors of a node and its two children.
+     *  h must have opposite color of its two children
      * @param h the node h
      */
     private void flipColors(final Node h) {
-        // h must have opposite color of its two children
         // assert (h != null) && (h.left != null) && (h.right != null);
         // assert (!isRed(h) &&  isRed(h.left) &&  isRed(h.right))
-        //    || (isRed(h)  && !isRed(h.left) && !isRed(h.right));
+        //     || (isRed(h)  && !isRed(h.left) && !isRed(h.right));
         h.color = !h.color;
         h.left.color = !h.left.color;
         h.right.color = !h.right.color;
@@ -749,7 +752,6 @@ public final class RedBlackBST<Key extends Comparable<Key>, Value> {
         return rank(key, root);
     }
 
-
     /**
      * Number of keys less than key in the subtree rooted at x.
      * @param key the key
@@ -1030,13 +1032,13 @@ public final class RedBlackBST<Key extends Comparable<Key>, Value> {
         return isBalanced(x.left, black) && isBalanced(x.right, black);
     }
 
-
     /**
      * Unit tests the {@code RedBlackBST} data type.
      *
      * @param args the command-line arguments
      */
     public static void main(final String[] args) {
+
         RedBlackBST<String, Integer> st = new RedBlackBST<>();
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
