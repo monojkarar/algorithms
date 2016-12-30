@@ -6,7 +6,7 @@ import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
 /**
- *  The {@code Heap} class provides a static methods for heapsorting
+ *  The {@code BinaryHeap} class provides a static methods for heapsorting
  *  an array.
  *
  *  Runtime analysis
@@ -15,7 +15,7 @@ import edu.princeton.cs.algs4.StdOut;
  *
  *  Worst-case space complexity O(1) auxiliary
  *
- *  Proposition. Heap construction uses <= 2 N compares and exchanges.
+ *  Proposition. BinaryHeap construction uses <= 2 N compares and exchanges.
  *  Proposition. Heapsort uses <= 2 N lg N compares and exchanges.
  *
  *  Significance. In-place sorting algorithm with N log N worst case.
@@ -142,8 +142,9 @@ public final class HeapSort {
      */
     private static void show(final Comparable[] a) {
         for (Comparable item : a) {
-            StdOut.println(item);
+            StdOut.print(item + " ");
         }
+        StdOut.println();
     }
 
     /**
@@ -155,6 +156,7 @@ public final class HeapSort {
     public static void main(final String[] args) {
         //String[] a = StdIn.readAllStrings();
         String[] a = {"X", "T", "S", "P", "L", "R", "A", "M", "O", "E", "E"};
+        show(a);
         Heap.sort(a);
         show(a);
         assert isSorted(a);
