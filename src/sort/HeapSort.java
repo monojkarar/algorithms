@@ -1,13 +1,10 @@
 package sort;
 
-
 import edu.princeton.cs.algs4.Heap;
-import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
 /**
- *  The {@code BinaryHeap} class provides a static methods for heapsorting
- *  an array.
+ *  The {BinaryHeapclass provides a static methods for heapsorting an array.
  *
  *  Runtime analysis
  *  Best        Average     Worst
@@ -19,14 +16,14 @@ import edu.princeton.cs.algs4.StdOut;
  *  Proposition. Heapsort uses <= 2 N lg N compares and exchanges.
  *
  *  Significance. In-place sorting algorithm with N log N worst case.
- *  - Mergesort: no, linear extra apace.
- *  - Quicksort: no, quadratic time in worst case.
+ *  - MergeSort: no, linear extra apace.
+ *  - QuickSort: no, quadratic time in worst case.
  *  - Heapsort: yes!
  *
  *  An in place sorting algorithm that's guaranteed O(n log n).
  *
  *  Bottom line. Heapsort is optimal for both time and space, but:
- *  - Inner loop longer than quicksort's.
+ *  - Inner loop longer than quickSort's.
  *  - Makes poor use of cache memory.
  *  - Not stable.
  *
@@ -42,38 +39,38 @@ public final class HeapSort {
 
     /**
      * Rearranges the array in ascending order, using the natural order.
-     * @param pq the array to be sorted
+     * @param heap the array to be sorted
      */
-    public static void sort(final Comparable[] pq) {
-        int n = pq.length;
+    public static void sort(final Comparable[] heap) {
+        int n = heap.length;
         // First pass. Build heap using bottom up method.
         for (int k = n / 2; k >= 1; k--) {
-            sink(pq, k, n);
+            sink(heap, k, n);
         }
         // Second pass. Remove the max one at a time. Leave in array instead
         // of nulling out.
         while (n > 1) {
-            exch(pq, 1, n--);
-            sink(pq, 1, n);
+            exch(heap, 1, n--);
+            sink(heap, 1, n);
         }
     }
 
     /**
      *  Helper functions to restore the heap invariant.
-     *  @param pq the array pq
+     *  @param heap the array pq
      *  @param k the k
      *  @param n the n
      */
-    private static void sink(final Comparable[] pq, int k, final int n) {
+    private static void sink(final Comparable[] heap, int k, final int n) {
         while (2 * k <= n) {
             int j = 2 * k;
-            if (j < n && less(pq, j, j + 1)) {
+            if (j < n && less(heap, j, j + 1)) {
                 j++;
             }
-            if (!less(pq, k, j)) {
+            if (!less(heap, k, j)) {
                 break;
             }
-            exch(pq, k, j);
+            exch(heap, k, j);
             k = j;
         }
     }
@@ -85,14 +82,14 @@ public final class HeapSort {
     /**
      * Return true if pq[i - 1] < pq[j - 1].
      * Convert from 1-based indexing to 0-base indexing.
-     * @param pq the array pq
+     * @param heap the array pq
      * @param i the variable i
      * @param j the variable j
      * @return boolean true if pq[i - 1] < pq[j - 1]
      */
-    private static boolean less(final Comparable[] pq, final int i,
+    private static boolean less(final Comparable[] heap, final int i,
                                 final int j) {
-        return pq[i - 1].compareTo(pq[j - 1]) < 0;
+        return heap[i - 1].compareTo(heap[j - 1]) < 0;
     }
 
     /**
@@ -125,12 +122,12 @@ public final class HeapSort {
 
     /**
      * Is the array sorted?
-     * @param a the arrray
+     * @param heap the arrray
      * @return true if array is sorted; false otherwise
      */
-    private static boolean isSorted(final Comparable[] a) {
-        for (int i = 1; i < a.length; i++) {
-            if (less(a[i], a[i - 1])) {
+    private static boolean isSorted(final Comparable[] heap) {
+        for (int i = 1; i < heap.length; i++) {
+            if (less(heap[i], heap[i - 1])) {
                 return false;
             }
         }
@@ -138,10 +135,10 @@ public final class HeapSort {
     }
     /**
      * Print array to standard output.
-     * @param a the array
+     * @param heap the array
      */
-    private static void show(final Comparable[] a) {
-        for (Comparable item : a) {
+    private static void show(final Comparable[] heap) {
+        for (Comparable item : heap) {
             StdOut.print(item + " ");
         }
         StdOut.println();
@@ -155,10 +152,10 @@ public final class HeapSort {
      */
     public static void main(final String[] args) {
         //String[] a = StdIn.readAllStrings();
-        String[] a = {"X", "T", "S", "P", "L", "R", "A", "M", "O", "E", "E"};
-        show(a);
-        Heap.sort(a);
-        show(a);
-        assert isSorted(a);
+        String[] heap = {"X", "T", "S", "P", "L", "R", "A", "M", "O", "E", "E"};
+        show(heap);
+        Heap.sort(heap);
+        show(heap);
+        assert isSorted(heap);
     }
 }
