@@ -66,9 +66,9 @@ import java.util.*;
  *  - Remove an arbitrary item.
  *  - Change the priority of an item.
  *
- *  Immutability: implementing ni Java
+ *  Immutability: implementing in Java
  *  Data type. Set values and operations on those values.
- *  Immutable data type. Can't change teh data type value once created.
+ *  Immutable data type. Can't change the data type value once created.
  *
  *  Immutable. String, Integer, Double, Color, Vector, Transaction, Point2D.
  *  Mutable. StringBuilder, Stack, Counter, Java array.
@@ -146,6 +146,7 @@ public class MaxPriorityQueue<Key> implements Iterable<Key> {
         }
         assert isMaxHeap();
     }
+
     /**
      * Returns true if this priority queue is empty.
      *
@@ -153,6 +154,7 @@ public class MaxPriorityQueue<Key> implements Iterable<Key> {
      *         {@code false} otherwise
      */
     public boolean isEmpty() {
+
         return n == 0;
     }
 
@@ -162,6 +164,7 @@ public class MaxPriorityQueue<Key> implements Iterable<Key> {
      * @return the number of keys in this priority queue
      */
     public int size() {
+
         return n;
     }
 
@@ -177,6 +180,7 @@ public class MaxPriorityQueue<Key> implements Iterable<Key> {
         }
         return pq[1];
     }
+
     /**
      * Helper function to double the size of the heap array.
      * @param capacity the capacity
@@ -189,6 +193,10 @@ public class MaxPriorityQueue<Key> implements Iterable<Key> {
 
     /**
      * Adds a new key to this priority queue.
+     * Scenario. Child's key becomes larger key than its parent's key.
+     * To eliminate this violation
+     * - Exchange key in child with key in parent.
+     * - Repeat until heap order restored.
      *
      * @param  x the new key to add to this priority queue
      */
@@ -208,7 +216,7 @@ public class MaxPriorityQueue<Key> implements Iterable<Key> {
     /**
      * Removes and returns the largest key in this priority queue.
      *
-     * @return a largest key on this priority queue
+     * @return the largest key on this priority queue
      * @throws NoSuchElementException if this priority queue is empty
      */
     private Key delMax() {
@@ -219,6 +227,7 @@ public class MaxPriorityQueue<Key> implements Iterable<Key> {
         exch(1, n--);
         sink(1);
         pq[n + 1] = null;     // to avoid loitering and help with garbage
+
         // collection size is reduced when it's only 1/4 full.
         if ((n > 0) && (n == (pq.length - 1) / 4)) {
             resize(pq.length / 2);
@@ -269,8 +278,7 @@ public class MaxPriorityQueue<Key> implements Iterable<Key> {
     private boolean less(final int i, final int j) {
         if (comparator == null) {
             return ((Comparable<Key>) pq[i]).compareTo(pq[j]) < 0;
-        }
-        else {
+        } else {
             return comparator.compare(pq[i], pq[j]) < 0;
         }
     }
@@ -290,6 +298,7 @@ public class MaxPriorityQueue<Key> implements Iterable<Key> {
      * @return boolean the boolean
      */
     private boolean isMaxHeap() {
+
         return isMaxHeap(1);
     }
     /**
