@@ -114,12 +114,16 @@ public final class BTree<Key extends Comparable<Key>, Value> {
         private Node next;
 
         /**
-         * Entry.
+         * Constructor.
+         * @param newKey the key
+         * @param newVal the value
+         * @param newNext the next key
          */
-        Entry(final Comparable key, final Object val, final Node next) {
-            this.key = key;
-            this.val = val;
-            this.next = next;
+        Entry(final Comparable newKey, final Object newVal, final Node
+                newNext) {
+            this.key = newKey;
+            this.val = newVal;
+            this.next = newNext;
         }
     }
 
@@ -390,6 +394,6 @@ public final class BTree<Key extends Comparable<Key>, Value> {
         StdOut.println(st);
         StdOut.println();
     }
-
 }
+
 
