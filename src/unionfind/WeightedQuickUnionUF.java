@@ -6,11 +6,11 @@ import java.util.Scanner;
 
 /**
  * Weighted Quick-union with path compression:
- * Worst case runtime is N + M lg* N. lg* N is the number of times you have to take log N to get 1.
- * M union-find operations on  set of N objects.
+ * Worst case runtime is N + M lg* N. lg* N is the number of times you have to
+ * take log N to get 1. M union-find operations on  set of N objects.
  * <p>
- * Data structure: Same as quick-union, but maintain extra array size[i] to count number of objects in the tree rooted
- * at i.
+ * Data structure: Same as quick-union, but maintain extra array size[i] to
+ * count number of objects in the tree rooted at i.
  * <p>
  * Find. Identical to quick-union.
  * <p>
@@ -30,7 +30,7 @@ import java.util.Scanner;
  * <p>
  * algorithm   initialize  union   find
  * quick-find  N           N       1
- * quick-union N           N*      N       <- worst case, * includes cost of finding roots
+ * quick-union N           N*      N  <- worst case,*includes cost finding roots
  * weighted QU N           log N*  log N   * includes cost of finding roots
  * 2       2
  * Iterated Log Function
@@ -46,7 +46,7 @@ import java.util.Scanner;
  * 65536
  * 2       5
  */
-public class WeightedQuickUnionUF {
+public final class WeightedQuickUnionUF {
     private static final String file = "src\\unionfind\\docs\\tinyuf.txt";
     //private static final String file = "src\\unionfind\\docs\\mediumuf.txt";
     //private static final String file = "C:\\Users\\Owner\\OneDrive\\largeUF.txt";
@@ -56,13 +56,13 @@ public class WeightedQuickUnionUF {
     private int count;
 
     /**
-     * Initializes an empty union–find data structure with N site 0 through N-1. Each site is initially in its own
-     * component.
+     * Initializes empty union–find data structure with N site 0 through N-1.
+     * Each site is initially in its own component.
      *
      * @param n the number of sites
      * @throws IllegalArgumentException if {n < 0}
      */
-    private WeightedQuickUnionUF(int n) {
+    private WeightedQuickUnionUF(final int n) {
         this.count = 0;
         this.parent = new int[n];
         this.size = new int[n];
@@ -85,32 +85,36 @@ public class WeightedQuickUnionUF {
 
     /**
      * Returns the component identifier for the component containing site i.
-     * Takes time proportional to depth of p and q. Depth of any node i is at most log N.
-     * 2
-     * Uses path compression. Just after computing the root of i, set the id of each examined node to point to that root.
+     * Takes time proportional to depth of p and q. Depth of any node i is at
+     * most log N.
+     *
+     * Uses path compression. Just after computing the root of i, set the id of
+     * each examined node to point to that root.
      *
      * @param i the integer representing one object
      * @return the component identifier for the component containing site i
      * @throws IndexOutOfBoundsException unless 0 <= i < n
      */
-    private int find(int i) {
+    private int find(final int i) {
         validate(i);
         while (i != parent[i]) {
-            parent[i] = parent[parent[i]];  // only one extra line of code! Keeps tree almost completely flat.
+            // only one extra line of code! Keeps tree almost completely flat.
+            parent[i] = parent[parent[i]];
             i = parent[i];
         }
         return i;
     }
 
     /**
-     * Validate that p is a valid index
+     * Validate that p is a valid index.
      *
      * @param p the integer representing one object
      */
-    private void validate(int p) {
+    private void validate(final int p) {
         int n = parent.length;
         if (p < 0 || p >= n) {
-            throw new IndexOutOfBoundsException("index " + p + " is not between 0 and " + (n - 1));
+            throw new IndexOutOfBoundsException("index " + p + " is not "
+                    + "between 0 and " + (n - 1));
         }
     }
 
@@ -119,25 +123,29 @@ public class WeightedQuickUnionUF {
      *
      * @param p the integer representing one site
      * @param q the integer representing the other site
-     * @return true if the two sites p and q are in the same component; false otherwise
+     * @return true if the two sites p & q are in the same component; false
+     *         otherwise
      * @throws IndexOutOfBoundsException unless both 0 <= p < n and 0 <= q < n
      */
-    private boolean connected(int p, int q) {
+    private boolean connected(final int p, final int q) {
+
         return find(p) == find(q);
     }
 
     /**
-     * Merges the component containing site p with the the component containing site q.
-     * Takes constant time, given roots.
+     * Merges the component containing site p with the the component containing
+     * site q. Takes constant time, given roots.
      *
      * @param p the integer representing one site
      * @param q the integer representing the other site
      * @throws IndexOutOfBoundsException unless both 0 <= p < n and 0 <= q < n
      */
-    private void union(int p, int q) {
+    private void union(final int p, final int q) {
         int rootP = find(p);
         int rootQ = find(q);
-        if (rootP == rootQ) return;
+        if (rootP == rootQ) {
+            return;
+        }
 
         count();
         // make smaller root point to larget one
@@ -151,13 +159,14 @@ public class WeightedQuickUnionUF {
     }
 
     /**
-     * Reads in a sequence of pairs of integers (between 0 and n-1) from standard input, where each integer represents
-     * some object; if the sites are in different components, merge the two component and print the pair to standard
-     * output.
+     * Reads in a sequence of pairs of integers (between 0 and n-1) from
+     * standard input, where each integer represents some object; if the
+     * sites are in different components, merge the two component and print the
+     * pair to standard output.
      *
      * @param args the command-line arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         try {
             Scanner in = new Scanner(new FileReader(file));
             long startTime, stopTime, duration;
@@ -179,7 +188,8 @@ public class WeightedQuickUnionUF {
             stopTime = System.currentTimeMillis();
             duration = stopTime - startTime;
             System.out.println(uf.count() + " components");
-            System.out.println("Union Find took " + duration / 1000 + "." + duration % 1000 + " seconds.");
+            System.out.println("Union Find took " + duration / 1000 + "."
+                    + duration % 1000 + " seconds.");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
