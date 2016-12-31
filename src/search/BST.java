@@ -100,14 +100,14 @@ public final class BST<Key extends Comparable<Key>, Value> {
 
         /**
          * the Constructor.
-         * @param key the key
-         * @param val the value
-         * @param size the size
+         * @param newKey the key
+         * @param newVal the value
+         * @param newSize the size
          */
-        Node(final Key key, final Value val, final int size) {
-            this.key = key;
-            this.val = val;
-            this.size = size;
+        Node(final Key newKey, final Value newVal, final int newSize) {
+            this.key = newKey;
+            this.val = newVal;
+            this.size = newSize;
         }
     }
 
@@ -801,3 +801,4 @@ public final class BST<Key extends Comparable<Key>, Value> {
         }
     }
 }
+
