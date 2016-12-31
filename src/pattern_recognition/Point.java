@@ -5,7 +5,7 @@ import edu.princeton.cs.algs4.StdDraw;
 import java.util.Comparator;
 
 /**
- *  Class Point.
+ *  Class pattern_recognition.Point.
  *
  *  To avoid potential complications with integer overflow or floating-point
  *  precision, you may assume that the constructor arguments x and y are each
@@ -73,7 +73,7 @@ public class Point implements Comparable<Point> {
      */
     public int compareTo(final Point that) {
 
-        if (this.y < that.y || (this.y == that.y && this.x < that.x)) {
+        if (this.y < that.y || (this.y ==  that.y && this.x < that.x)) {
             return -1;
         }
         if (this.x == that.x && this.y == that.y) {
@@ -129,31 +129,5 @@ public class Point implements Comparable<Point> {
                 return Double.compare(slope1, slope2);
             }
         };
-    }
-
-    /**
-     * Unit tests the Point data type.
-     *  @param args the args
-     */
-    public static void main(final String[] args) {
-
-        Point point1, point2;
-
-        /* Vertical line segments should be +Infinity */
-        point1 = new Point(5, 10);
-        point2 = new Point(5, 7);
-        assert point1.slopeTo(point2) == Double.POSITIVE_INFINITY
-                : "Vertical line segments should be +Infinity";
-
-        /* Horizontal line segments should be +0.0 */
-        point1 = new Point(12, 3);
-        point2 = new Point(3, 3);
-        assert point1.slopeTo(point2) == +0.0
-                : "Horizontal line segments should be +0.0";
-
-        /* The slope of a point with himself should be -Infinity */
-        Point p = new Point(1, 5);
-        assert p.slopeTo(p) == Double.NEGATIVE_INFINITY
-                : "The slpe of a point with himself should be -Infinity";
     }
 }

@@ -3,17 +3,13 @@ package pattern_recognition;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.Scanner;
-
 /*************************************************************************
  *  An immutable data type for Line segments in the plane.
  *  For use on Coursera, Algorithms Part I programming assignment.
  *************************************************************************/
 public class LineSegment {
     private static final String file =
-            "src\\pattern_recognition\\collineartests\\input6.txt";
+            "src\\pattern_recognition\\pattern_recognition.collineartests\\input6.txt";
     /** One endpoint of this line segment. */
     private final Point p;
     /** The other endpoint of this line segment. */
@@ -54,7 +50,7 @@ public class LineSegment {
     }
 
     /**
-     * Unit tests the Point data type..
+     * Unit tests the pattern_recognition.Point data type..
      *  @param args
      */
     public static void main(final String[] args) {

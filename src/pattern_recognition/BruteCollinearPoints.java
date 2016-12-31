@@ -1,13 +1,10 @@
 package pattern_recognition;
 
-import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.StdDraw;
-import edu.princeton.cs.algs4.StdOut;
-
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
- * BruteCollinearPoints.
+ * pattern_recognition.BruteCollinearPoints.
  *
  * Examines 4 points at a time and checks whether they all lie on the same
  * line segment, returning all such line segments.  To check whether the 4
@@ -15,8 +12,6 @@ import java.util.ArrayList;
  * between p and q, between p and r, and between p and s are equal.
  */
 public class BruteCollinearPoints {
-    private static final String file =
-            "src\\pattern_recognition\\collineartests\\input10.txt";
     /** Array of LineSegments. */
     private LineSegment[] lineSegments;
     /** Dynamic array of found collinear line segments found. */
@@ -32,10 +27,10 @@ public class BruteCollinearPoints {
         }
         for (Point point: points) {
             if (point == null)
-                throw new NullPointerException("Point is null.");
+                throw new NullPointerException("pattern_recognition.Point is null.");
         }
         segments = new ArrayList<>();
-        CheckForDuplicates(points);
+        checkForDuplicates(points);
 
         for (int p = 0; p < points.length - 3; p++) {
             for (int q = p + 1; q < points.length - 2; q++) {
@@ -51,6 +46,11 @@ public class BruteCollinearPoints {
         lineSegments = segments.toArray(new LineSegment[segments.size()]);
     }
 
+    /** Get the line segments. */
+    private LineSegment[] getLineSegments() {
+        return Arrays.copyOf(lineSegments, lineSegments.length);
+    }
+
     /**
      * Return true if points are collinear; false otherwise.
      * To check whether the 4 points p, q, r, and s are collinear, check
@@ -64,7 +64,7 @@ public class BruteCollinearPoints {
      * @param s fourth point
      * @return true if points are collienar; false otherwise
      */
-    public boolean isCollinear(final Point[] points, final int p, final int q,
+    private boolean isCollinear(final Point[] points, final int p, final int q,
                                                      final int r, final int s) {
         return (points[p].slopeTo(points[q]) == points[q].slopeTo(points[r]))
             && (points[q].slopeTo(points[r]) == points[r].slopeTo(points[s]));
@@ -91,14 +91,14 @@ public class BruteCollinearPoints {
      * @return an array of collinear line segments.
      */
     public LineSegment[] segments() {
-        return lineSegments;
+        return this.getLineSegments();
     }
 
     /**
      * Checks for duplicate points in an array of points.
      * @param points the array of points to check.
      */
-    private void CheckForDuplicates(final Point[] points) {
+    private void checkForDuplicates(final Point[] points) {
         for (int i = 0; i < points.length - 1; i++) {
             for (int j = i + 1; j < points.length; j++) {
                 if (points[i].compareTo(points[j]) == 0) {
@@ -106,36 +106,5 @@ public class BruteCollinearPoints {
                 }
             }
         }
-    }
-
-    /**
-     * Unit tests for the BruteCollinearPoints data type.
-     * @param args the args.
-     */
-    public static void main(final String[] args) {
-        In in = new In(file);
-
-        int n = in.readInt();
-        Point[] points = new Point[n];
-
-        StdDraw.setCanvasSize(800, 800);
-        StdDraw.setXscale(0, 32768);
-        StdDraw.setYscale(0, 32768);
-        StdDraw.setPenRadius(0.005);
-        StdDraw.setPenColor(StdDraw.BLUE);
-        StdDraw.enableDoubleBuffering();
-
-        for (int i = 0; i < n; i++) {
-            int x = in.readInt();
-            int y = in.readInt();
-
-            points[i] = new Point(x, y);
-        }
-
-        for (Point p : points) {
-            p.draw();
-        }
-        StdDraw.show();
-
     }
 }
