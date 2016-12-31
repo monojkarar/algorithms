@@ -478,7 +478,7 @@ public final class BinaryHeap<Key> implements Iterable<Key> {
      */
     public static void main(final String[] args) {
 
-        BinaryHeap theHeap = new BinaryHeap(2);
+        BinaryHeap theHeap = new BinaryHeap(10);
         int length = theHeap.heap.length;
 
         Scanner in = new Scanner(System.in);
