@@ -6,11 +6,11 @@ import edu.princeton.cs.algs4.StdDraw;
 import java.awt.Font;
 
 /**
- *
+ *  Puzzle Visualizer class.
  */
 public final class PuzzleVisualizer {
     /**
-     *
+     *  Draw.
      * @param board the board
      * @param numberOfMoves the number of moves
      */
@@ -50,7 +50,7 @@ public final class PuzzleVisualizer {
     }
 
     /**
-     *
+     *  Display message.
      * @param message the message
      */
     private static void displayMessage(final String message) {
