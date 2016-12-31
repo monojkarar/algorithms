@@ -4,7 +4,7 @@ import edu.princeton.cs.algs4.Heap;
 import edu.princeton.cs.algs4.StdOut;
 
 /**
- *  The {BinaryHeapclass provides a static methods for heapsorting an array.
+ *  The BinaryHeap class provides a static methods for heap sorting an array.
  *
  *  Runtime analysis
  *  Best        Average     Worst
@@ -16,15 +16,17 @@ import edu.princeton.cs.algs4.StdOut;
  *  Proposition. Heapsort uses <= 2 N lg N compares and exchanges.
  *
  *  Significance. In-place sorting algorithm with N log N worst case.
- *  - MergeSort: no, linear extra apace.
- *  - QuickSort: no, quadratic time in worst case.
- *  - Heapsort: yes!
+ *  - MergeSort: no, linear extra apace (in place possible , not practical).
+ *  - QuickSort: no, quadratic time in worst case(N log N worst-case possible
+ *               using shuffling, not practical.
+ *  - Heapsort:  yes!
  *
- *  An in place sorting algorithm that's guaranteed O(n log n).
+ *  An in place sorting algorithm that's guaranteed O(n log n). Heapsort!
+ *  In practice Heapsort is not used that much.
  *
  *  Bottom line. Heapsort is optimal for both time and space, but:
  *  - Inner loop longer than quickSort's.
- *  - Makes poor use of cache memory.
+ *  - Makes poor use of cache memory. No local memory reference like QuickSort.
  *  - Not stable.
  *
  *  For additional documentation, see
@@ -42,26 +44,35 @@ public final class HeapSort {
      * @param heap the array to be sorted
      */
     public static void sort(final Comparable[] heap) {
+
         int n = heap.length;
-        // First pass. Build heap using bottom up method.
+
+        // First pass. Rearrange the keys in the array to build a heap order
+        // using bottom up method. Heap order is when a root node is larger
+        // than its children.
         for (int k = n / 2; k >= 1; k--) {
             sink(heap, k, n);
         }
-        // Second pass. Remove the max one at a time. Leave in array instead
-        // of nulling out.
+
+        // Second pass. Make it heap order by sorting in-place by exchanging the
+        // largest remaining item one at a time with the last element in the
+        // heap. Leave it in the array instead of nulling out. Then sink the
+        // top node by replacing it with the largest of its two children
+        // until its in heap order.
         while (n > 1) {
-            exch(heap, 1, n--);
-            sink(heap, 1, n);
+            exch(heap, 1, n);
+            sink(heap, 1, --n);
         }
     }
 
     /**
      *  Helper functions to restore the heap invariant.
-     *  @param heap the array pq
+     *  @param heap the array heap
      *  @param k the k
      *  @param n the n
      */
     private static void sink(final Comparable[] heap, int k, final int n) {
+
         while (2 * k <= n) {
             int j = 2 * k;
             if (j < n && less(heap, j, j + 1)) {
@@ -152,7 +163,7 @@ public final class HeapSort {
      */
     public static void main(final String[] args) {
         //String[] a = StdIn.readAllStrings();
-        String[] heap = {"X", "T", "S", "P", "L", "R", "A", "M", "O", "E", "E"};
+        String[] heap = {"S", "O", "R", "T", "E", "X", "A", "M", "P", "L", "E"};
         show(heap);
         Heap.sort(heap);
         show(heap);
