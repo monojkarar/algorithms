@@ -1,7 +1,5 @@
 package heaps;
 
-import search.BinarySearch;
-
 import java.util.*;
 
 import static java.lang.Math.floor;

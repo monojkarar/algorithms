@@ -23,7 +23,7 @@ import edu.princeton.cs.algs4.StdOut;
  *  @author Kevin Wayne
  */
 public class Date implements Comparable<Date> {
-    /** A sample array */
+    /** A sample array. */
     private static final int[] DAYS = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30,
             31, 30, 31 };
     /** Month (between 1 and 12). */
@@ -135,12 +135,9 @@ public class Date implements Comparable<Date> {
     public Date next() {
         if (isValid(month, day + 1, year)) {
             return new Date(month, day + 1, year);
-        }
-        else if (isValid(month + 1, 1, year))
-        {
+        } else if (isValid(month + 1, 1, year)) {
             return new Date(month + 1, 1, year);
-        } else
-        {
+        } else {
             return new Date(1, 1, year + 1);
         }
     }
@@ -267,5 +264,5 @@ public class Date implements Comparable<Date> {
             StdOut.println(birthday);
         }
     }
-
 }
+

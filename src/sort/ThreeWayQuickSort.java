@@ -43,15 +43,21 @@ public final class ThreeWayQuickSort {
      */
     public static void sort(final Comparable[] a, final int lo, final int hi) {
 
-        if (hi <= lo) return;
+        if (hi <= lo) {
+            return;
+        }
         int lt = lo, gt = hi;
         Comparable v = a[lo];
         int i = lo;
         while (i <= gt) {
             int cmp = a[i].compareTo(v);
-            if      (cmp < 0) exch(a, lt++, i++);
-            else if (cmp > 0) exch(a, i, gt--);
-            else              i++;
+            if      (cmp < 0) {
+                exch(a, lt++, i++);
+            } else if (cmp > 0) {
+                exch(a, i, gt--);
+            } else {
+                i++;
+            }
         }
 
         sort(a, lo, lt - 1);

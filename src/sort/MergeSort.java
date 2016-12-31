@@ -67,10 +67,15 @@ public final class MergeSort {
         // merge back to a[]
         int i = low, j = middle + 1;
         for (int k = low; k <= high; k++) {
-            if      (i > middle)           array[k] = aux[j++];
-            else if (j > high)             array[k] = aux[i++];
-            else if (less(aux[j], aux[i])) array[k] = aux[j++];
-            else                           array[k] = aux[i++];
+            if      (i > middle) {
+                array[k] = aux[j++];
+            } else if (j > high) {
+                array[k] = aux[i++];
+            } else if (less(aux[j], aux[i])) {
+                array[k] = aux[j++];
+            } else {
+                array[k] = aux[i++];
+            }
         }
 
         //assert (isSorted(array, low, high));

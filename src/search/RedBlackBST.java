@@ -95,17 +95,17 @@ public final class RedBlackBST<Key extends Comparable<Key>, Value> {
         private int size;
         /**
          * Node constructor.
-         * @param key the key
-         * @param val the value
-         * @param color the color
-         * @param size the size
+         * @param newKey the key
+         * @param newVal the value
+         * @param newColor the color
+         * @param newSize the size
          */
-        Node(final Key key, final Value val, final boolean color,
-             final int size) {
-            this.key = key;
-            this.val = val;
-            this.color = color;
-            this.size = size;
+        Node(final Key newKey, final Value newVal, final boolean newColor,
+             final int newSize) {
+            this.key = newKey;
+            this.val = newVal;
+            this.color = newColor;
+            this.size = newSize;
         }
     }
 
@@ -1050,3 +1050,4 @@ public final class RedBlackBST<Key extends Comparable<Key>, Value> {
         StdOut.println();
     }
 }
+

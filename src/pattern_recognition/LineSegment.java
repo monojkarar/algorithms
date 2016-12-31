@@ -51,7 +51,7 @@ public class LineSegment {
 
     /**
      * Unit tests the pattern_recognition.Point data type..
-     *  @param args
+     *  @param args the args
      */
     public static void main(final String[] args) {
         In in = new In(file);

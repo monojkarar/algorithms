@@ -2,13 +2,13 @@
  *  Compilation:  javac BinarySearchST.java
  *  Execution:    java BinarySearchST
  *  Dependencies: StdIn.java StdOut.java
- *  Data files:   http://algs4.cs.princeton.edu/31elementary/tinyST.txt  
- *  
+ *  Data files:   http://algs4.cs.princeton.edu/31elementary/tinyST.txt
+ *
  *  Symbol table implementation with binary search in an ordered array.
  *
  *  % more tinyST.txt
  *  S E A R C H E X A M P L E
- *  
+ *
  *  % java BinarySearchST < tinyST.txt
  *  A 8
  *  C 4
@@ -517,3 +517,4 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
         }
     }
 }
+

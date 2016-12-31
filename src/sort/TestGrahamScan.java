@@ -1,6 +1,9 @@
 package sort;
 
-import edu.princeton.cs.algs4.*;
+import edu.princeton.cs.algs4.GrahamScan;
+import edu.princeton.cs.algs4.Point2D;
+import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdRandom;
 
 /**
  *  Graham Scan

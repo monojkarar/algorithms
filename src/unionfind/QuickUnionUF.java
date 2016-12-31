@@ -11,7 +11,7 @@ import java.util.Scanner;
  * <p>
  * algorithm   initialize  union   find
  * quick-find  N           N       1
- * quick-union N           N*      N       <- worst case, * includes cost of finding roots
+ * quick-union N           N*      N <- worst case, *includes cost of finding roots
  * <p>
  * Quick-find defect
  * - Union too expensive (N array accesses)
@@ -54,30 +54,33 @@ public class QuickUnionUF {
     }
 
     /**
-     * Chase parent pointers until reach root  (depth of i array accesses)
+     * Chase parent pointers until reach root  (depth of i array accesses).
      *
      * @param i the integer representing one object
-     * @return the component identifier for the component containing site {@code p}
+     * @return the component identifier for the component containing site p
      * @throws IndexOutOfBoundsException unless {@code 0 <= p < n}
      */
     private int find(int i) {
         int n = parent.length;
-        if (i < 0 || i >= n)
-            throw new IndexOutOfBoundsException("index " + i + " is not between 0 and " + (n - 1));
-
-        while (i != parent[i])
+        if (i < 0 || i >= n) {
+            throw new IndexOutOfBoundsException("index " + i + " is not "
+                    + "between 0 and " + (n - 1));
+        }
+        while (i != parent[i]) {
             i = parent[i];
+        }
         return i;
     }
 
     /**
-     * Check whether p and q have the same root (depth of p and q arrray accesses)
+     * Check whether p and q have the same root (depth of p & q array accesses).
      *
      * @param p the p
      * @param q the q
      * @return the boolean
      */
-    private boolean connected(int p, int q) {
+    private boolean connected(final int p, final int q) {
+
         return find(p) == find(q);
     }
 
@@ -87,12 +90,14 @@ public class QuickUnionUF {
      *
      * @param p the integer representing one site
      * @param q the integer representing the other site
-     * @throws IndexOutOfBoundsException unless both {@code 0 <= p < n} and {@code 0 <= q < n}
+     * @throws IndexOutOfBoundsException unless both 0 <= p < n and 0 <= q < n
      */
-    private void union(int p, int q) {
+    private void union(final int p, final int q) {
         int rootP = find(p);
         int rootQ = find(q);
-        if (rootP == rootQ) return;
+        if (rootP == rootQ) {
+            return;
+        }
         parent[rootP] = rootQ;
         count--;
     }
@@ -105,7 +110,7 @@ public class QuickUnionUF {
      *
      * @param args the command-line arguments
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         try {
             Scanner in = new Scanner(new FileReader(file));
 

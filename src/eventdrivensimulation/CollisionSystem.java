@@ -272,3 +272,5 @@ public final class CollisionSystem {
         system.simulate(10000);
     }
 }
+
+

@@ -19,7 +19,7 @@ import java.util.Arrays;
  * 0(ignoring integer overflow). This implementation uses sorting and binary
  * search and time proportional to n^2 log n, where n is the number of integers.
  */
-public class ThreeSum {
+public final class ThreeSum {
 
     /** do not instantiate. */
     private ThreeSum() {

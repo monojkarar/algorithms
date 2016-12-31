@@ -23,7 +23,8 @@ import java.util.Scanner;
 public class ThreeSumQuadratic {
 
     /**
-     * findThreeSum.
+     * findThreeSum
+     * @param a the array
      */
     private static void findThreeSum(final ArrayList<Integer> a) {
 

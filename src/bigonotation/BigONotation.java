@@ -34,10 +34,9 @@ public final class BigONotation {
      * @param args the arguments.
      */
     public static void main(final String[] args) {
-
-		//0(1) Test
-		 BigONotation testAlgo = new BigONotation(10);
-		 testAlgo.addItemToArray(10);
+         //0(1) Test
+         BigONotation testAlgo = new BigONotation(10);
+         testAlgo.addItemToArray(10);
 		 System.out.println(Arrays.toString(testAlgo.theArray));
 
         BigONotation testAlgo2 = new BigONotation(10000);

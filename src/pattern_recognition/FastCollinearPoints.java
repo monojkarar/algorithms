@@ -92,6 +92,10 @@ public class FastCollinearPoints {
         lineSegments = segments.toArray(new LineSegment[segments.size()]);
     }
 
+    /**
+     * Get line segments.
+     * @return copy of line segments
+     */
     private LineSegment[] getLineSegments() {
         return Arrays.copyOf(lineSegments, lineSegments.length);
     }

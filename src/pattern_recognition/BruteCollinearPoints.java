@@ -26,8 +26,10 @@ public class BruteCollinearPoints {
             throw new NullPointerException("Array of points of null");
         }
         for (Point point: points) {
-            if (point == null)
-                throw new NullPointerException("pattern_recognition.Point is null.");
+            if (point == null) {
+                throw new NullPointerException("pattern_recognition.Point "
+                        + "is null.");
+            }
         }
         segments = new ArrayList<>();
         checkForDuplicates(points);
@@ -46,7 +48,10 @@ public class BruteCollinearPoints {
         lineSegments = segments.toArray(new LineSegment[segments.size()]);
     }
 
-    /** Get the line segments. */
+    /**
+     * Get the line segments.
+     * @return the array of line segments
+     */
     private LineSegment[] getLineSegments() {
         return Arrays.copyOf(lineSegments, lineSegments.length);
     }

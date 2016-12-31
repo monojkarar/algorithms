@@ -144,7 +144,8 @@ public class BitonicArray {
             arraylist.toArray(array);
 
             if (containsDuplicates(array)) {
-                throw new IllegalArgumentException("array contains duplicate integers");
+                throw new IllegalArgumentException("array contains duplicate "
+                        + "integers");
             }
 
             int max = findMax(array, 0, array.length - 1);

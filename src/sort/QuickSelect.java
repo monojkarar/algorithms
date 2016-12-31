@@ -60,7 +60,10 @@ public final class QuickSelect {
     /** The array to sort. */
     private  Comparable[] theArray;
 
-    /** This class should not be instantiated. */
+    /**
+     * This class should not be instantiated.
+     * @param n the n
+     */
     private QuickSelect(final int n) {
         theArray = new Comparable[n];
         generateRandomArray(this.theArray, this.theArray.length);
@@ -130,9 +133,9 @@ public final class QuickSelect {
                 }
             }
 
-            if (i >= j)        // check if pointers cross.
+            if (i >= j) {       // check if pointers cross.
                 break;
-
+            }
             exch(array, i, j);  // swap.
         }
 

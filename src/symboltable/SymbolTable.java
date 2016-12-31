@@ -8,9 +8,9 @@ import java.util.NoSuchElementException;
 import java.util.TreeMap;
 
 /**
- *  The SymbolTable class represents an ordered symbol table of generic key-value pairs.
- *  It supports the usual put, get, contains, delete, size, and is-empty
- *  methods.
+ *  The SymbolTable class represents an ordered symbol table of generic
+ *  key-value pairs. It supports the usual put, get, contains, delete, size,
+ *  and is-empty methods.
  *
  *  It also provides ordered methods for finding the minimum, maximum, floor,
  *  and ceiling. It also provides a keys method for iterating over all of the

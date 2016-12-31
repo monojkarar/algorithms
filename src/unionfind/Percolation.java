@@ -42,10 +42,12 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
  * - Percolates iff any site on bottom row is connected to site on top row.
  * <p>
  * Question: How to model opening a new site?
- * Connect newly opened site to all of its adjacent open sites (up to 4 calls to union()).
+ * Connect newly opened site to all of its adjacent open sites \(up to 4
+ * calls to union()).
  * <p>
  * Question: What is percolation threshold p*?
- * Answer: About 0.592746 for large square lattices (constant only known via simulation).
+ * Answer: About 0.592746 for large square lattices
+ * (constant only known via simulation).
  */
 public class Percolation {
 
@@ -59,23 +61,25 @@ public class Percolation {
      * @param n the size of the grid
      * @throws IllegalArgumentException if {n < 0}
      */
-    public Percolation(int n) {
+    public Percolation(final int n) {
 
-        if (n <= 0)
-            throw new IllegalArgumentException("number of sites " + n + " is less than or equal to 0");
-
+        if (n <= 0) {
+            throw new IllegalArgumentException("number of sites " + n + " is "
+                    + "less than or equal to 0");
+        }
         N = n;
         int siteCount = N * N;
 
-        // Create n-by-n grid, with all sites blocked. Index 0 and N^2 + 1 are reserved for virtual top and bottom sites.
+        // Create n-by-n grid, with all sites blocked. Index 0 and N^2 + 1
+        // are reserved for virtual top and bottom sites.
         grid = new WeightedQuickUnionUF(siteCount + 2);
         auxGrid = new WeightedQuickUnionUF(siteCount + 2);
         openSites = new boolean[siteCount + 2];
 
         // initialize all sites to be false(blocked)
-        for (int i = 1; i <= siteCount; i++)
+        for (int i = 1; i <= siteCount; i++) {
             openSites[i] = false;
-
+        }
         //initialize virtual top and bottom site with open state
         openSites[0] = openSites[siteCount + 1] = true;
     }
@@ -90,13 +94,14 @@ public class Percolation {
      * @param row number of the site
      * @param col number of the site
      */
-    private int getIndex(int row, int col) {
+    private int getIndex(final int row, final int col) {
 
-        if (row <= 0 || row > this.getN())
+        if (row <= 0 || row > this.getN()) {
             throw new IndexOutOfBoundsException("Row out of bound");
-        if (col <= 0 || col > this.getN())
+        }
+        if (col <= 0 || col > this.getN()) {
             throw new IndexOutOfBoundsException("Column out of bound");
-
+        }
         return (row - 1) * this.getN() + col;
     }
 
@@ -107,14 +112,15 @@ public class Percolation {
      * @param col the col
      * @return true if the site is open; false otherwise.
      */
-    public boolean isOpen(int row, int col) {
+    public boolean isOpen(final int row, final int col) {
         int index = getIndex(row, col);
         return openSites[index];
     }
 
     /**
-     * Mark site (row, col) as true(open) if it is not open already. Connect newly opened site to all if its adjacent
-     * open sites. (up to 4 calls to union).
+     * Mark site (row, col) as true(open) if it is not open already. Connect
+     * newly opened site to all if its adjacent open sites. (up to 4 calls to
+     * union).
      *
      * @param row the row
      * @param col the col
@@ -125,23 +131,19 @@ public class Percolation {
         openSites[index] = true;
 
         // Connect top, bottom, left and right sites of current index if they are open.
-        if (row != 1 && isOpen(row - 1, col))        // Check left site
-        {
+        if (row != 1 && isOpen(row - 1, col)) {      // Check left site
             grid.union(index, getIndex(row - 1, col));
             auxGrid.union(index, getIndex(row - 1, col));
         }
-        if (row != getN() && isOpen(row + 1, col))    // Check right site
-        {
+        if (row != getN() && isOpen(row + 1, col)) {  // Check right site
             grid.union(index, getIndex(row + 1, col));
             auxGrid.union(index, getIndex(row + 1, col));
         }
-        if (col != 1 && isOpen(row, col - 1))         // Check top site
-        {
+        if (col != 1 && isOpen(row, col - 1)) {        // Check top site
             grid.union(index, getIndex(row, col - 1));
             auxGrid.union(index, getIndex(row, col - 1));
         }
-        if (col != getN() && isOpen(row, col + 1))    // Check bottom site
-        {
+        if (col != getN() && isOpen(row, col + 1)) {  // Check bottom site
             grid.union(index, getIndex(row, col + 1));
             auxGrid.union(index, getIndex(row, col + 1));
         }
@@ -151,7 +153,9 @@ public class Percolation {
             grid.union(0, index);
             auxGrid.union(0, index);
         }
-        if (row == N) {   // site on last row to virtual bottom site. Don't connect to grid to solve backwash issue.
+        // site on last row to virtual bottom site. Don't connect to grid to
+        // solve backwash issue.
+        if (row == N) {
             grid.union(openSites.length - 1, index);
         }
     }
@@ -169,10 +173,12 @@ public class Percolation {
     }
 
     /**
-     * Is any open site on bottom row of grid connected to open site on top row by open sites(percolates)?
-     * Check whether an N-by-N system percolates by checking if sites are in same connected by open sites.
+     * Is any open site on bottom row of grid connected to open site on top row
+     * by open sites(percolates)? Check whether an N-by-N system percolates
+     * by checking if sites are in same connected by open sites.
      * <p>
-     * Introduce a virtual top site and virtual bottom site (and connections to top and bottom).
+     * Introduce a virtual top site and virtual bottom site (and connections to
+     * top and bottom).
      * - Percolates iff virtual top site is connected to virtual bottom site.
      * - Efficient algorithm: only 1 call to connected().
      * <p>

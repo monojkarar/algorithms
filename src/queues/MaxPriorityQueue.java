@@ -402,5 +402,5 @@ public class MaxPriorityQueue<Key> implements Iterable<Key> {
         System.out.print(pq.delMax() + " ");
         System.out.println("(" + pq.size() + " left on pq)");
     }
-
 }
+

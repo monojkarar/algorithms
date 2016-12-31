@@ -146,7 +146,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     /** an iterator, doesn't implement remove() since it's optional. */
-    private class ArrayIterator implements Iterator<Item> {
+    private final class ArrayIterator implements Iterator<Item> {
 
         /** A counter. */
         private int i = 0;
@@ -165,7 +165,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
          * @return boolean
          */
         public boolean hasNext() {
-            return i <  length ;
+            return i <  length;
         }
         /** method not implemented. */
         public void remove() {
