@@ -79,10 +79,10 @@ public class MinPQ<Key> implements Iterable<Key> {
      * using the given comparator.
      *
      * @param  initCapacity the initial capacity of this priority queue
-     * @param  comparator the order to use when comparing keys
+     * @param  newComparator the order to use when comparing keys
      */
-    private MinPQ(final int initCapacity, final Comparator<Key> comparator) {
-        this.comparator = comparator;
+    private MinPQ(final int initCapacity, final Comparator<Key> newComparator) {
+        this.comparator = newComparator;
         pq = (Key[]) new Object[initCapacity + 1];
         n = 0;
     }
@@ -90,10 +90,11 @@ public class MinPQ<Key> implements Iterable<Key> {
     /**
      * Initializes an empty priority queue using the given comparator.
      *
-     * @param  comparator the order to use when comparing keys
+     * @param  newComparator the order to use when comparing keys
      */
-    public MinPQ(final Comparator<Key> comparator) {
-        this(1, comparator);
+    public MinPQ(final Comparator<Key> newComparator) {
+
+        this(1, newComparator);
     }
 
     /**
@@ -133,6 +134,7 @@ public class MinPQ<Key> implements Iterable<Key> {
      * @return the number of keys on this priority queue
      */
     public int size() {
+
         return n;
     }
 
@@ -185,15 +187,14 @@ public class MinPQ<Key> implements Iterable<Key> {
      * @return a smallest key on this priority queue
      * @throws NoSuchElementException if this priority queue is empty
      */
-    public Key delMin() {
+    Key delMin() {
         if (isEmpty()) {
             throw new NoSuchElementException("Priority queue underflow");
         }
         exch(1, n);
         Key min = pq[n--];
         sink(1);
-        pq[n + 1] = null;     // avoid loitering and help with garbage
-        // collection
+        pq[n + 1] = null;    // avoid loitering and help with garbage collection
         if ((n > 0) && (n == (pq.length - 1) / 4)) {
             resize(pq.length  / 2);
         }
@@ -201,10 +202,9 @@ public class MinPQ<Key> implements Iterable<Key> {
         return min;
     }
 
-
-   /***************************************************************************
-    * Helper functions to restore the heap invariant.
-    ***************************************************************************/
+    //**************************************************************************
+    // * Helper functions to restore the heap invariant.
+    //*************************************************************************/
 
     /**
      * Swim function.
@@ -291,7 +291,6 @@ public class MinPQ<Key> implements Iterable<Key> {
         return isMinHeap(left) && isMinHeap(right);
     }
 
-
     /**
      * Returns an iterator that iterates over the keys on this priority queue
      * in ascending order.
@@ -358,6 +357,7 @@ public class MinPQ<Key> implements Iterable<Key> {
      * @param args the command-line arguments
      */
     public static void main(final String[] args) {
+
         MinPQ<String> pq = new MinPQ<>();
         while (!StdIn.isEmpty()) {
             String item = StdIn.readString();
@@ -369,5 +369,4 @@ public class MinPQ<Key> implements Iterable<Key> {
         }
         StdOut.println("(" + pq.size() + " left on pq)");
     }
-
 }
