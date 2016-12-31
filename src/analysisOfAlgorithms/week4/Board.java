@@ -2,6 +2,7 @@ package analysisOfAlgorithms.week4;
 
 import edu.princeton.cs.algs4.Queue;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 /**
@@ -19,7 +20,7 @@ import java.util.Iterator;
  *
  *  init    1 left  2 up    5 left  goal
  */
-public class Board {
+public final class Board {
     /** An n-by-n array of blocks. */
     private final int[][] board;
     /** The size of the board. */
@@ -29,7 +30,7 @@ public class Board {
      *  Construct a board from an n-by-n array of blocks.
      *  @param blocks the blocks of an n-by-n array of blocks
      */
-    Board(final int[][] blocks) {
+    private Board(final int[][] blocks) {
 
         this.board = blocks;
         this.n = blocks.length;
@@ -39,7 +40,7 @@ public class Board {
      *  Board dimension.
      *  @return the board dimension
      */
-    public int dimension() {
+    private int dimension() {
 
         return this.board.length;
     }
@@ -111,34 +112,16 @@ public class Board {
      *  Is this board the goal board?
      *  @return true if board is the goal board; false otherwise
      */
-    public boolean isGoal() {
+    private boolean isGoal() {
 
         return this.hamming() == 0;
-    }
-
-    /**
-     * Copy the board to a new Board.
-     * @param x the board to copy
-     * @return the copy of the board.
-     */
-    private static Board copy(final Board x) {
-        int[][] twin = new int[x.n][x.n];
-
-        for (int i = 0; i < x.n; i++) {
-            for (int j = 0; j < x.n; j++) {
-                twin[i][j] = x.board[i][j];
-            }
-        }
-
-        Board boardCopy = new Board(twin);
-        return boardCopy;
     }
 
     /**
      * A board that is obtained by exchanging any pair of blocks.
      * @return the board obtained by exchanging any pair of blocks
      */
-    public Board twin() {
+    private Board twin() {
 
         int block1;
         int block2;
@@ -216,7 +199,7 @@ public class Board {
      * All neighboring boards.
      * @return all neighboring boards.
      */
-    public Iterable<Board> neighbors() {
+    private Iterable<Board> neighbors() {
 
         int x = 0;
         int y = 0;
@@ -234,39 +217,43 @@ public class Board {
         Queue<Board> queue = new Queue<>();
 
         try {
-            Board newBoard = copy(this);
+            Board newBoard =
+                    new Board(Arrays.copyOf(this.board, this.board.length));
             newBoard.board[x][y] = this.board[x + 1][y];
             newBoard.board[x + 1][y] = 0;
             queue.enqueue(newBoard);
         } catch (ArrayIndexOutOfBoundsException e) {
-
+            e.printStackTrace();
         }
 
         try {
-            Board newBoard2 = copy(this);
+            Board newBoard2 =
+                    new Board(Arrays.copyOf(this.board, this.board.length));
             newBoard2.board[x][y] = this.board[x - 1][y];
             newBoard2.board[x - 1][y] = 0;
             queue.enqueue(newBoard2);
         } catch (ArrayIndexOutOfBoundsException e) {
-
+            e.printStackTrace();
         }
 
         try {
-            Board newBoard3 = copy(this);
+            Board newBoard3 =
+                    new Board(Arrays.copyOf(this.board, this.board.length));
             newBoard3.board[x][y] = this.board[x][y + 1];
             newBoard3.board[x][y + 1] = 0;
             queue.enqueue(newBoard3);
         } catch (ArrayIndexOutOfBoundsException e) {
-
+            e.printStackTrace();
         }
 
         try {
-            Board newBoard4 = copy(this);
+            Board newBoard4 =
+                    new Board(Arrays.copyOf(this.board, this.board.length));
             newBoard4.board[x][y] = this.board[x][y - 1];
             newBoard4.board[x][y - 1] = 0;
             queue.enqueue(newBoard4);
         } catch (ArrayIndexOutOfBoundsException e) {
-
+            e.printStackTrace();
         }
 
         return queue;
@@ -290,7 +277,7 @@ public class Board {
         arr[2][2] = 5;
 
         Board board = new Board(arr);
-        System.out.println("Current board: "+ board + "\n");
+        System.out.println("Current board: " + board + "\n");
         System.out.println("Manhattan = " + board.manhattan());
         System.out.println("Hamming = " + board.hamming());
         System.out.println("Board dimension: " + board.dimension() + "\n");
