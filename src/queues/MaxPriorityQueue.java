@@ -3,25 +3,21 @@
  *  Execution:    java MaxPQ < input.txt
  *  Dependencies: StdIn.java StdOut.java
  *  Data files:   http://algs4.cs.princeton.edu/24pq/tinyPQ.txt
- *  
+ *
  *  Generic max priority queue implementation with a binary heap.
  *  Can be used with a comparator instead of the natural order,
  *  but the generic Key type must still be Comparable.
  *
- *  % java MaxPQ < tinyPQ.txt 
+ *  % java MaxPQ < tinyPQ.txt
  *  Q X P (6 left on pq)
  *
  *  We use a one-based array to simplify parent and child calculations.
  *
- *  Can be optimized by replacing full exchanges with half exchanges 
+ *  Can be optimized by replacing full exchanges with half exchanges
  *  (ala insertion sort).
- *
  ******************************************************************************/
 
 package queues;
-
-import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
 
 import java.util.*;
 
@@ -399,8 +395,9 @@ public class MaxPriorityQueue<Key> implements Iterable<Key> {
             }
         }
         if (!pq.isEmpty()) {
-            for (String string : pq)
+            for (String string : pq) {
                 System.out.println(string + " ");
+            }
         }
         System.out.print(pq.delMax() + " ");
         System.out.println("(" + pq.size() + " left on pq)");
