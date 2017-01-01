@@ -20,7 +20,7 @@ import java.util.Iterator;
  *
  *  init    1 left  2 up    5 left  goal
  */
-public final class Board {
+public class Board {
     /** An n-by-n array of blocks. */
     private final int[][] board;
     /** The size of the board. */
@@ -40,7 +40,7 @@ public final class Board {
      *  Board dimension.
      *  @return the board dimension
      */
-    private int dimension() {
+    public int dimension() {
 
         return this.board.length;
     }
@@ -58,7 +58,7 @@ public final class Board {
      *   initial           goal             Manhattan = 5 + 0
      * @return the number of blocks out of place
      */
-    int hamming() {
+    public int hamming() {
 
         int count = 0;
         int goalNum = 1;
@@ -91,7 +91,7 @@ public final class Board {
      *
      *  @return the sum
      */
-    int manhattan() {
+    public int manhattan() {
 
         int total = 0;
         for (int i = 0; i < n; i++) {
@@ -121,7 +121,7 @@ public final class Board {
      * A board that is obtained by exchanging any pair of blocks.
      * @return the board obtained by exchanging any pair of blocks
      */
-    Board twin() {
+    public Board twin() {
 
         int block1;
         int block2;
@@ -218,7 +218,7 @@ public final class Board {
      * All neighboring boards.
      * @return all neighboring boards.
      */
-    Iterable<Board> neighbors() {
+    public Iterable<Board> neighbors() {
 
         int x = 0;
         int y = 0;

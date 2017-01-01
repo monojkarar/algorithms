@@ -11,7 +11,7 @@ import java.util.Iterator;
 /**
  * The class Solver.
  */
-public final class Solver {
+public class Solver {
     /** Solution node. */
     private Node solutionNode;
     /** Is the initial board solvable? */
@@ -29,7 +29,7 @@ public final class Solver {
         private int numberOfMovesMade;
 
         /** Node constructor. */
-        Node() {
+        private Node() {
             this.numberOfMovesMade = 0;
         }
 
@@ -153,7 +153,7 @@ public final class Solver {
      * Is the initial board solvable?
      * @return true if the initial board is solvable; false otherwise
      */
-    boolean isSolvable() {
+    public boolean isSolvable() {
 
         return initialSolvable;
     }
@@ -162,7 +162,7 @@ public final class Solver {
      * Min number of moves to solve initial board; -1 if unsolvable.
      * @return minimum number of moves to solve initial board
      */
-    private int moves() {
+    public int moves() {
 
          return initialSolvable ? solutionNode.numberOfMovesMade : -1;
     }
@@ -171,7 +171,7 @@ public final class Solver {
      * Sequence of boards in a shortest solution; null if unsolvable.
      * @return sequence of boards in shortest solution
      */
-    Iterable<Board> solution() {
+    public Iterable<Board> solution() {
 
         return initialSolvable ? solutionBoards : null;
     }
