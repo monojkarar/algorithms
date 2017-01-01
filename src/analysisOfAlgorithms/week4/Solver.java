@@ -34,9 +34,9 @@ public final class Solver {
         }
 
         /**
-         * Compare times when two events will occur.
+         * Compare number of moves of two nodes.
          *
-         * @param that an Event
+         * @param that a node
          * @return int
          */
         public int compareTo(final Node that) {
@@ -82,23 +82,22 @@ public final class Solver {
 
         int count = 0;
         while (!solutionNode.theBoard.isGoal()
-                | !solutionNodeTwin.theBoard.isGoal()) {
+             | !solutionNodeTwin.theBoard.isGoal()) {
 
             solutionNode = thePQ.delMin();
             solutionBoards.enqueue(solutionNode.theBoard);
+
             if (solutionNode.theBoard.isGoal()) {
                 initialSolvable = true;
                 break;
             } else {
                 solutionNode.numberOfMovesMade++;
-                Iterable<Board> neighborBoards
-                        = solutionNode.theBoard.neighbors();
+                Iterable<Board> neighborBoards = solutionNode.theBoard.neighbors();
                 Iterator<Board> itr = neighborBoards.iterator();
                 while (itr.hasNext()) {
                     Node neighborNode = new Node();
                     neighborNode.theBoard = itr.next();
-                    neighborNode.numberOfMovesMade
-                            = solutionNode.numberOfMovesMade;
+                    neighborNode.numberOfMovesMade = solutionNode.numberOfMovesMade;
                     neighborNode.previousNode = solutionNode;
                     if (count == 0) {
                         thePQ.insert((neighborNode));
@@ -115,24 +114,22 @@ public final class Solver {
                 break;
             } else {
                 solutionNodeTwin.numberOfMovesMade++;
-                Iterable<Board> neighborBoardsTwin = solutionNodeTwin
-                        .theBoard.neighbors();
+                Iterable<Board> neighborBoardsTwin = solutionNodeTwin.theBoard.neighbors();
                 Iterator<Board> itr2 = neighborBoardsTwin.iterator();
                 while (itr2.hasNext()) {
                     Node neighborNodeTwin = new Node();
                     neighborNodeTwin.theBoard = itr2.next();
-                    neighborNodeTwin.numberOfMovesMade = solutionNodeTwin
-                            .numberOfMovesMade;
+                    neighborNodeTwin.numberOfMovesMade = solutionNodeTwin.numberOfMovesMade;
                     neighborNodeTwin.previousNode = solutionNodeTwin;
                     if (count == 0) {
                         thePQTwin.insert(neighborNodeTwin);
-                    } else if (!neighborNodeTwin.theBoard.equals(solutionNodeTwin
-                            .previousNode.theBoard)) {
+                    } else if (!neighborNodeTwin.theBoard.equals(solutionNodeTwin.previousNode.theBoard)) {
                         thePQTwin.insert(neighborNodeTwin);
                     }
                 }
             }
         }
+        count++;
     }
 
     /**
@@ -141,7 +138,7 @@ public final class Solver {
      *
      * @return the Comparator that defines this ordering on nodes.
      */
-    public Comparator<Node> boardOrder() {
+    private Comparator<Node> boardOrder() {
         return new Comparator<Node>() {
             @Override
             public int compare(final Node o1, final Node o2) {

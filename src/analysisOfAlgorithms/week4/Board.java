@@ -185,14 +185,33 @@ public final class Board {
      */
     public String toString() {
 
-        String s = n + "\n";
+        StringBuilder s = new StringBuilder();
+        s.append(n + "\n");
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                String addNum = board[i][j] + " ";
-                s = s.concat(addNum);
+                s.append(String.format("%2d ", board[i][j]));
             }
+            s.append("\n");
         }
-        return s;
+
+        return s.toString();
+    }
+
+    /**
+     * Copy the board.
+     * @param x the board
+     * @return a copy of the board.
+     */
+    private Board copy(final Board x)
+    {
+        int[][] twin = new int[n][n];
+
+        for (int i = 0; i < n; i++) {
+                twin[i] = x.board[i].clone();
+        }
+
+        Board boardCopy = new Board(twin);
+        return boardCopy;
     }
 
     /**
@@ -204,56 +223,45 @@ public final class Board {
         int x = 0;
         int y = 0;
         // Find out where the zero is.
+        outerloop:
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (board[i][j] == 0) {
                     x = i;
                     y = j;
-                    break;
+                    break outerloop;
                 }
             }
         }
 
         Queue<Board> queue = new Queue<>();
 
-        try {
-            Board newBoard =
-                    new Board(Arrays.copyOf(this.board, this.board.length));
-            newBoard.board[x][y] = this.board[x + 1][y];
+        if (x != n - 1) {
+            Board newBoard = copy(this);
+            newBoard.board[x][y] = newBoard.board[x + 1][y];
             newBoard.board[x + 1][y] = 0;
             queue.enqueue(newBoard);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
         }
 
-        try {
-            Board newBoard2 =
-                    new Board(Arrays.copyOf(this.board, this.board.length));
+        if (x != 0) {
+            Board newBoard2 = copy(this);
             newBoard2.board[x][y] = this.board[x - 1][y];
             newBoard2.board[x - 1][y] = 0;
             queue.enqueue(newBoard2);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
         }
 
-        try {
-            Board newBoard3 =
-                    new Board(Arrays.copyOf(this.board, this.board.length));
+        if (y != n - 1) {
+            Board newBoard3 = copy(this);
             newBoard3.board[x][y] = this.board[x][y + 1];
             newBoard3.board[x][y + 1] = 0;
             queue.enqueue(newBoard3);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
         }
 
-        try {
-            Board newBoard4 =
-                    new Board(Arrays.copyOf(this.board, this.board.length));
+        if (y != 0){
+            Board newBoard4 = copy(this);
             newBoard4.board[x][y] = this.board[x][y - 1];
             newBoard4.board[x][y - 1] = 0;
             queue.enqueue(newBoard4);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            e.printStackTrace();
         }
 
         return queue;
