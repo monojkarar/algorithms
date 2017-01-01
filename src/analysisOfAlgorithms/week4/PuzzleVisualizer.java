@@ -27,7 +27,8 @@ public final class PuzzleVisualizer {
 
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
-                int block = Integer.parseInt(blockStrings[i * dimension + j + 1]);
+                int block
+                        = Integer.parseInt(blockStrings[i * dimension + j + 1]);
                 double x = (2 * j + 1) / (2.0 * dimension);
                 double y = 1 - (2 * i + 1) / (2.0 * dimension);
                 double halfSideLength = 1 / (2.0 * dimension);

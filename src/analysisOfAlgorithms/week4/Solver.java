@@ -57,7 +57,7 @@ public final class Solver {
      *
      *  @param initial the initial board
      */
-    private Solver(final Board initial) {
+    Solver(final Board initial) {
 
         Node solutionNodeTwin;  // Solution node twin
         MinPQ<Node> thePQ;  // Minimum priority queue
@@ -128,8 +128,8 @@ public final class Solver {
                     }
                 }
             }
+            count++;
         }
-        count++;
     }
 
     /**
@@ -153,7 +153,7 @@ public final class Solver {
      * Is the initial board solvable?
      * @return true if the initial board is solvable; false otherwise
      */
-    private boolean isSolvable() {
+    boolean isSolvable() {
 
         return initialSolvable;
     }
@@ -171,7 +171,7 @@ public final class Solver {
      * Sequence of boards in a shortest solution; null if unsolvable.
      * @return sequence of boards in shortest solution
      */
-    private Iterable<Board> solution() {
+    Iterable<Board> solution() {
 
         return initialSolvable ? solutionBoards : null;
     }
@@ -201,10 +201,10 @@ public final class Solver {
         if (!solver.isSolvable()) {
             StdOut.println("No solution possible");
         } else {
-            StdOut.println("Minimum number of moves = " + solver.moves());
             for (Board board : solver.solution()) {
                 StdOut.println(board);
             }
+            StdOut.println("Minimum number of moves = " + solver.moves());
         }
     }
 }

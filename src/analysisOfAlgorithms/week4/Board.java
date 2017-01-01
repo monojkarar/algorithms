@@ -30,7 +30,7 @@ public final class Board {
      *  Construct a board from an n-by-n array of blocks.
      *  @param blocks the blocks of an n-by-n array of blocks
      */
-    Board(final int[][] blocks) {
+    public Board(final int[][] blocks) {
 
         this.board = blocks;
         this.n = blocks.length;
@@ -112,7 +112,7 @@ public final class Board {
      *  Is this board the goal board?
      *  @return true if board is the goal board; false otherwise
      */
-    boolean isGoal() {
+    public boolean isGoal() {
 
         return this.hamming() == 0;
     }
