@@ -59,14 +59,10 @@ public final class Solver {
      */
     private Solver(final Board initial) {
 
-        /** Solution node twin. */
-        Node solutionNodeTwin;
-        /** Minimum priority queue. */
-        MinPQ<Node> thePQ;
-        /** Minimum priority queue for the twin. */
-        MinPQ<Node> thePQTwin;
-        /** Is the initial twin board solvable? */
-        boolean initialSolvableTwin = false;
+        Node solutionNodeTwin;  // Solution node twin
+        MinPQ<Node> thePQ;  // Minimum priority queue
+        MinPQ<Node> thePQTwin; // Minimum priority queue for the twin
+        boolean initialSolvableTwin = false; // is initial twin board solvable
 
         solutionNode = new Node();
         solutionNodeTwin = new Node();
@@ -95,12 +91,14 @@ public final class Solver {
                 break;
             } else {
                 solutionNode.numberOfMovesMade++;
-                Iterable<Board> neighborBoards = solutionNode.theBoard.neighbors();
+                Iterable<Board> neighborBoards
+                        = solutionNode.theBoard.neighbors();
                 Iterator<Board> itr = neighborBoards.iterator();
                 while (itr.hasNext()) {
                     Node neighborNode = new Node();
                     neighborNode.theBoard = itr.next();
-                    neighborNode.numberOfMovesMade = solutionNode.numberOfMovesMade;
+                    neighborNode.numberOfMovesMade
+                            = solutionNode.numberOfMovesMade;
                     neighborNode.previousNode = solutionNode;
                     if (count == 0) {
                         thePQ.insert((neighborNode));
