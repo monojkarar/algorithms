@@ -30,7 +30,7 @@ public final class Board {
      *  Construct a board from an n-by-n array of blocks.
      *  @param blocks the blocks of an n-by-n array of blocks
      */
-    private Board(final int[][] blocks) {
+    Board(final int[][] blocks) {
 
         this.board = blocks;
         this.n = blocks.length;
@@ -58,7 +58,7 @@ public final class Board {
      *   initial           goal             Manhattan = 5 + 0
      * @return the number of blocks out of place
      */
-    private int hamming() {
+    int hamming() {
 
         int count = 0;
         int goalNum = 1;
@@ -91,7 +91,7 @@ public final class Board {
      *
      *  @return the sum
      */
-    private int manhattan() {
+    int manhattan() {
 
         int total = 0;
         for (int i = 0; i < n; i++) {
@@ -112,7 +112,7 @@ public final class Board {
      *  Is this board the goal board?
      *  @return true if board is the goal board; false otherwise
      */
-    private boolean isGoal() {
+    boolean isGoal() {
 
         return this.hamming() == 0;
     }
@@ -121,7 +121,7 @@ public final class Board {
      * A board that is obtained by exchanging any pair of blocks.
      * @return the board obtained by exchanging any pair of blocks
      */
-    private Board twin() {
+    Board twin() {
 
         int block1;
         int block2;
@@ -199,7 +199,7 @@ public final class Board {
      * All neighboring boards.
      * @return all neighboring boards.
      */
-    private Iterable<Board> neighbors() {
+    Iterable<Board> neighbors() {
 
         int x = 0;
         int y = 0;
