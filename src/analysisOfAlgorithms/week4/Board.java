@@ -2,6 +2,7 @@ package analysisOfAlgorithms.week4;
 
 import edu.princeton.cs.algs4.Queue;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 /**
@@ -31,7 +32,7 @@ public class Board {
      */
     public Board(final int[][] blocks) {
 
-        this.board = blocks;
+        this.board = Arrays.copyOf(blocks, blocks.length);
         this.n = blocks.length;
     }
 
@@ -256,7 +257,7 @@ public class Board {
             queue.enqueue(newBoard3);
         }
 
-        if (y != 0){
+        if (y != 0) {
             Board newBoard4 = copy(this);
             newBoard4.board[x][y] = this.board[x][y - 1];
             newBoard4.board[x][y - 1] = 0;

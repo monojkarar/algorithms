@@ -20,7 +20,7 @@ public class Solver {
     private Queue<Board> solutionBoards;
 
     /** Node class. */
-    private static class Node implements Comparable<Node> {
+    private class Node implements Comparable<Node> {
         /** The game board. */
         private Board theBoard;
         /** The previous node. */
@@ -82,7 +82,7 @@ public class Solver {
 
         int count = 0;
         while (!solutionNode.theBoard.isGoal()
-             | !solutionNodeTwin.theBoard.isGoal()) {
+             || !solutionNodeTwin.theBoard.isGoal()) {
 
             solutionNode = thePQ.delMin();
             solutionBoards.enqueue(solutionNode.theBoard);
