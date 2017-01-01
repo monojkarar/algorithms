@@ -2,7 +2,6 @@ package analysisOfAlgorithms.week4;
 
 import edu.princeton.cs.algs4.Queue;
 
-import java.util.Arrays;
 import java.util.Iterator;
 
 /**
@@ -37,7 +36,7 @@ public class Board {
     }
 
     /**
-     *  Board dimension.
+     *  analysisOfAlgorithms.week4.Board dimension.
      *  @return the board dimension
      */
     public int dimension() {
@@ -288,7 +287,7 @@ public class Board {
         System.out.println("Current board: " + board + "\n");
         System.out.println("Manhattan = " + board.manhattan());
         System.out.println("Hamming = " + board.hamming());
-        System.out.println("Board dimension: " + board.dimension() + "\n");
+        System.out.println("analysisOfAlgorithms.week4.Board dimension: " + board.dimension() + "\n");
 
         System.out.println("Is this board the goal board? " + board.isGoal());
 

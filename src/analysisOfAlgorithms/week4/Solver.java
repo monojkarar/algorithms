@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 /**
- * The class Solver.
+ * The class analysisOfAlgorithms.week4.Solver.
  */
 public class Solver {
     /** Solution node. */
@@ -20,7 +20,7 @@ public class Solver {
     private Queue<Board> solutionBoards;
 
     /** Node class. */
-    public static class Node implements Comparable<Node> {
+    private static class Node implements Comparable<Node> {
         /** The game board. */
         private Board theBoard;
         /** The previous node. */
@@ -47,7 +47,7 @@ public class Solver {
 
     /**
      *  Find a solution to the initial board (using the A* algorithm).
-     *  1. Create first Node from initial Board
+     *  1. Create first Node from initial analysisOfAlgorithms.week4.Board
      *  2. Add initial Node to priority queue
      *  3. Dequeue Node with least priority
      *  4. Get back an list of all neighbor boards for dequeued Node
@@ -57,7 +57,7 @@ public class Solver {
      *
      *  @param initial the initial board
      */
-    Solver(final Board initial) {
+    public Solver(final Board initial) {
 
         Node solutionNodeTwin;  // Solution node twin
         MinPQ<Node> thePQ;  // Minimum priority queue
@@ -177,7 +177,7 @@ public class Solver {
     }
 
     /**
-     * Unit tests the Solver data type.
+     * Unit tests the analysisOfAlgorithms.week4.Solver data type.
      *
      * @param args the command-line arguments
      */
