@@ -1,10 +1,10 @@
-package pattern_recognition;
+package analysisOfAlgorithms.week3_pattern_recognition;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * pattern_recognition.BruteCollinearPoints.
+ * analysisOfAlgorithms.week3_pattern_recognition.BruteCollinearPoints.
  *
  * Examines 4 points at a time and checks whether they all lie on the same
  * line segment, returning all such line segments.  To check whether the 4
@@ -27,7 +27,7 @@ public class BruteCollinearPoints {
         }
         for (Point point: points) {
             if (point == null) {
-                throw new NullPointerException("pattern_recognition.Point "
+                throw new NullPointerException("analysisOfAlgorithms.week3_pattern_recognition.Point "
                         + "is null.");
             }
         }

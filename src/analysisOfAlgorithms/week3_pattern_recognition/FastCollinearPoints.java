@@ -1,4 +1,4 @@
-package pattern_recognition;
+package analysisOfAlgorithms.week3_pattern_recognition;
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;

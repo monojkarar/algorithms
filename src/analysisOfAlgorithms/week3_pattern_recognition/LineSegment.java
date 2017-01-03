@@ -1,4 +1,4 @@
-package pattern_recognition;
+package analysisOfAlgorithms.week3_pattern_recognition;
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
@@ -9,7 +9,7 @@ import edu.princeton.cs.algs4.StdDraw;
  *************************************************************************/
 public class LineSegment {
     private static final String file =
-            "src\\pattern_recognition\\pattern_recognition.collineartests\\input6.txt";
+            "src\\pattern_recognition\\analysisOfAlgorithms.week3_pattern_recognition.collineartests\\input6.txt";
     /** One endpoint of this line segment. */
     private final Point p;
     /** The other endpoint of this line segment. */
@@ -50,7 +50,7 @@ public class LineSegment {
     }
 
     /**
-     * Unit tests the pattern_recognition.Point data type..
+     * Unit tests the analysisOfAlgorithms.week3_pattern_recognition.Point data type..
      *  @param args the args
      */
     public static void main(final String[] args) {

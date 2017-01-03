@@ -1,11 +1,11 @@
-package pattern_recognition;
+package analysisOfAlgorithms.week3_pattern_recognition;
 
 import edu.princeton.cs.algs4.StdDraw;
 
 import java.util.Comparator;
 
 /**
- *  Class pattern_recognition.Point.
+ *  Class analysisOfAlgorithms.week3_pattern_recognition.Point.
  *
  *  To avoid potential complications with integer overflow or floating-point
  *  precision, you may assume that the constructor arguments x and y are each
