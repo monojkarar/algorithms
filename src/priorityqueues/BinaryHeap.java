@@ -1,4 +1,4 @@
-package heaps;
+package priorityqueues;
 
 import java.util.*;
 
