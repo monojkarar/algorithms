@@ -33,14 +33,15 @@ import edu.princeton.cs.algs4.Vector;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
-public class SparseVector {
+public final class SparseVector {
     /** Dimension. */
     private int d;
     /** The vector, represented by index-value pairs. */
-    private ST<Integer, Double> st;
+    private ST<Integer, Double> st; // Hash becasue order not important
 
    /**
-     * Initializes a d-dimensional zero vector.
+     * Initializes a d-dimensional zero vector.Empty ST represents all 0
+     * vectors.
      * @param newd the dimension of the vector
      */
     private SparseVector(final int newd) {
@@ -115,7 +116,7 @@ public class SparseVector {
 
     /**
      * Returns the inner product of this vector with the specified vector.
-     *
+     * Dot product is constant time for sparse vectors.
      * @param  that the other vector
      * @return the dot product between this vector and that vector
      * @throws IllegalArgumentException if the lengths of the two vectors are
@@ -145,7 +146,6 @@ public class SparseVector {
         return sum;
     }
 
-
     /**
      * Returns the inner product of this vector with the specified array.
      *
@@ -171,7 +171,6 @@ public class SparseVector {
     private double magnitude() {
         return Math.sqrt(this.dot(this));
     }
-
 
     /**
      * Returns the Euclidean norm of this vector.
@@ -235,7 +234,6 @@ public class SparseVector {
         return s.toString();
     }
 
-
     /**
      * Unit tests the {@code SparseVector} data type.
      *
@@ -255,7 +253,6 @@ public class SparseVector {
         StdOut.println("a dot b = " + a.dot(b));
         StdOut.println("a + b   = " + a.plus(b));
     }
-
 }
 
 /******************************************************************************
