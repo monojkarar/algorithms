@@ -21,16 +21,23 @@ import edu.princeton.cs.algs4.*;
  *  when associating a value with a key that is already in the symbol table,
  *  the convention is to replace the old value with the new value.
  *  Unlike {@link java.util.Map}, this class uses the convention that
- *  values cannot be null—setting the
- *  value associated with a key to null is equivalent to deleting the key
- *  from the symbol table.
+ *  values cannot be null—setting the value associated with a key to null is
+ *  equivalent to deleting the key from the symbol table.
  *
  *  This implementation uses a separate chaining hash table. It requires that
- *  the key type overrides the equals() and hashCode() methods.
- *  The expected time per put contains, or remove
- *  operation is constant, subject to the uniform hashing assumption.
- *  The size, and is-empty operations take constant time.
- *  Construction takes constant time.
+ *  the key type overrides the equals() and hashCode() methods. The expected
+ *  time per put contains, or remove operation is constant, subject to the
+ *  uniform hashing assumption. The size, and is-empty operations take
+ *  constant time. Construction takes constant time.
+ *
+ *  Proposition. Under unifirm assumption, prob. that the number of keys in a
+ *  list is within a constant factor of N/M is extremely close to 1.
+ *
+ *  Consequence. Number of probes(equals() and hashcode()) for search/insert is
+ *  proportional to N/M (M times faster than sequential search).
+ *  - M to large => too many empty chains.
+ *  - M too small => chains too long.
+ *  - Typical choice: M ~ N/5 =>  constant-time ops.
  *
  *  For additional documentation, see
  *  <a href="http://algs4.cs.princeton.edu/34hash">Section 3.4</a> of

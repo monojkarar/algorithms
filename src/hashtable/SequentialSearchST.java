@@ -231,7 +231,6 @@ public final class SequentialSearchST<Key, Value> {
         return queue;
     }
 
-
     /**
      * Unit tests the {@code SequentialSearchST} data type.
      *
