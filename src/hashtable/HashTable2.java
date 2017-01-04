@@ -368,7 +368,7 @@ public final class HashTable2 {
         theFunc.increaseArraySize(60);
         theFunc.displayTheStack();
         theFunc.fillArrayWithNeg1();
-        theFunc.doubleHashFunc(elementsToAdd2, theFunc.theArray);
+        theFunc.doubleHashFunc(elementsToAdd2);
         theFunc.displayTheStack();
         theFunc.findKeyDblHashed("990");
     }
