@@ -99,7 +99,8 @@ public final class HashTableLinearProbing {
      *  the array big enough to avoid collisions, but not so big that we waste
      *  memory.
      *
-     * @param value the value to store in the hash table
+     * @param value the value to store in the hash
+     * @return position of value.
      */
     private int findPos(final String value) {
 
@@ -131,9 +132,10 @@ public final class HashTableLinearProbing {
     }
 
     /**
-     * Returns the value stored in the Hash Table.
+     * Returns the value stored in the hash table.
      *
      * @param value the value to find
+     * @return the value stored in the hash table.
      */
     private int find(final String value) {
 
