@@ -37,38 +37,6 @@ public final class HashTable2 {
     private int arraySize;
 
     /**
-     * Unit tests the HastTable3 data type.
-     *
-     * @param args the command-line arguments
-     */
-    public static void main(final String[] args) {
-
-        HashTable2 theFunc = new HashTable2(31);
-
-        String[] elementsToAdd2 = {"100", "510", "170", "214", "268", "398",
-                "235", "802", "900", "723", "699", "1", "16", "999", "890",
-                "725", "998", "978", "988", "990", "989", "984", "320", "321",
-                "400", "415", "450", "50", "660", "624" };
-
-        // Demonstrate how data normally follows patterns and how a non-prime
-        // sized array can cause havoc
-        String[] elementsToAdd3 = {"30", "60", "90", "120", "150", "180",
-                "210", "240", "270", "300", "330", "360", "390", "420", "450",
-                "480", "510", "540", "570", "600", "989", "984", "320", "321",
-                "400", "415", "450", "50", "660", "624" };
-
-        theFunc.hashFunction2(elementsToAdd2, theFunc.theArray);
-
-        // theFunc.modThirty();
-        theFunc.increaseArraySize(60);
-        theFunc.displayTheStack();
-        theFunc.fillArrayWithNeg1();
-        theFunc.doubleHashFunc(elementsToAdd2, theFunc.theArray);
-        theFunc.displayTheStack();
-        theFunc.findKeyDblHashed("990");
-    }
-
-    /**
      * Outputs matches that would put an item in index 0 if arraySize was 31.
      */
     public void modThirty() {
@@ -173,10 +141,8 @@ public final class HashTable2 {
     /**
      * Double hash function.
      * @param stringsForArray strings for array
-     * @param theArray the array
      */
-    private void doubleHashFunc(final String[] stringsForArray,
-                                final String[] theArray) {
+    private void doubleHashFunc(final String[] stringsForArray) {
 
         for (int n = 0; n < stringsForArray.length; n++) {
             // Store value in array index
@@ -251,6 +217,7 @@ public final class HashTable2 {
      */
     private void hashFunction2(final String[] stringsForArray, final String[]
             theArray) {
+
         for (int n = 0; n < stringsForArray.length; n++) {
 
             String newElementVal = stringsForArray[n];
@@ -264,7 +231,9 @@ public final class HashTable2 {
             while (!theArray[arrayIndex].equals("-1")) {
 
                 ++arrayIndex;
-                // System.out.println("Collision Try " + arrayIndex + " Instead");
+                // System.out.println("Collision Try " + arrayIndex
+                // + "
+                // Instead");
 
                 // If we get to the end of the array go back to index 0
                 arrayIndex %= arraySize;
@@ -370,5 +339,37 @@ public final class HashTable2 {
             }
             System.out.println();
         }
+    }
+
+    /**
+     * Unit tests the HastTable3 data type.
+     *
+     * @param args the command-line arguments
+     */
+    public static void main(final String[] args) {
+
+        HashTable2 theFunc = new HashTable2(31);
+
+        String[] elementsToAdd2 = {"100", "510", "170", "214", "268", "398",
+                "235", "802", "900", "723", "699", "1", "16", "999", "890",
+                "725", "998", "978", "988", "990", "989", "984", "320", "321",
+                "400", "415", "450", "50", "660", "624" };
+
+        // Demonstrate how data normally follows patterns and how a non-prime
+        // sized array can cause havoc
+        String[] elementsToAdd3 = {"30", "60", "90", "120", "150", "180",
+                "210", "240", "270", "300", "330", "360", "390", "420", "450",
+                "480", "510", "540", "570", "600", "989", "984", "320", "321",
+                "400", "415", "450", "50", "660", "624" };
+
+        theFunc.hashFunction2(elementsToAdd2, theFunc.theArray);
+
+        // theFunc.modThirty();
+        theFunc.increaseArraySize(60);
+        theFunc.displayTheStack();
+        theFunc.fillArrayWithNeg1();
+        theFunc.doubleHashFunc(elementsToAdd2, theFunc.theArray);
+        theFunc.displayTheStack();
+        theFunc.findKeyDblHashed("990");
     }
 }
