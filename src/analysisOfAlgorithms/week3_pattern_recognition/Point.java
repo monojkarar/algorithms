@@ -19,15 +19,21 @@ public class Point implements Comparable<Point> {
 
         /**
          * Initializes a new point (x, y).
-         * @param x the x-coordinate
-         * @param y the y-coordinate
+         * @param newx the x-coordinate
+         * @param newy the y-coordinate
          * @throws IllegalArgumentException if either {@code x} or {@code y}
          *    is {@code Double.NaN}, {@code Double.POSITIVE_INFINITY} or
          *    {@code Double.NEGATIVE_INFINITY}
          */
-    public Point(final int x, final int y) {
-            this.x = x;
-            this.y = y;
+    Point(final int newx, final int newy) {
+        if (Double.isInfinite(newx) || Double.isInfinite(newy)) {
+            throw new IllegalArgumentException("Coordinates must be finite");
+        }
+        if (Double.isNaN(newx) || Double.isNaN(newy)) {
+            throw new IllegalArgumentException("Coordinates cannot be NaN");
+        }
+            this.x = newx;
+            this.y = newy;
     }
 
     /**
@@ -44,7 +50,7 @@ public class Point implements Comparable<Point> {
      *
      * @param that the other point
      */
-    public void drawTo(final Point that) {
+    private void drawTo(final Point that) {
 
         StdDraw.line(this.x, this.y, that.x, that.y);
     }
@@ -92,7 +98,7 @@ public class Point implements Comparable<Point> {
      * @param  that the other point
      * @return the slope between this point and the specified point
      */
-    public  double slopeTo(final Point that) {
+    public double slopeTo(final Point that) {
         // Degenerate line segments
         if (that.x == this.x && that.y == this.y) {
             return Double.NEGATIVE_INFINITY;
