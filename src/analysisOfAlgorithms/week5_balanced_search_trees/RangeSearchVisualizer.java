@@ -24,9 +24,16 @@ import edu.princeton.cs.algs4.StdDraw;
  * searches on the axis-aligned rectangles dragged by the user in the
  * standard drawing window.
  */
-public class RangeSearchVisualizer {
+public final class RangeSearchVisualizer {
 
-    public static void main(String[] args) {
+    /** Constructor. */
+    private RangeSearchVisualizer() { }
+    /**
+     * Unit tests the RangeSearchVisualizer data type.
+     *
+     * @param args the command-line arguments
+     */
+    public static void main(final String[] args) {
 
         String filename = args[0];
         In in = new In(filename);
@@ -63,17 +70,11 @@ public class RangeSearchVisualizer {
                 y0 = StdDraw.mouseY();
                 isDragging = true;
                 continue;
-            }
-
-            // user is dragging a rectangle
-            else if (StdDraw.mousePressed() && isDragging) {
+            } else if (StdDraw.mousePressed() && isDragging) {
                 x1 = StdDraw.mouseX();
                 y1 = StdDraw.mouseY();
                 continue;
-            }
-
-            // mouse no longer pressed
-            else if (!StdDraw.mousePressed() && isDragging) {
+            } else if (!StdDraw.mousePressed() && isDragging) {
                 isDragging = false;
             }
 
@@ -91,20 +92,20 @@ public class RangeSearchVisualizer {
             StdDraw.setPenRadius();
             rect.draw();
 
-            // draw the range search results for brute-force data structure in red
+            // draw range search results for brute-force data structure in red
             StdDraw.setPenRadius(0.03);
             StdDraw.setPenColor(StdDraw.RED);
-            for (Point2D p : brute.range(rect))
+            for (Point2D p : brute.range(rect)) {
                 p.draw();
-
+            }
             // draw the range search results for kd-tree in blue
             //StdDraw.setPenRadius(.02);
             //StdDraw.setPenColor(StdDraw.BLUE);
             //for (Point2D p : kdtree.range(rect))
                 //p.draw();
 
-            //StdDraw.show();
-            //StdDraw.pause(40);
+            StdDraw.show();
+            StdDraw.pause(40);
         }
     }
 }

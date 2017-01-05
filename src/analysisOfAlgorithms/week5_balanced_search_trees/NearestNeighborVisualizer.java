@@ -33,6 +33,7 @@ public final class NearestNeighborVisualizer {
      * @param args the command-line arguments
      */
     public static void main(final String[] args) {
+
         String filename = args[0];
         In in = new In(filename);
 
@@ -67,6 +68,7 @@ public final class NearestNeighborVisualizer {
             StdDraw.setPenColor(StdDraw.RED);
             brute.nearest(query).draw();
             StdDraw.setPenRadius(0.02);
+            StdDraw.show();
 
             // draw in blue the nearest neighbor (using kd-tree algorithm)
             //StdDraw.setPenColor(StdDraw.BLUE);
