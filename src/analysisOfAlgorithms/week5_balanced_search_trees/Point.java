@@ -13,9 +13,9 @@ import java.util.Comparator;
  */
 public class Point implements Comparable<Point> {
     /** X-coordinate. */
-    private final int x;
+    private final double x;
     /** Y-coordinate. */
-    private final int y;
+    private final double y;
 
         /**
          * Initializes a new point (x, y).
@@ -26,17 +26,18 @@ public class Point implements Comparable<Point> {
          *         .NEGATIVE_INFINITY
          */
     public Point(final int newx, final int newy) {
-        if (Double.isInfinite(newx) || Double.isInfinite(newy))
+        if (Double.isInfinite(newx) || Double.isInfinite(newy)) {
             throw new IllegalArgumentException("Coordinates must be finite");
-        if (Double.isNaN(newx) || Double.isNaN(newy))
+        }
+        if (Double.isNaN(newx) || Double.isNaN(newy)) {
             throw new IllegalArgumentException("Coordinates cannot be NaN");
-
+        }
         this.x = newx;
         this.y = newy;
     }
 
     /**
-     * Draws this point to standard draw.
+     * Draws the line segment from this point to that point using standard draw.
      */
     public void draw() {
 
