@@ -1,10 +1,10 @@
-package analysisOfAlgorithms.week2;
+package analysisOfAlgorithms.week2_stacks_and_queues;
 
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
 /**
- *  analysisOfAlgorithms.week2.wee2ysisOfAlgorithms.week2.Subset class takes a
+ *  analysisOfAlgorithms.week2_stacks_and_queues.wee2ysisOfAlgorithms.week2_stacks_and_queues.Subset class takes a
  *  command-line integer k; reads in a sequence of N strings from standard
  *  input using StdIn.readString(); and prints out exactly k of them,
  *  uniformly at random. Each item from the sequence can be printed out at

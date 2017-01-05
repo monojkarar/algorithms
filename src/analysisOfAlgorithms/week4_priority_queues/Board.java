@@ -1,4 +1,4 @@
-package analysisOfAlgorithms.week4;
+package analysisOfAlgorithms.week4_priority_queues;
 
 import edu.princeton.cs.algs4.Queue;
 
@@ -37,7 +37,7 @@ public class Board {
     }
 
     /**
-     *  analysisOfAlgorithms.week4.Board dimension.
+     *  analysisOfAlgorithms.week4_priority_queues.Board dimension.
      *  @return the board dimension
      */
     public int dimension() {
@@ -288,7 +288,7 @@ public class Board {
         System.out.println("Current board: " + board + "\n");
         System.out.println("Manhattan = " + board.manhattan());
         System.out.println("Hamming = " + board.hamming());
-        System.out.println("analysisOfAlgorithms.week4.Board dimension: " + board.dimension() + "\n");
+        System.out.println("analysisOfAlgorithms.week4_priority_queues.Board dimension: " + board.dimension() + "\n");
 
         System.out.println("Is this board the goal board? " + board.isGoal());
 

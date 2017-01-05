@@ -1,4 +1,4 @@
-package analysisOfAlgorithms.week2;
+package analysisOfAlgorithms.week2_stacks_and_queues;
 
 import edu.princeton.cs.algs4.StdOut;
 
@@ -280,7 +280,7 @@ public class Deque<Item> implements Iterable<Item> {
         deque.addLast(5);
         deque.addLast(4);
 
-        StdOut.println("analysisOfAlgorithms.week2.wee2ysisOfAlgorithms.week2."
+        StdOut.println("analysisOfAlgorithms.week2_stacks_and_queues.wee2ysisOfAlgorithms.week2_stacks_and_queues."
                 + "Deque: ");
         for (Integer item : deque) {
             StdOut.println(item);
@@ -289,14 +289,14 @@ public class Deque<Item> implements Iterable<Item> {
         StdOut.println("Size of deque is " + deque.size());
 
         StdOut.println("Remove item at front: " + deque.removeFirst());
-        StdOut.println("analysisOfAlgorithms.week2.wee2ysisOfAlgorithms.week2."
+        StdOut.println("analysisOfAlgorithms.week2_stacks_and_queues.wee2ysisOfAlgorithms.week2_stacks_and_queues."
                 + "Deque: ");
         for (Integer item : deque) {
             StdOut.println(item);
         }
 
         StdOut.println("Remove item at rear: " + deque.removeLast());
-        StdOut.println("analysisOfAlgorithms.week2.DequeAlgorithms.week2.wee2."
+        StdOut.println("analysisOfAlgorithms.week2_stacks_and_queues.DequeAlgorithms.week2_stacks_and_queues.wee2."
                 + "Deque: ");
         for (Integer item : deque) {
             StdOut.println(item);

@@ -1,4 +1,4 @@
-package analysisOfAlgorithms.week4;
+package analysisOfAlgorithms.week4_priority_queues;
 
 import edu.princeton.cs.algs4.MinPQ;
 import edu.princeton.cs.algs4.Queue;
@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 /**
- * The class analysisOfAlgorithms.week4.Solver.
+ * The class analysisOfAlgorithms.week4_priority_queues.Solver.
  */
 public class Solver {
     /** Solution node. */
@@ -47,7 +47,7 @@ public class Solver {
 
     /**
      *  Find a solution to the initial board (using the A* algorithm).
-     *  1. Create first Node from initial analysisOfAlgorithms.week4.Board
+     *  1. Create first Node from initial analysisOfAlgorithms.week4_priority_queues.Board
      *  2. Add initial Node to priority queue
      *  3. Dequeue Node with least priority
      *  4. Get back an list of all neighbor boards for dequeued Node
@@ -177,7 +177,7 @@ public class Solver {
     }
 
     /**
-     * Unit tests the analysisOfAlgorithms.week4.Solver data type.
+     * Unit tests the analysisOfAlgorithms.week4_priority_queues.Solver data type.
      *
      * @param args the command-line arguments
      */

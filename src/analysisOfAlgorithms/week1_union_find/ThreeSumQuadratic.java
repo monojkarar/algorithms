@@ -1,4 +1,4 @@
-package analysisOfAlgorithms.week1;
+package analysisOfAlgorithms.week1_union_find;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

@@ -1,4 +1,4 @@
-package analysisOfAlgorithms.week4;
+package analysisOfAlgorithms.week4_priority_queues;
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;

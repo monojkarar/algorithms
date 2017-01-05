@@ -1,4 +1,4 @@
-package analysisOfAlgorithms.week2;
+package analysisOfAlgorithms.week2_stacks_and_queues;
 
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdRandom;
