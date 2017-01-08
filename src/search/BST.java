@@ -119,7 +119,7 @@ public final class BST<Key extends Comparable<Key>, Value> {
 
     /**
      * Returns true if this symbol table is empty.
-     * @return {@code true} if this symbol table is empty; false otherwise
+     * @return {true if this symbol table is empty; false otherwise
      */
     public boolean isEmpty() {
         return size() == 0;
