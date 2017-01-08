@@ -95,7 +95,7 @@ public final class WeightedQuickUnionUF {
      * @return the component identifier for the component containing site i
      * @throws IndexOutOfBoundsException unless 0 <= i < n
      */
-    private int find(final int i) {
+    private int find(int i) {
         validate(i);
         while (i != parent[i]) {
             // only one extra line of code! Keeps tree almost completely flat.
