@@ -118,14 +118,5 @@ public class PointSET {
         }
         return nearest;
     }
-
-    /**
-     * Unit tests the PointSET data type.
-     *
-     * @param args the command-line arguments
-     */
-    public static void main(final String[] args) {
-
-    }
 }
 
