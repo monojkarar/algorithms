@@ -25,7 +25,7 @@ public final class KdTreeGenerator {
     /** Constructor. */
     private KdTreeGenerator() { }
     /**
-     * Unit tests the KDTree data type.
+     * Unit tests the KdTree data type.
      *
      * @param args the command-line arguments
      */
