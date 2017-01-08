@@ -66,7 +66,7 @@ public class PointSET {
     }
 
     /**
-     * Drawl all point to standard draw.
+     * Draw all points to standard draw.
      */
     public void draw() {
 
