@@ -50,7 +50,7 @@ public class Point implements Comparable<Point> {
      *
      * @param that the other point
      */
-    private void drawTo(final Point that) {
+    public void drawTo(final Point that) {
 
         StdDraw.line(this.x, this.y, that.x, that.y);
     }
