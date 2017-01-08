@@ -1,8 +1,6 @@
 package analysisOfAlgorithms.week5_balanced_search_trees;
 
-import edu.princeton.cs.algs4.Point2D;
-import edu.princeton.cs.algs4.RectHV;
-import edu.princeton.cs.algs4.StdDraw;
+import edu.princeton.cs.algs4.*;
 
 import java.util.ArrayList;
 
@@ -46,9 +44,6 @@ public final class KdTree {
 
         /**Number of nodes in subtree. */
         private int size;
-
-        /** Is node vertical or horizontal?*/
-        private boolean isVertical;
 
         /** Level a node is at. */
         private int level;
@@ -115,14 +110,6 @@ public final class KdTree {
         int getLevel() {
             return level;
         }
-
-        /**
-         * Setter for level.
-         * @param lev the level
-         */
-        void setLevel(final int lev) {
-            this.level = lev;
-        }
     }
 
     /** Initializes an empty symbol table. */
@@ -130,42 +117,6 @@ public final class KdTree {
 
         minDistance = -1.0;
         nearestNeighbor = root;
-    }
-
-    /**
-     * Returns level of given point.
-     * @param node the node to start searching for the point.
-     * @param point the point to find the level for
-     */
-    public void findLevel(final Node node, final Point2D point) {
-
-        node.level = findLevel(root, point, 1);
-    }
-
-    /**
-     *  Helper funciton for setLevel(). It returns the level of the node
-     *  in the the tree, otherwise returns 0.
-     *  @param node the node to check
-     *  @param p the data to check against
-     *  @param lvl the level of the node
-     *  @return the level of the node
-     */
-    private int findLevel(final Node node, final Point2D p, int lvl) {
-
-        if (node == null) {
-            return 1;
-        }
-        if (node.point == p) {
-            return lvl;
-        }
-
-        int downLevel = findLevel(node.left, p, lvl + 1);
-        if (downLevel != 1) {
-            return downLevel;
-        }
-
-        downLevel = findLevel(node.right, p, lvl + 1);
-        return downLevel;
     }
 
     /**
@@ -187,9 +138,9 @@ public final class KdTree {
     }
 
     /**
-     *  Return number of key-value pairs in KdTree rooted at x.
-     *  @param x the x
-     *  @return the int
+     *  Return number of points in KdTree rooted at x.
+     *  @param x the node
+     *  @return the number of points in KdTree
      */
     private int size(final Node x) {
 
@@ -197,19 +148,6 @@ public final class KdTree {
             return 0;
         }
         return x.size;
-    }
-
-    /**
-     *  Returns the height of the KdTree.
-     *  @param x the node used to calculate the height
-     *  @return the the height of the KdTree (a 1-node tree has height 0)
-     */
-    private int height(final Node x) {
-
-        if (x == null) {
-            return -1;
-        }
-        return 1 + Math.max(height(x.left), height(x.right));
     }
 
     /**
@@ -317,30 +255,6 @@ public final class KdTree {
         StdDraw.setPenColor(StdDraw.BLACK);
         StdDraw.setPenRadius(0.01);
         node.point.draw();
-        if (node.getLevel() % 2 == 0) {
-            StdDraw.setPenColor(StdDraw.BLUE);
-            StdDraw.setPenRadius(0.001);
-            if (node.point.x() <= node.parent.point.x()) {
-                StdDraw.line(node.rectangle.xmin(), node.point.y(),
-                        node.parent.point.x(), node.point.y());
-            } else {
-                StdDraw.line(node.parent.point.x(), node.point.y(),
-                        node.rectangle.xmax(), node.point.y());
-            }
-        } else if (node.getLevel() % 2 == 1) {
-            StdDraw.setPenColor(StdDraw.RED);
-            StdDraw.setPenRadius(0.001);
-            if (node.point.y() == node.parent.point.y()) {
-                StdDraw.line(node.point.x(), node.rectangle.ymin(),
-                        node.point.x(), node.rectangle.ymax());
-            } else if (node.point.y() <= node.parent.point.y()) {
-                StdDraw.line(node.point.x(), node.rectangle.ymin(),
-                        node.point.x(), node.parent.point.y());
-            } else  {
-                StdDraw.line(node.point.x(), node.parent.point.y(),
-                        node.point.x(), node.rectangle.ymax());
-            }
-        }
         draw(node.left);
         draw(node.right);
     }
@@ -381,7 +295,7 @@ public final class KdTree {
             points.add(node.point);
         }
 
-        if (node.isVertical) {
+        if (node.getLevel() % 2 == 1) {
             if (node.compareTo(rectangle.xmin()) < 0) {
                 range(node.left, rectangle, points);
             }
@@ -463,6 +377,38 @@ public final class KdTree {
             nearest(node.left, point);
         } else if (cmp > 0) {
             nearest(node.right, point);
+        }
+    }
+
+    public static void main(final String[] args) {
+
+        String filename = args[0];
+        In in = new In(filename);
+
+        StdDraw.enableDoubleBuffering();
+
+        // initialize the data structures with N points from standard input
+        KdTree kdtree = new KdTree();
+        while (!in.isEmpty()) {
+            double x = in.readDouble();
+            double y = in.readDouble();
+            Point2D p = new Point2D(x, y);
+            kdtree.insert(p);
+            StdOut.printf("%8.6f %8.6f\n", x, y);
+        }
+
+        Point2D p1 = new Point2D(0.278547, 0.212465);
+        if (kdtree.contains(p1)) {
+            System.out.println("Point is in the tree");
+        } else {
+            System.out.println("Point is not in the tree");
+        }
+
+        Point2D p = new Point2D(0.1, 0.1);
+        if (kdtree.contains(p)) {
+            System.out.println("Point is in the tree");
+        } else {
+            System.out.println("Point is not in the tree");
         }
     }
 }
