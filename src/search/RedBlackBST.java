@@ -185,7 +185,7 @@ public final class RedBlackBST<Key extends Comparable<Key>, Value> {
     private Value get(Node x, final Key key) {
         while (x != null) {
             int cmp = key.compareTo(x.key);
-            if      (cmp < 0) {
+            if (cmp < 0) {
                 x = x.left;
             } else if (cmp > 0) {
                 x = x.right;
