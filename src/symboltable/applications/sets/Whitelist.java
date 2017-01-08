@@ -27,7 +27,7 @@
  *
  ******************************************************************************/
 
-package symboltableapps;
+package symboltable.applications.sets;
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StaticSETofInts;

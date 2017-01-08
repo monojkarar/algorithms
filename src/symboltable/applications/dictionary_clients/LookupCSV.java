@@ -30,7 +30,7 @@
  *
  ******************************************************************************/
 
-package symboltable.applications;
+package symboltable.applications.dictionary_clients;
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.ST;
@@ -42,6 +42,10 @@ import edu.princeton.cs.algs4.StdOut;
  *  key-value pairs from a file; then, printing the values corresponding to the
  *  keys found on standard input. Both keys and values are strings.
  *  The fields to serve as key and value are taken as command-line arguments.
+ *
+ *  java LookupCSV ip.csv 0 1 adobe.com (domain is key, IP is value)
+ *  java LookupCSV ip.csv 1 0 128.112.128.15 (IP is key, domain is value)
+ *
  *
  *  For additional documentation, see
  *  <a href="http://algs4.cs.princeton.edu/35applications">Section 3.5</a> of
