@@ -1,5 +1,6 @@
 package unionfind;
 
+import analysisOfAlgorithms.week1_union_find.Percolation;
 import edu.princeton.cs.algs4.StdOut;
 
 import java.io.FileNotFoundException;

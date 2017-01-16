@@ -1,4 +1,4 @@
-package unionfind;
+package analysisOfAlgorithms.week1_union_find;
 
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 

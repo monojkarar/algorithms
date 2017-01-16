@@ -1,4 +1,4 @@
-package unionfind;
+package analysisOfAlgorithms.week1_union_find;
 /******************************************************************************
  *  Compilation:  javac PercolationVisualizer.java
  *  Execution:    java PercolationVisualizer input.txt
