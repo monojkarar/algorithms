@@ -1,24 +1,25 @@
 package stacks;
 
-import queues.QueueLinkedList;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
  * Stacks are used to complete a task and are soon after discarded.
- * <p>
+ *
  * StackArray
- * 1.  StackArray is a data structure that holds a collection of elements of the same type.
+ * 1.  StackArray is a data structure that holds a collection of elements of
+ *     the same type.
  * 2.  Allows only a single item to be added or removed at a time
  * 3.  Allows access to the last item inserted, first out (LIFO)
  * 4.  Problem: No random access to other elements
  * 5.  StackArray overflow: Trying to push an item onto a full stack
- * 6. 	StackArray underflow: Trying to pop an item from an empty stack
- * <p>
+ * 6.  StackArray underflow: Trying to pop an item from an empty stack
+ *
  * STACK OPERATIONS
- * Running Time Analysis: These operations take constant time O(1) in the worst case.
+ * Running Time Analysis: These operations take constant time O(1) in the worst
+ * case.
+ *
  * Memory Analysis:
  * 16 bytes (object overhead)
  * 8 bytes (inner class overhead)
@@ -26,32 +27,47 @@ import java.util.Scanner;
  * 8 bytes (reference to Node)
  * --------------------------------
  * 40 bytes per stack node
- * <p>
- * Remark: Analysis includes memory for the stack (but not the items themselves, which the client owns).
- * <p>
+ *
+ * Remark: Analysis includes memory for the stack (but not the items themselves,
+ * which the client owns).
+ *
  * isEmpty: true if the stack currently contains no elements
- * isFull: true if the stack is currently full, i.e.,has no more space to hold additional elements
+ * isFull: true if the stack is currently full, i.e.,has no more space to hold
+ * additional elements
  * push: add a item onto the top of the stack. Make sure it is not full first.
- * pop: remove (and return) the item from the top of the stack. Make sure it is not empty first.
- * peek: Looks at the object at the top of this stack without removing it from the stack.
+ * pop: remove (and return) the item from the top of the stack. Make sure it is
+ * not empty first.
+ * peek: Looks at the object at the top of this stack without removing it from
+ * the stack.
  * <p>
  * This operation should take linear time O(n)
  * makeEmpty: removes all the elements
+ * @param <T> a generic item
  */
 
-public class StackLinkedList<T> implements Iterable {
+public final class StackLinkedList<T> implements Iterable {
 
+    /**
+     * Node helper class.
+     */
     private class Node {
-        T item;
-        Node next = null;
+        /** Item. */
+        private T item;
+        /** Node. */
+        private Node next = null;
 
         /**
          * Constructor for the Node class.
+         * @param value the value
          */
-        Node(T value) {
+        Node(final T value) {
             this.item = value;
         }
 
+        /**
+         * Convert item to string.
+         * @return item as a string
+         */
         public String toString() {
 
             return this.item.toString();
@@ -66,7 +82,8 @@ public class StackLinkedList<T> implements Iterable {
         }
     }
 
-    private Node head;    // Reference to first Link in list
+    /** Reference to first Link in list. */
+    private Node head;
 
     /**
      * Constructor for stack.
@@ -102,8 +119,9 @@ public class StackLinkedList<T> implements Iterable {
     /**
      * Push an item onto the stack.
      * Average time complexity: O(1)
+     * @param item the item
      */
-    private void push(T item) {
+    private void push(final T item) {
 
         Node oldFirst = head;
 
@@ -138,8 +156,8 @@ public class StackLinkedList<T> implements Iterable {
     /**
      * Display the linked list
      * Average time complexity for traversing list: O(n).
-     * Start at the reference stored in firstLink and keep getting the references stored in next for every Link until
-     * next returns null
+     * Start at the reference stored in firstLink and keep getting the
+     * references stored in next for every Link until next returns null
      */
     private void display() {
 
@@ -153,26 +171,37 @@ public class StackLinkedList<T> implements Iterable {
     }
 
     /**
-     * Returns an iterator that iterates over the items in this queue in FIFO order.
-     *
-     * @return an iterator that iterates over the items in this queue in FIFO order
+     * Returns an iterator that iterates over the items in this queue in FIFO
+     * order.
+     * @return an iterator that iterates over the items in this queue in FIFO
+     * order
      */
-    public Iterator<T> iterator() { return new ListIterator();
+    public Iterator<T> iterator() {
+        return new ListIterator();
     }
 
-    // an iterator, doesn't implement remove() since it's optional
+    /** an iterator, doesn't implement remove() since it's optional. */
     private class ListIterator implements Iterator<T> {
-
+        /** The current node. */
         private Node current = head;
 
+        /**
+         * Is there another item?
+         * @return true if there is another item; false otherwise.
+         */
         public boolean hasNext() {
             return current != null;
         }
 
+        /** Not supported. */
         public void remove() {
             throw new UnsupportedOperationException();
         }
 
+        /**
+         * Get the next item.
+         * @return the next item
+         */
         public T next() {
 
             if (current == null) {
@@ -185,21 +214,27 @@ public class StackLinkedList<T> implements Iterable {
         }
     }
 
-
-    public static void main(String[] args) {
+    /**
+     * Unit tests the StackLinkedList data type.
+     *
+     * @param args the command-line arguments
+     */
+    public static void main(final String[] args) {
 
         StackLinkedList<String> stack = new StackLinkedList<>();
 
-        // Insert Link and add a reference to the book Link added just prior to the field next
+        // Insert Link and add a reference to the book Link added just prior to
+        // the field next
         stack.push("Don Quixote");
         stack.push("A Tale of Two Cities");
         stack.push("The Lord of the Rings");
         stack.push("Harry Potter and the Sorcerer's Stone");
 
-        for (Object item: stack)
+        for (Object item: stack) {
             System.out.println(item);
-
-        System.out.println("Value of first item in the stack is " + stack.peek() + "\n");
+        }
+        System.out.println("Value of first item in the stack is "
+                + stack.peek() + "\n");
 
         Scanner in = new Scanner(System.in);
         System.out.println("Enter a string (q to Quit):\n");
