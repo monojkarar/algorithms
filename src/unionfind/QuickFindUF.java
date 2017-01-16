@@ -96,7 +96,7 @@ public final class QuickFindUF {
     }
 
     /**
-     * Are p and q in the same component? (depth of p & q array accesses).
+     * Are p and q in the same component?
      *
      * @param p the integer representing one site
      * @param q the integer representing the other site

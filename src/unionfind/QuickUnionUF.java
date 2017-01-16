@@ -9,6 +9,22 @@ import java.util.Scanner;
  * - Union command: connect two objects.
  * - Find/connected query: is there a path connecting the two objects?
  *
+ * Quick-find [eager approach]
+ * Data Structure.
+ * - Integer array id[] of size N.
+ * - interpretation: is[i] is parent of i
+ * - Root if i is id[id[id[...id[i]...]]].
+ *   Keep going until it doesn't change (algorithm ensures no cycles)
+ *
+ *   Each element in array keeps reference to its parent in the tree.  We can
+ *   associate with each item a root which is representative of its connected
+ *   component.
+ *
+ *      0   1   2   3   4   5   6   7   8   9
+ * id[] 0   1   9   4   9   6   6   7   8   8
+ *
+ * 0, 5,, 6 & 1,2,7 & 3,4,8,9 are connected.
+ *
  * Quick-union is also too slow;
  * Cost Model: Number of array accesses (for read or write).
  *
@@ -29,9 +45,9 @@ public final class QuickUnionUF {
     /** Test file. */
     private static final String FILE = "src\\unionfind\\docs\\tinyuf.txt";
     /** The parent. */
-    private int[] parent;       // parent[i] = parent of i
-    /** The number of component. */
-    private int count;          // number of components
+    private int[] parent;               // parent[i] = parent of i
+    /** The number of components. */
+    private int count;                  // number of components
 
     /**
      * Instantiate union-find data structure with N objects( 0 to N-1).
@@ -55,15 +71,16 @@ public final class QuickUnionUF {
     }
 
     /**
-     * Add a connection between p and q (at most N + 2 array accesses).
+     * To merge components containing p and q, set the id of p's root to the
+     * id of q's root(depth of p & q array accesses).
      *
      * @param p the integer representing one site
      * @param q the integer representing the other site
      * @throws IndexOutOfBoundsException unless both 0 <= p < n and 0 <= q < n
      */
     private void union(final int p, final int q) {
-        int rootP = find(p);
-        int rootQ = find(q);
+        int rootP = root(p);
+        int rootQ = root(q);
         if (rootP == rootQ) {
             return;
         }
@@ -72,7 +89,7 @@ public final class QuickUnionUF {
     }
 
     /**
-     * Are p and q in the same component? (depth of p & q array accesses).
+     * Do p and q in the same root? (depth of p & q array accesses).
      *
      * @param p the integer representing one site
      * @param q the integer representing the other site
@@ -80,18 +97,18 @@ public final class QuickUnionUF {
      */
     private boolean connected(final int p, final int q) {
 
-        return find(p) == find(q);
+        return root(p) == root(q);
     }
 
     /**
-     * Chase parent pointers until reach root  (depth of i array accesses).
+     * Check if p and q have the same root  (depth of i array accesses).
      * Component identifier for p (0 to N-1).
      *
      * @param i the integer representing one object
      * @return the component identifier for the component containing site p
      * @throws IndexOutOfBoundsException unless 0 <= p < n
      */
-    private int find(int i) {
+    private int root(int i) {
         int n = parent.length;
         if (i < 0 || i >= n) {
             throw new IndexOutOfBoundsException("index " + i + " is not "
