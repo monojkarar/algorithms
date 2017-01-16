@@ -3,10 +3,12 @@ package analysisOfAlgorithms.week1_union_find;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 /**
- * Author:        Raul Zuniga
- * Login:         rzuniga64@gmail.com
- * Written:       12/4/2016
- * <p>
+ * Percolation
+ * A model for many physical systems:
+ * - N-by-N grid of sites
+ * - Each site is open with probability p (or blocked with probability 1-p).
+ * - System percolates iff top and bottom are connected by open sites.
+ *
  * This application models a percolation system using an n-by-n grid of
  * sites. Each site is either open or blocked. A full site is an open
  * site that can be connected to an open site in the top row via a chain
@@ -14,7 +16,7 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
  * percolates if there is a full site in the bottom row. In other words,
  * a system percolates if we fill all open sites connected to the top
  * row and that process fills some open site on the bottom row.
- * <p>
+ *
  * Input:
  * - Size of grid N
  * - Two integer arguments that is used to calculate the site index
@@ -22,38 +24,40 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
  * - N-by-N grid of sites
  * - each site is open with probability p (or locked with probability 1-p)
  * - System percolates iff top and bottom are connected by open sites.
- * <p>
+ *
  * model               system      vacant site occupied site   percolates
  * ------------------------------------------------------------------------
  * electricity         material    conductor   insulated       conducts
  * fluid flow          material    empty       blocked         porous
  * social interaction  population  person      empty           communicates
- * <p>
+ *
  * Monte Carlo simulation
  * - initialize N-by-N whole grid to be blocked.
  * - Declare random sites open until top connected to bottom.
  * - Vacancy percentage estimates p*.
- * <p>
+ *
  * Dynamic connectivity solution to estimate percolation threshold.
- * <p>
+ *
  * Question: How to check whether an N-by-N system percolates?2
  * - Create an object for each site and and name them 0 to N - 1.
  * - Sites are in same component if connected by open sites.
  * - Percolates iff any site on bottom row is connected to site on top row.
- * <p>
+ *
  * Question: How to model opening a new site?
  * Connect newly opened site to all of its adjacent open sites \(up to 4
  * calls to union()).
- * <p>
+ *
  * Question: What is percolation threshold p*?
  * Answer: About 0.592746 for large square lattices
  * (constant only known via simulation).
  */
 public class Percolation {
-
-    private int N;                              // number of rows, columns in site grid
-    private boolean[] openSites;                // array for open sites
-    private WeightedQuickUnionUF grid, auxGrid; // auxiliary grid to help avoid backwash
+    /** Number of rows, columns in site grid. */
+    private int n;
+    /** Array for open sites. */
+    private boolean[] openSites;
+    /** Auxiliary grid to help avoid backwash. */
+    private WeightedQuickUnionUF grid, auxGrid;
 
     /**
      * Initializes an empty grid with all sites initially blocked.
@@ -67,8 +71,8 @@ public class Percolation {
             throw new IllegalArgumentException("number of sites " + n + " is "
                     + "less than or equal to 0");
         }
-        N = n;
-        int siteCount = N * N;
+        this.n = n;
+        int siteCount = this.n * this.n;
 
         // Create n-by-n grid, with all sites blocked. Index 0 and N^2 + 1
         // are reserved for virtual top and bottom sites.
@@ -81,28 +85,34 @@ public class Percolation {
             openSites[i] = false;
         }
         //initialize virtual top and bottom site with open state
-        openSites[0] = openSites[siteCount + 1] = true;
-    }
-
-    public int getN() {
-        return N;
+        openSites[0] = true;
+        openSites[siteCount + 1] = true;
     }
 
     /**
-     * Return array index of give row and column.
+     * Get the number of sitees.
+     * @return the number of sites
+     */
+    private int getn() {
+        return n;
+    }
+
+    /**
+     * Return array index of given row and column.
      *
      * @param row number of the site
      * @param col number of the site
+     * @return array index of given row and column
      */
     private int getIndex(final int row, final int col) {
 
-        if (row <= 0 || row > this.getN()) {
+        if (row <= 0 || row > this.getn()) {
             throw new IndexOutOfBoundsException("Row out of bound");
         }
-        if (col <= 0 || col > this.getN()) {
+        if (col <= 0 || col > this.getn()) {
             throw new IndexOutOfBoundsException("Column out of bound");
         }
-        return (row - 1) * this.getN() + col;
+        return (row - 1) * this.getn() + col;
     }
 
     /**
@@ -125,17 +135,17 @@ public class Percolation {
      * @param row the row
      * @param col the col
      */
-    public void open(int row, int col) {
+    public void open(final int row, final int col) {
 
         int index = getIndex(row, col);
         openSites[index] = true;
 
-        // Connect top, bottom, left and right sites of current index if they are open.
+        // Connect top, bottom, left and right sites of current index if open.
         if (row != 1 && isOpen(row - 1, col)) {      // Check left site
             grid.union(index, getIndex(row - 1, col));
             auxGrid.union(index, getIndex(row - 1, col));
         }
-        if (row != getN() && isOpen(row + 1, col)) {  // Check right site
+        if (row != getn() && isOpen(row + 1, col)) {  // Check right site
             grid.union(index, getIndex(row + 1, col));
             auxGrid.union(index, getIndex(row + 1, col));
         }
@@ -143,7 +153,7 @@ public class Percolation {
             grid.union(index, getIndex(row, col - 1));
             auxGrid.union(index, getIndex(row, col - 1));
         }
-        if (col != getN() && isOpen(row, col + 1)) {  // Check bottom site
+        if (col != getn() && isOpen(row, col + 1)) {  // Check bottom site
             grid.union(index, getIndex(row, col + 1));
             auxGrid.union(index, getIndex(row, col + 1));
         }
@@ -155,7 +165,7 @@ public class Percolation {
         }
         // site on last row to virtual bottom site. Don't connect to grid to
         // solve backwash issue.
-        if (row == N) {
+        if (row == getn()) {
             grid.union(openSites.length - 1, index);
         }
     }
@@ -167,7 +177,7 @@ public class Percolation {
      * @param col the col
      * @return true if the site is full; false otherwise.
      */
-    public boolean isFull(int row, int col) {
+    public boolean isFull(final int row, final int col) {
         int index = getIndex(row, col);
         return auxGrid.connected(0, index);
     }
