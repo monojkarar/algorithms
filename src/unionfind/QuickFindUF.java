@@ -2,6 +2,7 @@ package unionfind;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.IllegalFormatCodePointException;
 import java.util.Scanner;
 
 /**
@@ -45,11 +46,16 @@ public final class QuickFindUF {
     private static int n = 0;
 
     /**
-     * Instantiates a new Quick find uf.
+     * Instantiate union-find data structure with N objects( 0 to N-1).
      *
-     * @param N the n
+     * @param N the number of  sites
+     * @throws IllegalArgumentException if n < 0
      */
     private QuickFindUF(final int N) {
+        if (N < 0) {
+            throw new IllegalArgumentException("Number of sites less than 0.");
+        }
+
         id = new int[N];
 
         // set id of each object to itself (N array accesses)
@@ -59,22 +65,11 @@ public final class QuickFindUF {
     }
 
     /**
-     * Check whether p and q are in the same component (2 array accesses).
+     * Add a connection between p and q (at most N + 2 array accesses).
      *
-     * @param p the first object
-     * @param q the second object
-     * @return true if p and q are connected; false otherwise.
-     */
-    private boolean connected(final int p, final int q) {
-        return id[p] == id[q];
-    }
-
-    /**
-     * Change all entries with id[p] to id[q]
-     * (at most @N + 2 array accesses.
-     *
-     * @param p the first object
-     * @param q the second object
+     * @param p the integer representing one site
+     * @param q the integer representing the other site
+     * @throws IndexOutOfBoundsException unless both 0 <= p < n and 0 <= q < n
      */
     private void union(final int p, final int q) {
         int pid = id[p];
@@ -88,25 +83,42 @@ public final class QuickFindUF {
     }
 
     /**
+     * Are p and q in the same component? (depth of p & q array accesses).
+     *
+     * @param p the integer representing one site
+     * @param q the integer representing the other site
+     * @return true if p and q are connected; false otherwise.
+     */
+    private boolean connected(final int p, final int q) {
+        return id[p] == id[q];
+    }
+
+    /**
+     * Chase parent pointers until reach root  (depth of i array accesses).
      * Component identifier for p (0 to N-1).
      *
-     * @param p the p
-     * @return the return.
+     * @param i the integer representing one object
+     * @return the component identifier for the component containing site p
+     * @throws IndexOutOfBoundsException unless 0 <= p < n
      */
-    public int find(final int p) {
+    public int find(final int i) {
         return 0;
     }
 
     /**
      * Count the number of components.
-     * @return the count
+     * @return the number of components between 1 and N
      */
     public int count() {
         return 0;
     }
 
     /**
-     * Unit tests the QuickFindUF data type.
+     *  Unit tests the QuickFindUF data type.
+     *  Reads in a sequence of pairs of integers (between 0 and n-1) from a
+     *  file, where each integer represents some object;
+     *  if the sites are in different components, merge the two components
+     *  and print the pair to standard output.
      *
      * @param args the command-line arguments
      */
