@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
  *  3.  Allows access to the last item inserted, first out (LIFO)
  *  4.  Problem: No random access to other elements
  *  5.  StackArray overflow: Trying to push an item onto a full stack
- *  6. 	StackArray underflow: Trying to pop an item from an empty stack
+ *  6.  StackArray underflow: Trying to pop an item from an empty stack
  *
  *  Stack Considerations:
  *  Overflow and underflow.
@@ -235,7 +235,6 @@ public final class StackArray<T> implements Iterable {
          * Is there another item?
          * @return true if there is another item; false otherwise */
         public boolean hasNext() {
-
             return i < stackArray.length - 1;
         }
         /** Not supported. */
