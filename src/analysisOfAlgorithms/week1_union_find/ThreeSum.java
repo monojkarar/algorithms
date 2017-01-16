@@ -49,7 +49,7 @@ public final class ThreeSum {
      * @throws IllegalArgumentException if the array contains duplicate
      * integers.
      */
-    public static void printAll(final int[] a) {
+    private static void printAll(final int[] a) {
 
         int n = a.length;
         Arrays.sort(a);
