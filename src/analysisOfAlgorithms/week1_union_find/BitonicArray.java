@@ -32,8 +32,10 @@ import java.util.Scanner;
  * divides the array into the increasing and decreasing pieces.
  * Signing bonus. Do it without finding the maximum integer.
  */
-public class BitonicArray {
+public final class BitonicArray {
 
+    /** Constructor. */
+    private BitonicArray() { }
     /**
      * returns true if the sorted array contains any duplicated integers.
      *
