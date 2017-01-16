@@ -31,6 +31,15 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
  * fluid flow          material    empty       blocked         porous
  * social interaction  population  person      empty           communicates
  *
+ *  Percolation phase transition
+ *  When N is large, theory guarantees a sharp threshhold p*.
+ *  - p > p*: almost certainly percolates.
+ *  - p < p*: almost certainly does not percolate
+ *
+ * Question: What is percolation threshold p*?
+ * Answer: About 0.592746 for large square lattices
+ * (constant only known via simulation).
+ *
  * Monte Carlo simulation
  * - initialize N-by-N whole grid to be blocked.
  * - Declare random sites open until top connected to bottom.
@@ -43,13 +52,13 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
  * - Sites are in same component if connected by open sites.
  * - Percolates iff any site on bottom row is connected to site on top row.
  *
- * Question: How to model opening a new site?
- * Connect newly opened site to all of its adjacent open sites \(up to 4
- * calls to union()).
+ * Dynamic connectivity solution to estimate percolation threshhold
+ * Clever trick. Introduce 2 virtual sites (and connections to top and bottom).
+ * - Percolates iff virtual top is connected to virtual bottom site.
  *
- * Question: What is percolation threshold p*?
- * Answer: About 0.592746 for large square lattices
- * (constant only known via simulation).
+ * Question: How to model opening a new site?
+ * Connect newly opened site to all of its adjacent open sites (up to 4
+ * calls to union()).
  */
 public class Percolation {
     /** Number of rows, columns in site grid. */
