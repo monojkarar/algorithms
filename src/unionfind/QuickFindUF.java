@@ -10,34 +10,44 @@ import java.util.Scanner;
  * - Union command: connect two objects.
  * - Find/connected query: is there a path connecting the two objects?
  *
+ * Quick-find [eager approach]
+ * Data Structure.
+ * - Integer array id[] of size N.
+ * - Interpretation. p and q are connected iff they have the same id.
+ *
+ *      0   1   2   3   4   5   6   7   8   9
+ * id[] 0   1   1   8   8   0   0   1   8   8
+ *
+ * 0, 5,, 6 & 1,2,7 & 3,4,8,9 are connected.
+ *
  * Quick-find is too slow.
  * Cost model. Number of array access (for read and write)
  *
  * algorithm   initialize  union   find
- * quick-find  N           N       2
+ * quick-find  N           N       1
  * -------------------------------------
  * order of growth of number of accesses
  *
- * Union is too expensive. It takes N*N array accesses to process a sequencer
- * of N union commands on N objects. Quadratic algorithms don't scale with
- * technology. As computers get faster and bigger, quadratic algorithms
- * actually get slower. People have computers that can run billions of
- * operations per second. They have billions of entries in main memory. We
- * could have billions of objects and hope to do billions of union commands on
- * them. QuickFind would take pow(10, 18) operations or 30 years of computer
- * time.
+ * Union is too expensive. It takes N^2 array accesses to process a sequence
+ * of N union commands on N objects.
+ *
+ * Quadratic algorithms don't scale with technology. As computers get faster
+ * and bigger, quadratic algorithms actually get slower. People have
+ * computers that can run billions of operations per second. They have
+ * billions of entries in main memory. We could have billions of objects and
+ * hope to do billions of union commands on them. QuickFind would take pow
+ * (10, 18) operations or 30 years of computer time.
  *
  * Rough Standard
- * 9                         9
- * 10 operations per second. 10 words of main memory. Touch all words in
+ * 10^9 operations per second. 10^9 words of main memory. Touch all words in
  * approximately 1 second.
  *
  * Ex. Huge problem for quick-find
- * 9                    9                                      18
- * 10 union commands on 10 objects. Quick-find takes more than 10 operations.
- * 30 years of computer time!
+ * 10^9 union commands on 10^9 objects. Quick-find takes more than 10^18
+ * operations. 30 years of computer time!
  */
 public final class QuickFindUF {
+
     /** Test file. */
     private static final String FILE = "src\\unionfind\\test\\tinyuf.txt";
     /** id. */
@@ -52,6 +62,7 @@ public final class QuickFindUF {
      * @throws IllegalArgumentException if n < 0
      */
     private QuickFindUF(final int N) {
+
         if (N < 0) {
             throw new IllegalArgumentException("Number of sites less than 0.");
         }
@@ -72,11 +83,13 @@ public final class QuickFindUF {
      * @throws IndexOutOfBoundsException unless both 0 <= p < n and 0 <= q < n
      */
     private void union(final int p, final int q) {
+
         int pid = id[p];
         int qid = id[q];
 
+        // change all entries with id[p] to id[q](at mos 2N -2 array accesses)
         for (int i = 0; i < id.length; i++) {
-            if (id[i] == pid) {
+            if (id[i] == pid) { // don't put id[p] here
                 id[i] = qid;
             }
         }
@@ -90,6 +103,7 @@ public final class QuickFindUF {
      * @return true if p and q are connected; false otherwise.
      */
     private boolean connected(final int p, final int q) {
+
         return id[p] == id[q];
     }
 
@@ -123,6 +137,7 @@ public final class QuickFindUF {
      * @param args the command-line arguments
      */
     public static void main(final String[] args) {
+
         try {
             Scanner in = new Scanner(new FileReader(FILE));
 
