@@ -7,30 +7,28 @@ import java.util.Scanner;
 /**
  * Stacks are used to complete a task and are soon after discarded.
  *
- * StackArray
- * 1.  StackArray is a data structure that holds a collection of elements of
+ * Stack
+ * 1.  Stack is a data structure that holds a collection of elements of
  *     the same type.
  * 2.  Allows only a single item to be added or removed at a time
  * 3.  Allows access to the last item inserted, first out (LIFO)
  * 4.  Problem: No random access to other elements
- * 5.  StackArray overflow: Trying to push an item onto a full stack
- * 6.  StackArray underflow: Trying to pop an item from an empty stack
+ * 5.  Stack overflow: Trying to push an item onto a full stack
+ * 6.  Stack underflow: Trying to pop an item from an empty stack
  *
- * STACK OPERATIONS
- * Running Time Analysis: These operations take constant time O(1) in the worst
- * case.
- *
- * Memory Analysis:
+ * Memory Analysis: A stack with N items uses ~40 N bytes
  * 16 bytes (object overhead)
- * 8 bytes (inner class overhead)
- * 8 bytes (reference to object T)
- * 8 bytes (reference to Node)
+ * 8 bytes  (inner class overhead)
+ * 8 bytes  (reference to object T)
+ * 8 bytes  (reference to Node)
  * --------------------------------
  * 40 bytes per stack node
  *
  * Remark: Analysis includes memory for the stack (but not the items themselves,
  * which the client owns).
  *
+ * STACK OPERATIONS
+ * Running Time Analysis: These operations take constant time in the worst case:
  * isEmpty: true if the stack currently contains no elements
  * isFull: true if the stack is currently full, i.e.,has no more space to hold
  * additional elements
@@ -39,9 +37,10 @@ import java.util.Scanner;
  * not empty first.
  * peek: Looks at the object at the top of this stack without removing it from
  * the stack.
- * <p>
+ *
  * This operation should take linear time O(n)
  * makeEmpty: removes all the elements
+ *
  * @param <T> a generic item
  */
 
@@ -51,17 +50,18 @@ public final class StackLinkedList<T> implements Iterable {
      * Node helper class.
      */
     private class Node {
-        /** Item. */
+
+        /** Generic item. */
         private T item;
-        /** Node. */
+        /** Reference to the next node. */
         private Node next = null;
 
         /**
          * Constructor for the Node class.
-         * @param value the value
+         * @param newItem the value
          */
-        Node(final T value) {
-            this.item = value;
+        Node(final T newItem) {
+            this.item = newItem;
         }
 
         /**
@@ -73,9 +73,7 @@ public final class StackLinkedList<T> implements Iterable {
             return this.item.toString();
         }
 
-        /**
-         * Display the item in the node.
-         */
+        /** Display the item in the node. */
         void display() {
 
             System.out.println(this.item.toString());
@@ -123,11 +121,9 @@ public final class StackLinkedList<T> implements Iterable {
      */
     private void push(final T item) {
 
-        Node oldFirst = head;
-
-        // insert at end of list
-        head = new Node(item);
-        head.next = oldFirst;
+        Node oldFirst = head;   // save a link to the list
+        head = new Node(item);  // create a new node for the beginning
+        head.next = oldFirst;   // set the instance variables in the new node
     }
 
     /**
@@ -233,8 +229,12 @@ public final class StackLinkedList<T> implements Iterable {
         for (Object item: stack) {
             System.out.println(item);
         }
-        System.out.println("Value of first item in the stack is "
-                + stack.peek() + "\n");
+
+        // Look at the top item on the stack
+        System.out.println("Peeks at top of stack is " + stack.peek() + "\n");
+
+        // Remove value from the stack (LIFO)
+        System.out.println("Pop the top of the stack: " + stack.pop());
 
         Scanner in = new Scanner(System.in);
         System.out.println("Enter a string (q to Quit):\n");
