@@ -29,3 +29,16 @@ Goal. Design efficient data structure for union-find.
 * Number of objects N can be huge.
 * Number of operations M can be huge.
 * Find queries and union commands may be intermixed.
+
+####Union-find applications
+* Percolation
+* Games (Go, Hex).
+* Dynamic connectivity
+* least common ancestor
+* Equivalence of finit state automata
+* Hoshen-Kopelman algorithm in physics
+* Hinley-Milner polymorphic type inference
+* Kruskals minimum spanning tree algorithm
+* Compiling equivalence statements in Fortran
+* Morphological attribute openings and closings
+* Matlab's bwlabel() function in image processing
