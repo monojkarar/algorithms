@@ -6,6 +6,9 @@ University in Coursera.
 ###### Assignment details:
 > http://coursera.cs.princeton.edu/algs4/assignments/percolation.html
 
+###### Slides: 
+> https://drive.google.com/open?id=0B4obpfq-GqEPTXJHZzVtbTVia2s
+
 Summary
 ---------
 Percolation is an abstract process where a collection of initially isolated 

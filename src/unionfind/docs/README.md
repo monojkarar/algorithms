@@ -1,3 +1,6 @@
+###### Slides: 
+> https://drive.google.com/open?id=0B4obpfq-GqEPTXJHZzVtbTVia2s
+
 #####Applications involving manipulating objects of all types.
 * pixels in a digital photo
 * computers in a network
