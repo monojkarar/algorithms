@@ -126,8 +126,7 @@ public final class StackArray<T> implements Iterable {
     }
 
     /**
-     * Removes all items off the stack.
-     * Inserting first N items takes time proportional to N (not N^2)
+     * Resize the array.
      * @param capacity the capacity of the array
      */
     private void resize(final int capacity) {
@@ -142,7 +141,7 @@ public final class StackArray<T> implements Iterable {
 
     /**
      * Push an item onto the stack.
-     * Average time complexity: O(1)
+     * Inserting first N items takes time proportional to N (not N^2)
      * @param item the item
      */
     private void push(final T item) {
