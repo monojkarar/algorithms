@@ -177,7 +177,7 @@ public final class QueueStack<T> {
     }
 
     /**
-     * Adds the item to this queue.
+     * Insert a new item onto the queue.
      * @param item the item to add
      */
     private void enqueue(final T item) {
