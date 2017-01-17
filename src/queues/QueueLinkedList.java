@@ -1,89 +1,109 @@
 package queues;
 
-import edu.princeton.cs.algs4.Queue;
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * Queue: a data structure that holds a collection of elements of the same type.
- * - The elements are accessed according to FIFO order: first in, first out
- * - No random access to other elements
- * <p>
- * OPERATIONS
- * - enqueue: add a value onto the rear of the QueueLinkedList (the end of the line)
- * - make sure it is not full first.
- * - dequeue: remove a value from the front of the QueueLinkedList(the front of the line) Next!
- * make sure it is not empty first.
- * - isFull: true if the QueueLinkedList is currently full.
- * - isEmpty: true if the QueueLinkedList currently contains no elements.
- * <p>
- * These operations take constant time: O(1)
- * <p>
- * - makeEmpty: removes all the elements.  This is allowed to take longer than constant time.
- * <p>
- * QUEUE ILLUSTRATED
- * <p>
- * q.enqueue(2)		q.enqueue(3)	q.enqueue(5)	q.dequeue(item)		q.dequeue(time)		q.enqueue(10)
- * item = 2			item = 3
- * front/rear	2	0	front	2	0	front	2	0			x	0				x	0				x	0
- * 1	rear	3	1			3	1	front	3	1				x	1				x	1
- * 2			    2	rear	5	2	rear	5	2	front/rear	5	2		front	5	2
- * 3			    3				3				3					3		rear	10	3
- * <p>
- * Note: front and rear are variables used by the implementation to carry out the operations
- * <p>
- * q.enqueue(2);
- * q.enqueue(3);
- * q.enqueue(5);
- * q.dequeue();	// remove 2
- * q.dequeue();	// remove 3
- * q.enqueue(10);
- * <p>
- * QUEUE APPLICATIONS
- * <p>
- * The best examples of applications of queues involve managing multiple processes.
- * For example, imagine the print QueueLinkedList for a computer lab. Any computer can add a new print job to the
- * QueueLinkedList (enqueue). The printer performs the dequeue operation and starts printing that job. While it is
- * printing, more jobs are added to the Q. When the printer finishes, it pulls the next job from the Q, continuing
- * until the Q is empty
- * <p>
- * IMPLEMENTING A QUEUE CLASS
- * - Just like stacks, queues can be implemented using arrays or linked lists and may be implemented using templates.
- * - When an item was dequeued, both front and rear indices move in the array
- * <p>
- * LINKED LIST IMPLEMENTATION
- * <p>
- * - Linked List is very fast (O(1)).
- * - Array may be faster than linked list (no dynamic allocation)
- * - code is actually simpler than array with resizing, especially for queues.
- * - space used by elements is always proportional to number of elements (only wasted space is for the pointers)
- * <p>
- * SUMMARY:
- * - array implementation is probably better for small objects.
- * - linked list is probably better for large objects if space is scarce or copying is expensive (resizing)
+ *  Queue: a data structure that holds a collection of elements of the same
+ *  type.
+ *  - The elements are accessed according to FIFO order: first in, first out
+ *  - No random access to other elements
+ *
+ *  OPERATIONS
+ *  - enqueue: add a value onto the rear of the QueueLinkedList (the end of
+ *    the line)
+ *  - make sure it is not full first.
+ *  - dequeue: remove a value from the front of the QueueLinkedList(the front
+ *    of the line) Next!
+ *  make sure it is not empty first.
+ *  - isFull: true if the QueueLinkedList is currently full.
+ *  - isEmpty: true if the QueueLinkedList currently contains no elements.
+ *
+ *  These operations take constant time: O(1)
+ *  - makeEmpty: removes all the elements.  This is allowed to take longer than
+ *    constant time.
+ *
+ *  QUEUE ILLUSTRATED
+ *  q.enqueue(2)        q.enqueue(3)    q.enqueue(5)
+ *  item = 2            item = 3
+ *  front/rear  2   0   front   2   0   front   2   0
+ *  1   rear    3   1   front   2   0   front   2   1
+ *  2               2   rear    5   2   rear    5   2
+ *  3               3               3               3
+ *
+ *  q.dequeue(item)     q.dequeue(time)     q.enqueue(10)
+ *  item = 2            item = 3
+ *              x   0               x   0           x   0
+ *              x   1               x   1
+ *  front/rear  5   2      front    5   2
+ *              3            rear  10   3
+ *
+ *  Note: front and rear are variables used by the implementation to carry out
+ *  the operations
+ *  q.enqueue(2);
+ *  q.enqueue(3);
+ *  q.enqueue(5);
+ *  q.dequeue();    // remove 2
+ *  q.dequeue();    // remove 3
+ *  q.enqueue(10);
+ *
+ *  QUEUE APPLICATIONS
+ *  The best examples of applications of queues involve managing multiple
+ *  processes. For example, imagine the print QueueLinkedList for a computer
+ *  lab. Any computer can add a new print job to the QueueLinkedList (enqueue).
+ *  The printer performs the dequeue operation and starts printing that job.
+ *  While it is printing, more jobs are added to the Q. When the printer
+ *  finishes, it pulls the next job from the Q, continuing until the Q is empty
+ *
+ *  IMPLEMENTING A QUEUE CLASS
+ *  - Just like stacks, queues can be implemented using arrays or linked lists
+ *    and may be implemented using templates.
+ *  - When an item was dequeued, both front and rear indices move in the array
+ *
+ *  LINKED LIST IMPLEMENTATION
+ *  - Linked List is very fast (O(1)).
+ *  - Array may be faster than linked list (no dynamic allocation)
+ *  - code is actually simpler than array with resizing, especially for queues.
+ *  - space used by elements is always proportional to number of elements
+ *  (only wasted space is for the pointers)
+ *
+ *  SUMMARY:
+ *  - array implementation is probably better for small objects.
+ *  - linked list is probably better for large objects if space is scarce or
+ *    copying is expensive (resizing)
+ *
+ *  @param <T> Generic item
  */
+public final class QueueLinkedList<T> implements Iterable<T> {
 
-public class QueueLinkedList<T> implements Iterable<T> {
-
+    /** Helper Node class. */
     private class Node {
-        T item;
-        Node next = null;
+
+        /** Generic item. */
+        private T item;
+        /** Reference to next node. */
+        private Node next = null;
 
         /**
          * Constructor for the Node class.
+         * @param newItem the item
          */
-        Node(T value) {
-            this.item = value;
+        Node(final T newItem) {
+            this.item = newItem;
         }
 
+        /**
+         * Convert item to string.
+         * @return the item as a string
+         */
         public String toString() {
 
             return this.item.toString();
         }
     }
 
-    private Node first, last;      // Reference to first and last link in list
+    /** references to first and last link in list. */
+    private Node first, last;
 
     /**
      * Constructor for queue.
@@ -104,8 +124,11 @@ public class QueueLinkedList<T> implements Iterable<T> {
         return (first == null);
     }
 
-    // insert a new item onto queue
-    private void enqueue(T item) {
+    /**
+     * Insert a new item onto queue.
+     * @param item the item to insert
+     */
+    private void enqueue(final T item) {
 
         // save a link to the last node
         Node oldlast = last;
@@ -116,50 +139,66 @@ public class QueueLinkedList<T> implements Iterable<T> {
         last.next = null;
 
         // Link the new node to the end of the list.
-        if (isEmpty())
+        if (isEmpty()) {
             first = last;
-        else
+        } else {
             oldlast.next = last;
+        }
     }
 
-    // remove and return the item
+    /**
+     * Remove and return the item.
+     * @return the item taken off the queue
+     */
     private T dequeue() {
 
         T item = first.item;
 
         first = first.next;
 
-        if (isEmpty())
+        if (isEmpty()) {
             last = null;
-
+        }
         return item;
     }
 
     /**
-     * Returns an iterator that iterates over the items in this queue in FIFO order.
-     *
-     * @return an iterator that iterates over the items in this queue in FIFO order
+     * Returns an iterator that iterates over the items in this queue in FIFO
+     * order.
+     * @return an iterator that iterates over the items in this queue in FIFO
+     * order
      */
-    public Iterator<T> iterator() { return new ListIterator();
+    public Iterator<T> iterator() {
+
+        return new ListIterator();
     }
 
-    // an iterator, doesn't implement remove() since it's optional
+    /** An iterator, doesn't implement remove() since it's optional. */
     private class ListIterator implements Iterator<T> {
 
+        /** The first node. */
         private Node current = first;
 
+        /**
+         * Does queue have another item?
+         * @return true if there is another item; false otherwise
+         */
         public boolean hasNext() {
             return current != null;
         }
 
+        /** Not supported. */
         public void remove() {
             throw new UnsupportedOperationException();
         }
 
+        /**
+         * Get the next item.
+         * @return the next item
+         */
         public T next() {
 
             if (current == null) {
-
                 throw new NoSuchElementException();
             }
             T item = current.item;
@@ -168,20 +207,26 @@ public class QueueLinkedList<T> implements Iterable<T> {
         }
     }
 
-    public static void main(String[] args) {
+    /**
+     * Unit tests the QueueLinkedList data type.
+     * @param args the command-line arguments
+     */
+    public static void main(final String[] args) {
 
         QueueLinkedList<Integer> q = new QueueLinkedList<>();
 
         q.enqueue(2);
         q.enqueue(3);
         q.enqueue(5);
-        for (Integer item : q)
+        for (Integer item : q) {
             System.out.println(item);
+        }
         System.out.println();
         q.dequeue();    // remove 2
         q.dequeue();    // remove 3
         q.enqueue(10);
-        for (Integer item : q)
+        for (Integer item : q) {
             System.out.println(item);
+        }
     }
 }
