@@ -4,24 +4,23 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- *  Queue: a data structure that holds a collection of elements of the same
- *  type.
+ *  Queue: data structure that holds a collection of elements of the same type.
  *  - The elements are accessed according to FIFO order: first in, first out
  *  - No random access to other elements
  *
  *  OPERATIONS
+ *  These operations take constant time: O(1)
  *  - enqueue: add a value onto the rear of the QueueLinkedList (the end of
  *    the line)
  *  - make sure it is not full first.
  *  - dequeue: remove a value from the front of the QueueLinkedList(the front
- *    of the line) Next!
- *  make sure it is not empty first.
+ *    of the line)
+ *  - make sure it is not empty first.
  *  - isFull: true if the QueueLinkedList is currently full.
  *  - isEmpty: true if the QueueLinkedList currently contains no elements.
  *
- *  These operations take constant time: O(1)
- *  - makeEmpty: removes all the elements.  This is allowed to take longer than
- *    constant time.
+ *  These operations take linear time: O(N)
+ *  - makeEmpty: removes all the elements.
  *
  *  QUEUE ILLUSTRATED
  *  q.enqueue(2)        q.enqueue(3)    q.enqueue(5)
@@ -58,14 +57,14 @@ import java.util.NoSuchElementException;
  *  IMPLEMENTING A QUEUE CLASS
  *  - Just like stacks, queues can be implemented using arrays or linked lists
  *    and may be implemented using templates.
- *  - When an item was dequeued, both front and rear indices move in the array
+ *  - When an item was de-queued, both front and rear indices move in the array
  *
  *  LINKED LIST IMPLEMENTATION
  *  - Linked List is very fast (O(1)).
  *  - Array may be faster than linked list (no dynamic allocation)
  *  - code is actually simpler than array with resizing, especially for queues.
  *  - space used by elements is always proportional to number of elements
- *  (only wasted space is for the pointers)
+ *    (only wasted space is for the pointers)
  *
  *  SUMMARY:
  *  - array implementation is probably better for small objects.
@@ -89,6 +88,7 @@ public final class QueueLinkedList<T> implements Iterable<T> {
          * @param newItem the item
          */
         Node(final T newItem) {
+
             this.item = newItem;
         }
 
@@ -110,6 +110,7 @@ public final class QueueLinkedList<T> implements Iterable<T> {
      * Average time complexity: O(1)
      */
     private QueueLinkedList() {
+
         first = null;
     }
 
@@ -125,21 +126,17 @@ public final class QueueLinkedList<T> implements Iterable<T> {
     }
 
     /**
-     * Insert a new item onto queue.
+     * Insert a new item onto end of the queue.
      * @param item the item to insert
      */
     private void enqueue(final T item) {
 
-        // save a link to the last node
-        Node oldlast = last;
-
-        // create a new node for the end
-        last = new Node(item);
+        Node oldlast = last;    // save a link to the last node.
+        last = new Node(item);  // create a new node for the end.
         last.item = item;
-        last.next = null;
+        last.next = null;       // prevent loitering.
 
-        // Link the new node to the end of the list.
-        if (isEmpty()) {
+        if (isEmpty()) {        // Link the new node to the end of the list.
             first = last;
         } else {
             oldlast.next = last;
@@ -147,19 +144,18 @@ public final class QueueLinkedList<T> implements Iterable<T> {
     }
 
     /**
-     * Remove and return the item.
+     * Remove and return the item from front of the queue.
      * @return the item taken off the queue
      */
     private T dequeue() {
 
-        T item = first.item;
-
-        first = first.next;
+        T item = first.item;    // save item to return.
+        first = first.next;     // delete the first node.
 
         if (isEmpty()) {
             last = null;
         }
-        return item;
+        return item;            // return the item.
     }
 
     /**
