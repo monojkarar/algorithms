@@ -114,7 +114,7 @@ import java.util.NoSuchElementException;
  *
  * @param <T> Generic item
  */
-public final class QueueStack<T> {
+public final class QueueStack<T> implements Iterable<T> {
     /** Queue elements. */
     private T[] queue;
     /** Number of elements in the queue. */
