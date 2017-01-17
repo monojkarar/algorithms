@@ -9,21 +9,46 @@ import java.util.NoSuchElementException;
  *  - No random access to other elements
  *
  *  OPERATIONS
- *  - enqueue: add a value onto the rear of the QueueLinkedList
- *    (the end of the line)
+ *  These operations take constant time: O(1)
+ *  - enqueue: add a value onto the rear of the QueueLinkedList (the end of
+ *    the line)
  *  - make sure it is not full first.
  *  - dequeue: remove a value from the front of the QueueLinkedList(the front
- *  of the line) Next!
- *  make sure it is not empty first.
+ *    of the line) Next!
+ *  - make sure it is not empty first.
  *  - isFull: true if the QueueLinkedList is currently full.
  *  - isEmpty: true if the QueueLinkedList currently contains no elements.
  *  - How do we define isFull and isEmpty?  use a counter variable to keep
- *     track of the total number of items in the queue.
+ *    track of the total number of items in the queue.
  *
- *  QueueLinkedList.
- *  These operations take constant time: O(1)
- *  - makeEmpty: removes all the elements.  This is allowed to take longer than
+ *  These operations take linear time: O(N)
+ *  - makeEmpty: removes all the elements. This is allowed to take longer than
  *    constant time.
+ *
+ *  QUEUE ILLUSTRATED
+ *  q.enqueue(2)        q.enqueue(3)    q.enqueue(5)
+ *  item = 2            item = 3
+ *  front/rear  2   0   front   2   0   front   2   0
+ *  1   rear    3   1   front   2   0   front   2   1
+ *  2               2   rear    5   2   rear    5   2
+ *  3               3               3               3
+ *
+ *  q.dequeue(item)     q.dequeue(time)     q.enqueue(10)
+ *  item = 2            item = 3
+ *              x   0               x   0           x   0
+ *              x   1               x   1
+ *  front/rear  5   2      front    5   2
+ *              3            rear  10   3
+ *
+ *  Note: front and rear are variables used by the implementation to carry out
+ *  the operations
+ *
+ *  q.enqueue(2);
+ *  q.enqueue(3);
+ *  q.enqueue(5);
+ *  q.dequeue();    // remove 2
+ *  q.dequeue();    // remove 3
+ *  q.enqueue(10);
  *
  *  QUEUE APPLICATIONS
  *
@@ -35,23 +60,6 @@ import java.util.NoSuchElementException;
  *  printer finishes, it pulls the next job from the Q, continuing until the
  *  Q is empty
  *
- *  QUEUE ILLUSTRATED
- *  q.enqueue(2)		    q.enqueue(3)	q.enqueue(5)        q.dequeue()		    q.dequeue()		q.enqueue(10)
- *  front/rear	2	0	front	2	0	front	2	0			x	0				x	0				x	0
- *  1	rear	3	1			3	1	front	3	1			3	1		        x	1               x   1
- *  2		        2	rear	5	2	rear	5	2	front/rear	5	2	front	5	2               x   2
- *  3		        3				3				3					3	rear	10	3   front/rear  10  3
- *
- *  Note: front and rear are variables used by the implementation to carry out
- *  the operations
- *
- *  q.enqueue(2);
- *  q.enqueue(3);
- *  q.enqueue(5);
- *  q.dequeue();	// remove 2
- *  q.dequeue();	// remove 3
- *  q.enqueue(10);
- *
  *  IMPLEMENTING A QUEUE CLASS
  *  - Queues can be implemented using arrays or linked lists and may be
  *    implemented using templates.
@@ -62,7 +70,8 @@ import java.util.NoSuchElementException;
  *    quickly
  *  - Solution: wrap index around to front of array
  *  - To 'wrap' the rear index back to the front of the array, the following
- *    code is equivalent, but shorter
+ *    code is equivalent, but shorter:
+ *
  *  increment rear during enqueue: (assuming 0 <= rear < queueSize):
  *
  *  if (rear == queueSize - 1) rear = 0;
@@ -70,8 +79,8 @@ import java.util.NoSuchElementException;
  *  else rear = rear+1;
  *
  *  - Do the same for advancing the front index.
- *  ----------------------------------------------------------------------------
- *  When is it full? (rear+1)%queueSize == front
+ *  - When is it full? (rear+1)%queueSize == front
+ *  - When is it empty? (rear+1)%queueSize == front
  *
  *  q.enqueue(2)		q.enqueue(3)	q.enqueue(5)	q.enqueue(10)	q.enqueue(15)
  *  front/rear	2	0	front	2	0	front	2	0	front	2	0	front	2	0
@@ -84,8 +93,6 @@ import java.util.NoSuchElementException;
  *  q.enqueue(5);
  *  q.enqueue(10);
  *  q.enqueue(15);
- *  ----------------------------------------------------------------------------
- *  - When is it empty? (rear+1)%queueSize == front
  *
  *  q.dequeue()		    q.dequeue()	    q.dequeue()     q.dequeue()		    q.dequeue(15)
  *           x	0		        x	0	     	x	0		        x	0		front	x	0

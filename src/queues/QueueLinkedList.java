@@ -47,6 +47,7 @@ import java.util.NoSuchElementException;
  *  q.enqueue(10);
  *
  *  QUEUE APPLICATIONS
+ *
  *  The best examples of applications of queues involve managing multiple
  *  processes. For example, imagine the print QueueLinkedList for a computer
  *  lab. Any computer can add a new print job to the QueueLinkedList (enqueue).
