@@ -40,12 +40,14 @@ public final class KnuthShuffle {
      * Rearranges an array of objects in uniformly random order
      * (under the assumption that Math.random() generates independent
      * and uniformly distributed numbers between 0 and 1).
+     * Common bug: r betwwen 0 anbd N-1.
+     * Correct variant: r between i and N-1.
      * @param array the array to be shuffled
      */
     private static void shuffle(final Object[] array) {
-        int size = array.length;
-        for (int i = 0; i < size; i++) {
-            int r = i + (int) (Math.random() * (size - i));
+        int n = array.length;
+        for (int i = 0; i < n; i++) {
+            int r = i + (int) (Math.random() * (n - i));
             Object swap = array[r];
             array[r] = array[i];
             array[i] = swap;
