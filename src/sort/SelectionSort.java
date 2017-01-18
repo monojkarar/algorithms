@@ -40,7 +40,6 @@ import static sort.SortUtility.printHorizontalArray;
  *  N(N + 1) /2.
  *  Efficiency of algorithm is O(N^2).
  */
-
 public final class SelectionSort {
 
     /** The array to sort. */
