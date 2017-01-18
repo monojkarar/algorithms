@@ -1,3 +1,6 @@
+###### Slides: 
+> https://drive.google.com/open?id=0B4obpfq-GqEPYTBQZDU1bjhDUDA
+
 ##Sorting Applications
 
 ####Sorting algorithms are essential in a broad varitiety of applications.
