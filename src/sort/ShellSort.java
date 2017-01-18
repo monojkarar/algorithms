@@ -9,6 +9,9 @@ import static sort.SortUtility.generateRandomArray;
 /**
  *  The ShellSort class provides static methods for sorting an
  *  array using Shellsort with Knuth's increment sequence (1, 4, 13, 40, ...).
+ *  Idea. Move entries more than one position at a time by h-sorting the
+ *  array (h being the gap).  Shell sort is known as a diminishing gap sort.
+ *  When gap is 1 the loop is identical to an insertion sort.
  *
  *  For additional documentation, see
  *  <a href="http://algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
@@ -18,8 +21,7 @@ import static sort.SortUtility.generateRandomArray;
  * than the insertion sort, making it the simplest of the faster algorithms.
  * It compares elements that are far apart and then by comparing elements that
  * are less far apart, and so on, gradually shrinking toward the basic
- * insertion sort.  Shell sort is known as a diminishing gap sort. When gap
- * is 1 the loop is identical to an insertion sort.
+ * insertion sort.
  *
  * The running time of Shell sort depends heavily on the choice of increment
  * sequences.  A sequence which performs well in practice but has no
