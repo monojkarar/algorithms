@@ -1,10 +1,19 @@
 package sort;
 
+import edu.princeton.cs.algs4.StdOut;
+
 import java.util.Arrays;
 
 import static sort.SortUtility.generateRandomArray;
 
 /**
+ *  The ShellSort class provides static methods for sorting an
+ *  array using Shellsort with Knuth's increment sequence (1, 4, 13, 40, ...).
+ *
+ *  For additional documentation, see
+ *  <a href="http://algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
+ *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ *
  * Shell sort is a sub quadratic algorithm whose code is only slightly longer
  * than the insertion sort, making it the simplest of the faster algorithms.
  * It compares elements that are far apart and then by comparing elements that
@@ -30,7 +39,7 @@ import static sort.SortUtility.generateRandomArray;
  *
  * Runtime analysis
  * Best        Average         Worst
- * O(n log n)  depends on gap  O(n log n * log n)
+ * O(n log n)  depends on gap  O(n log n ^2)
  *
  * Original        81  94  11  96  12  35  17  95  28  58  41  75  15
  * After 5-sort    35  17  11  28  12  41  75  15  96  58  81  94  95
@@ -41,23 +50,14 @@ import static sort.SortUtility.generateRandomArray;
  */
 public final class ShellSort {
 
-    /** The array of unsorted elements. */
-    private Comparable[] theArray;
+    /** The constructor. */
+    private ShellSort() { }
 
     /**
-     *  The constructor.
-     *  @param n the number of items.
+     * Rearranges the array in ascending order, using the natural order.
+     * @param theArray the array to be sorted
      */
-    private ShellSort(final int n) {
-
-        theArray = new Comparable[n];
-        generateRandomArray(this.theArray, this.theArray.length);
-    }
-
-    /**
-     * The shellsort algorithm.
-     */
-    private void shellsort() {
+    private static void shellsort(final Comparable[] theArray) {
         Comparable temp;
         int j;
 
@@ -80,45 +80,89 @@ public final class ShellSort {
      * @param w tje variable y
      * @return boolean true if v < y; false otherwise.
      */
-    private boolean less(final Comparable v, final Comparable w) {
+    private static boolean less(final Comparable v, final Comparable w) {
         return v.compareTo(w) < 0;
     }
 
     /**
      * SwapValues.
-     * @param array the array
-     * @param indexOne the indexOne
-     * @param indexTwo the index Two
+     * @param a the array
+     * @param i the first index
+     * @param j the second index
      */
-    private void exch(final Comparable[] array, final int indexOne, final
-    int indexTwo) {
+    private static void exch(final Object[] a, final int i, final int j) {
 
-        Comparable temp = array[indexOne];
-        array[indexOne] = array[indexTwo];
-        array[indexTwo] = temp;
+        Object swap = a[i];
+        a[i] = a[j];
+        a[j] = swap;
+    }
+
+    //**************************************************************************
+    //  Check if array is sorted - useful for debugging.
+    //*************************************************************************/
+
+    /**
+     * Is the array a[] sorted?
+     * @param a the array
+     * @return true if array is sorted; false otherwise
+     */
+    private static boolean isSorted(final Comparable[] a) {
+        for (int i = 1; i < a.length; i++) {
+            if (less(a[i], a[i - 1])) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
-     * The entry point of application.
-     *
-     * @param args the input arguments
+     * Is the array h sorted?
+     * @param a the array
+     * @param h the h
+     * @return true if array is sorted; false otherwise
+     */
+    private static boolean isHsorted(final Comparable[] a, final int h) {
+        for (int i = h; i < a.length; i++) {
+            if (less(a[i], a[i - h])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Print array to standard output.
+     * @param a the array
+     */
+    private static void show(final Comparable[] a) {
+        for (Comparable item : a) {
+            StdOut.print(item + " ");
+        }
+    }
+
+    /**
+     * Unit tests the ShellSort data type.
+     * @param args the command-line arguments
      */
     public static void main(final String[] args) {
+
+        // The array of unsorted elements.
+        Comparable[] array = new Comparable[Integer.parseInt(args[0])];
+        generateRandomArray(array, array.length);
 
         long startTime;
         long endTime;
 
-        ShellSort theSort = new ShellSort(Integer.parseInt(args[0]));
-        System.out.println(Arrays.toString(theSort.theArray));
+        System.out.println(Arrays.toString(array));
         System.out.println();
 
         startTime = System.currentTimeMillis();
-        theSort.shellsort();
+        shellsort(array);
         endTime = System.currentTimeMillis();
         System.out.println("Shellsort took " + (endTime - startTime)
                 + " milliseconds.");
 
         System.out.println();
-        System.out.println(Arrays.toString(theSort.theArray));
+        System.out.println(Arrays.toString(array));
     }
 }
