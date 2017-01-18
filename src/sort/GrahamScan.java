@@ -26,10 +26,7 @@ package sort;
  *
  ******************************************************************************/
 
-import edu.princeton.cs.algs4.Point2D;
-import edu.princeton.cs.algs4.Stack;
-import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.*;
 
 import java.util.Arrays;
 
@@ -39,6 +36,37 @@ import java.util.Arrays;
  *
  *  The implementation uses the Graham-Scan convex hull algorithm.
  *  It runs in O(N log N) time in the worst case and uses O(N) extra memory.
+ *
+ *  The convex hull of a set of N points is the smallest perimeter fence
+ *  enclosing the points.
+ *  Convex hull output. Sequence of vertices in counterclockwise order.
+ *
+ *  Equivalent definitions.
+ *  - Smallest convex set containing all the points.
+ *  - Smallest area convex polygon enclosing the points.
+ *  - Convex polygon enclosing the points, whose vertices are points in set.
+ *
+ *  Convex hull output. Sequence of vertices in counterclockwise order.
+ *
+ *  Graham scan: implementation challenges
+ *  Q. How to find point p with smallest y-coordinate?
+ *  A. Define a total order, comparing by y-coordinate.
+ *
+ *  Q. How to sort points by polar angle with respect to p?
+ *  A. Define a total order for each point p.
+ *
+ *  Q. How to determine whether p1->p2->p3 is a counterclockwise turn?
+ *  A. Computational geometry.
+ *
+ *  Q. How to sort efficiently?
+ *  A. Mergesort sorts in N log N time.
+ *
+ *  Q. How to handle degeneracies (three or more points on a line)?
+ *  A. Requires some care but not hard.
+ *
+ *  Lesson. Geometric primitives are tricky to implement.
+ *  - Dealing with degenerate cases.
+ *  - Coping with floatig-point precision.
  *
  *  For additional documentation, see
  *  <a href="http://algs4.cs.princeton.edu/99scientific">Section 9.9</a> of
@@ -151,20 +179,21 @@ public final class GrahamScan {
     }
 
     /**
-     * Unit tests the {@code GrahamScan} data type.
-     * Reads in an integer {@code n} and {@code n} points (specified by
-     * their <em>x</em>- and <em>y</em>-coordinates) from standard input;
-     * computes their convex hull; and prints out the points on the
-     * convex hull to standard output.
+     * Unit tests the GrahamScan data type.
+     * Reads in an integer n from standard input. n points (specified by
+     * their x- and y-coordinates) are randomly generated; computes their convex
+     * hull; and prints out the points on the convex hull to standard output.
      *
      * @param args the command-line arguments
      */
     public static void main(final String[] args) {
-        int n = StdIn.readInt();
+
+        int n = Integer.parseInt(args[0]);
+
         Point2D[] points = new Point2D[n];
         for (int i = 0; i < n; i++) {
-            int x = StdIn.readInt();
-            int y = StdIn.readInt();
+            int x = StdRandom.uniform(100);
+            int y = StdRandom.uniform(100);
             points[i] = new Point2D(x, y);
         }
         GrahamScan graham = new GrahamScan(points);
