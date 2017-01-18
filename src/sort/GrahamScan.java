@@ -48,25 +48,48 @@ import java.util.Arrays;
  *
  *  Convex hull output. Sequence of vertices in counterclockwise order.
  *
+ *  Farthest pair problem. Given N points in the plane, find a pair of points
+ *  with the largest Euclidean distance between them.
+ *  Fact. Farthest pair of points are extreme points on a convex hull.
+ *
+ *  Convex hull: geometric properties
+ *  Fact. Can traverse the convex hull by making only counterclockwise turns.
+ *  Fast. the vertices of convex hull appear in increasing order of polar
+ *  angle with respect to point p with lowest y-coordinate.
+ *
+ *  Graham scan
+ *  - choose point p with smallest y-coordinate
+ *  - sort points by polar angle with p
+ *  - consider points in order; discard unless it creates a ccw turn.
+ *
  *  Graham scan: implementation challenges
  *  Q. How to find point p with smallest y-coordinate?
- *  A. Define a total order, comparing by y-coordinate.
+ *  A. Define a total order, comparing by y-coordinate. Sorting is the answer.
  *
  *  Q. How to sort points by polar angle with respect to p?
- *  A. Define a total order for each point p.
+ *  A. Define a total order for each point p. We don't just want to just sort
+ *  them using a compareTo(). We want to sort them in different ways sometimes.
  *
  *  Q. How to determine whether p1->p2->p3 is a counterclockwise turn?
  *  A. Computational geometry.
  *
  *  Q. How to sort efficiently?
- *  A. Mergesort sorts in N log N time.
+ *  A. MergeSort sorts in N log N time.  A good sort algorithm gives us a
+ *  good convex hull algorithm!
  *
  *  Q. How to handle degeneracies (three or more points on a line)?
  *  A. Requires some care but not hard.
  *
  *  Lesson. Geometric primitives are tricky to implement.
  *  - Dealing with degenerate cases.
- *  - Coping with floatig-point precision.
+ *  - Coping with floating-point precision.
+ *
+ *  CCW. See slide.
+ *  Given three points a, b, and c, is a → b → c a counterclockwise turn?
+ *  - Determinant (or cross product) gives 2x signed area of planar triangle.
+ ・ - If signed area > 0, then a → b → c is counterclockwise.
+ *  - If signed area < then a → b → c is clockwise.
+ *  - If signed area = 0, then a → b → c are collinear
  *
  *  For additional documentation, see
  *  <a href="http://algs4.cs.princeton.edu/99scientific">Section 9.9</a> of
@@ -82,6 +105,8 @@ public final class GrahamScan {
 
     /**
      * Computes the convex hull of the specified array of points.
+     * Running time. N log N for sorting and linear for rest.
+     * Pf. N log N for sorting, each point pushed and popped at most once
      *
      * @param  pts the array of points
      * @throws NullPointerException if points is null or if any entry in
@@ -95,10 +120,10 @@ public final class GrahamScan {
         for (int i = 0; i < n; i++) {
             points[i] = pts[i];
         }
-        // preprocess so that points[0] has lowest y-coordinate; break ties by
+        // pre-process so that points[0] has lowest y-coordinate; break ties by
         // x-coordinate points[0] is an extreme point of the convex hull
         // (alternatively, could do easily in linear time)
-        Arrays.sort(points);
+        Arrays.sort(points);    //points[0] is now point with lowest y-coord
 
         // sort by polar angle with respect to base point points[0],
         // breaking ties by distance to points[0]
@@ -135,7 +160,7 @@ public final class GrahamScan {
                 top = hull.pop();
             }
             hull.push(top);
-            hull.push(points[i]);
+            hull.push(points[i]);   // add p(i) to putative hull
         }
 
         assert isConvex();
