@@ -2,9 +2,14 @@ package sort;
 
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdRandom;
 
 /**
- *  The type Knuth shuffle.
+ *  The KnuthShuffle class provides a client for reading in a
+ *  sequence of strings and shuffling them using the Knuth (or Fisher-Yates)
+ *  shuffling algorithm. This algorithm guarantees to rearrange the elements
+ *  in uniformly random order, under the assumption that Math.random()
+ *  generates independent and uniformly distributed numbers between 0 and 1.
  *
  *  In iteration i, pick r between 0 and i uniformly at random.
  *  Swap a[i] and a[r].
@@ -17,6 +22,12 @@ import edu.princeton.cs.algs4.StdOut;
  *  - Continuously monitor statistic properties:
  *    hardware random-number generators are fragile and fail silently
  *  - Use an unbiased shuffling algorithm.
+ *
+ *  For additional documentation,
+ *  see <a href="http://algs4.cs.princeton.edu/11model">Section 1.1</a> of
+ *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ *  See {@link StdRandom} for versions that shuffle arrays and
+ *  subarrays of objects, doubles, and ints.
  */
 public final class KnuthShuffle {
 
@@ -24,30 +35,20 @@ public final class KnuthShuffle {
      * This class should not be instantiated.
      */
         private KnuthShuffle() { }
-    /**
-     * SwapValues.
-     * @param array the array
-     * @param indexOne the indexOne
-     * @param indexTwo the index Two
-     */
-    private static void exch(final Object[] array, final int indexOne, final
-    int indexTwo) {
-
-        Object temp = array[indexOne];
-        array[indexOne] = array[indexTwo];
-        array[indexTwo] = temp;
-    }
 
     /**
-     * Shuffle.
-     *
-     * @param array the array
+     * Rearranges an array of objects in uniformly random order
+     * (under the assumption that Math.random() generates independent
+     * and uniformly distributed numbers between 0 and 1).
+     * @param array the array to be shuffled
      */
     private static void shuffle(final Object[] array) {
         int size = array.length;
         for (int i = 0; i < size; i++) {
             int r = i + (int) (Math.random() * (size - i));
-            exch(array, i, r);
+            Object swap = array[r];
+            array[r] = array[i];
+            array[i] = swap;
         }
     }
 
