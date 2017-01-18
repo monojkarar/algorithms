@@ -67,7 +67,7 @@ public final class SelectionSort {
         for (int i = 0; i < array.length; i++) {
             int min = i;
 
-            for (int j = i; j < array.length; j++) {
+            for (int j = i + 1; j < array.length; j++) {
                 if (less(array[j], array[min])) {
                     min = j;
                 }
@@ -83,7 +83,8 @@ public final class SelectionSort {
      * @param array the array
      * @param comparator the comparator specifying the order
      */
-    public static void sort(final Object[] array, final Comparator comparator) {
+    public static void selectionSort(final Object[] array,
+                                     final Comparator comparator) {
         int n = array.length;
         for (int i = 0; i < n; i++) {
             int min = i;
