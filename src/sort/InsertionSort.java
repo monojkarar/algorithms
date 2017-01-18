@@ -30,6 +30,11 @@ import static sort.SortUtility.printHorizontalArray;
  *
  *  Insertion sort is going to be about twice as fast as selection sort.
  *
+ *  Proposition. For partially-sorted arrays, insertion sort runs in linear
+ *  time.
+ *  Pf. Number of exchanges equals the number of inversions (an inversion is
+ *  a pair of keys that are out of order).
+ *
  *  The basic action of insertion sort is to sort the elements in positions 0
  *  through p (where p ranges from 1 through N-1). In each state p increases
  *  by 1. That is what the outer loop is controlling.
