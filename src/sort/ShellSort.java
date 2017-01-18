@@ -12,7 +12,9 @@ import static sort.SortUtility.generateRandomArray;
  *  Idea. Move entries more than one position at a time by h-sorting the
  *  array (h being the gap).  Shell sort is known as a diminishing gap sort.
  *  When gap is 1 the loop is identical to an insertion sort.
+ *
  *  How to h-sort an array? Insertion sort, with gap h.
+ *  Why insertion sort? Big increments => small array.
  *
  *  For additional documentation, see
  *  <a href="http://algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
