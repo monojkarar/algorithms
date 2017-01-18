@@ -26,6 +26,9 @@ import static sort.SortUtility.printHorizontalArray;
  *  Best    Average     Worst
  *  O(n^2)  O(n^2)      O(n^2)
  *
+ *  Running time insensitive to input. Quadratic time, even if input is sorted.
+ *  Data movement is minimal. Linear number of exchanges.
+ *
  *  Array Position  0   1   2   3   4
  *  Initial State  36   24  10   6  12
  *  After 1st pass  6   24  10  36  12   6 and 36 are swapped.
