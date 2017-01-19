@@ -1,12 +1,31 @@
 package sort;
 
+import edu.princeton.cs.algs4.MergeX;
+
+import java.util.Arrays;
+
 import static sort.SortUtility.generateRandomArray;
 import static sort.SortUtility.printHorizontalArray;
 
 /**
- *  The MergeSort.
- *  MergeSort is a divide and conquer algorithm that is a  an efficient,
- *  general-purpose, comparison-based sorting algorithm
+ *  The MergeSort class provides static methods for sorting an  array using
+ *  merge sort. MergeSort is a divide and conquer algorithm that is a  an
+ *  efficient, general-purpose, comparison-based sorting algorithm
+ *
+ *  Basic plan.
+ *  - Copy original array to auxiliary array, sort it and copy it back to
+ *    original array.
+ *  - Maintain three indices:
+ *    - i, current entry on left half
+ *    - j, current etnry on right half
+ *    - k, the entry in the sorted result
+ *  - Divide array into two halves.
+ *  - Recursively sort each half.
+ *  - Merge two halves.
+ *
+ *  Abstract in-place merge
+ *  Goal. Given two sorted subarrays a[lo] to a[mid[ and a[mid+1] to a[hi},
+ *  replace with sorted subarray a[lo[ to a[hi].
  *
  *  Proposition: MergeSort uses at most N lg N compares and 6 N lg N array
  *  accesses to sort any array of size N. Extra cost of
@@ -20,30 +39,38 @@ import static sort.SortUtility.printHorizontalArray;
  *
  *  Upper bound is an algorithm guaranteed to get the sort done in time
  *  proportional to worst case running time.
+ *
+ *  For additional documentation, see
+ *  <a href="http://algs4.cs.princeton.edu/22mergesort">Section 2.2</a> of
+ *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ *  For an optimized version, see {@link MergeX}.
  */
 public final class MergeSort {
+
     /** A variable to determine when number of items to sort is small. */
     private static final int CUTOFF = 7;
 
-    /** The array to sort. */
-    private Comparable[] theArray;
-    /**
-     *  The constructor.
-     *  @param n the number of items in array.
-     */
-    private MergeSort(final int n) {
-        theArray = new Comparable[n];
-        generateRandomArray(this.theArray, this.theArray.length);
-    }
+    /** This class should not be instantiated. */
+    private MergeSort() { }
+
     /**
      * Merge sort algorithm.
+     * stably merge a[lo .. mid] with a[mid+1 ..hi] using aux[lo .. hi]
      * @param array the array to sort
-     * @param aux the aux
-     * @param low the lo
-     * @param high the hi
+     * @param aux the copy of the array
+     * @param low the low index of the array
+     * @param middle the middle index of the array
+     * @param high the high index of the array
      */
-    private void mergesort(final Comparable[] array, final Comparable[] aux,
-                           final int low, final int high) {
+    private static void merge(final Comparable[] array,
+                              Comparable[] aux,
+                              final int low,
+                              final int middle,
+                              final int high) {
+
+        // precondition: a[lo .. mid] and a[mid+1 .. hi] are sorted subarrays
+        assert isSorted(array, low, middle);
+        assert isSorted(array, middle + 1, high);
 
         // performance improvement
         if (high <= low + CUTOFF - 1) {
@@ -51,17 +78,12 @@ public final class MergeSort {
             return;
         }
 
-        int middle = (low + high) >>> 1;
+        // copy to aux[]
+        aux = Arrays.copyOf(array, array.length);
 
-        mergesort(array, low, middle);
-        mergesort(array, middle + 1, high);
-        // Is biggest item in 1st half <= samllest item in 2nd half. If so stop.
+        // Is biggest item in 1st half <= smallest item in 2nd half? If so stop.
         if (!less(array[middle + 1], array[middle])) {
             return;
-        }
-        // copy to aux[]
-        for (int k = low; k <= high; k++) {
-            aux[k] = array[k];
         }
 
         // merge back to a[]
@@ -78,24 +100,44 @@ public final class MergeSort {
             }
         }
 
-        //assert (isSorted(array, low, high));
+        // postcondition: a[lo .. hi] is sorted
+        assert (isSorted(array, low, high));
     }
 
     /**
-     * Merge sort algorithm.
-     * @param array the array to sort
-     * @param lo the lo
-     * @param hi the hi
+     *  Mergesort a[lo..hi] using auxiliary array aux[lo..hi].
+     *  @param array the array to sort
+     *  @param aux the copy of the array
+     *  @param low the low index of the array
+     *  @param high the high index of the array
      */
-    private void mergesort(final Comparable[] array,
-                           final int lo,
-                           final int hi) {
-        Comparable[] aux = new Comparable[array.length];
-        if (lo >= hi) {
+    private static void sort(final Comparable[] array,
+                             final Comparable[] aux,
+                             final int low,
+                             final int high) {
+        if (high <= low) {
             return;
         }
-        mergesort(array, aux, lo, hi);
+        int middle = low + ((high - low) >>> 1);
+        sort(array, aux, low, middle);
+        sort(array, aux, middle + 1, high);
+        merge(array, aux, low, middle, high);
     }
+
+    /**
+     *  Merge sort algorithm.
+     *  @param array the array to sort
+     */
+    private static void mergesort(final Comparable[] array) {
+
+        Comparable[] aux = new Comparable[array.length];
+        sort(array, aux, 0, array.length - 1);
+        assert isSorted(array);
+    }
+
+    //**************************************************************************
+    //  Helper sorting function.
+    //*************************************************************************/
 
     /**
      * Return true if v < w; false otherwise.
@@ -103,8 +145,21 @@ public final class MergeSort {
      * @param w tje variable y
      * @return boolean true if v < y; false otherwise.
      */
-    private boolean less(final Comparable v, final Comparable w) {
+    private static boolean less(final Comparable v, final Comparable w) {
         return v.compareTo(w) < 0;
+    }
+
+    //**************************************************************************
+    //  Check if array is sorted - useful for debugging.
+    //*************************************************************************/
+
+    /**
+     * Is array sorted?
+     * @param a the array
+     * @return true of array is sorted; false otherwise.
+     */
+    private static boolean isSorted(final Comparable[] a) {
+        return isSorted(a, 0, a.length - 1);
     }
 
     /**
@@ -117,7 +172,7 @@ public final class MergeSort {
      *  @param end the end.
      *  @return true if sorted; false otherwise.
      */
-    private boolean isSorted(final Comparable[] a, final int start,
+    private static boolean isSorted(final Comparable[] a, final int start,
                              final int end) {
 
         for (int i = start; i < end - 1; i++) {
@@ -139,18 +194,20 @@ public final class MergeSort {
         long startTime;
         long endTime;
 
-        MergeSort ms = new MergeSort(Integer.parseInt(args[0]));
+        // The array of unsorted elements.
+        Comparable[] array = new Comparable[Integer.parseInt(args[0])];
+        generateRandomArray(array, array.length);
 
         System.out.println("STARTING ARRAY");
-        printHorizontalArray(ms.theArray, ms.theArray.length, -1, -1);
+        printHorizontalArray(array, array.length, -1, -1);
 
         startTime = System.currentTimeMillis();
         // Send the array, 0 and the array size
-        ms.mergesort(ms.theArray, 0, ms.theArray.length - 1);
+        MergeSort.mergesort(array);
         endTime = System.currentTimeMillis();
 
         System.out.println("FINAL SORTED ARRAY");
-        printHorizontalArray(ms.theArray, ms.theArray.length, -1, -1);
+        printHorizontalArray(array, array.length, -1, -1);
         System.out.println("Mergesort took " + (endTime - startTime)
                 + " milliseconds.");
     }
