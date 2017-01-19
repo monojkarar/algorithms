@@ -31,6 +31,12 @@ import static sort.SortUtility.printHorizontalArray;
  *  accesses to sort any array of size N. Extra cost of
  *  merge =2^K * (N/2^K) lg N (# of stages).
  *
+ *  Can enable or disable assert at runtime. No cost in production code.
+ *  By default assertions are disabled.
+ *
+ *  - java -ea MyProgram    // enable assertions
+ *  - java -da MyProgram    // disable assertions(default)
+ *
  *  Runtime analysis
  *  Best        Average     Worst
  *  O(n log n)  O(n log n)  O(n log n)
@@ -72,12 +78,6 @@ public final class MergeSort {
         assert isSorted(array, low, middle);
         assert isSorted(array, middle + 1, high);
 
-        // performance improvement
-        if (high <= low + CUTOFF - 1) {
-            InsertionSort.insertionSort(array);
-            return;
-        }
-
         // copy to aux[]
         aux = Arrays.copyOf(array, array.length);
 
@@ -117,10 +117,20 @@ public final class MergeSort {
                              final int high) {
         if (high <= low) {
             return;
+        } else if (high <= low + CUTOFF - 1) {
+            // performance improvement. Use insertion sort for small sub-arrays.
+            InsertionSort.insertionSort(array);
+            return;
         }
+
         int middle = low + ((high - low) >>> 1);
         sort(array, aux, low, middle);
         sort(array, aux, middle + 1, high);
+        // performance improvement. Stop if already sorted.
+        // If biggest element in first half is <= smallest item in second half.
+        if (!less(array[middle + 1], array[middle])) {
+            return;
+        }
         merge(array, aux, low, middle, high);
     }
 
@@ -130,6 +140,7 @@ public final class MergeSort {
      */
     private static void mergesort(final Comparable[] array) {
 
+        // Do not create aux array in recursive routine because of extra cost
         Comparable[] aux = new Comparable[array.length];
         sort(array, aux, 0, array.length - 1);
         assert isSorted(array);
