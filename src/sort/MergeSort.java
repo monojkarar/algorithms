@@ -115,9 +115,8 @@ public final class MergeSort {
                              final Comparable[] aux,
                              final int low,
                              final int high) {
-        if (high <= low) {
-            return;
-        } else if (high <= low + CUTOFF - 1) {
+        //if (high <= low) return;
+        if (high <= low + CUTOFF) {
             // performance improvement. Use insertion sort for small sub-arrays.
             InsertionSort.insertionSort(array);
             return;
@@ -129,6 +128,7 @@ public final class MergeSort {
         // performance improvement. Stop if already sorted.
         // If biggest element in first half is <= smallest item in second half.
         if (!less(array[middle + 1], array[middle])) {
+            System.arraycopy(array, low, aux, low, high - low + 1);
             return;
         }
         merge(array, aux, low, middle, high);
