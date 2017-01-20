@@ -196,9 +196,8 @@ public final class MergeSort {
     }
 
     /**
-     * Main.
-     *
-     * @param args the args
+     * Unit tests the MergeSort data type.
+     * @param args the command-line arguments
      */
     public static void main(final String[] args) {
 
