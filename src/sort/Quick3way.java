@@ -32,6 +32,26 @@ import java.util.Arrays;
  *  The Quick3way class provides static methods for sorting an array using
  *  quicksort with 3-way partitioning.
  *
+ *  Often, purpose of sort is to bring items with equal keys together
+ *  - Sort population by age.
+ *  - Find collinear points.
+ *  - Remove duplicates from mailing list.
+ *  - Sort job applicants by college attended.
+ *
+ *  Typical characteristics of such applications.
+ *  - Huge array.
+ *  - Small number of key values.
+ *
+ *  Recommended. Stop scans on equal items equal to the partioning item.
+ *  Consequence. ~N lg N compares when all keys equal.
+ *  Desirable. Put all items equal to the partitioning item in place.
+ *
+ *  3-way partitioning
+ *  Goal. Partition array into 3 parts so that:
+ *  - Entries between lt and gt equal to paritition item v.
+ *  - No larger entries to left of lt.
+ *  - No smaller entries to right of gt.
+ *
  *  For additional documentation, see
  *  <a href="http://algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
  *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
@@ -57,10 +77,27 @@ public final class Quick3way {
     // quicksort the subarray a[lo .. hi] using 3-way partitioning
 
     /**.
-     * quicksort the subarray a[lo .. hi] using 3-way partitioning
-     * @param a the array to sort
-     * @param lo the left
-     * @param hi the right
+     *  quicksort the subarray a[lo .. hi] using 3-way partitioning
+     *
+     *  Dijkstra 3-way paritioning
+     *  Let v be partitioning item a[lo]
+     *  Scan i from left to right.
+     *  - a[i] < v ): exchange a[lt] with a[i]; increment both lt and i
+     *  - a[i] > v ); exchange a[gt] with a[i]; decrement gt
+     *  - a[i] == v): increment i
+     *
+     *  invariant
+     *  ----------------------------
+     *  | <V    |=V |       |  >V   |
+     *  -----------------------------
+     *           ^   ^     ^
+     *          lt   i     gt
+     *
+     *  Bottom line. Randomized quicksort with 3-way partitioning reduces
+     *  running time from linearithmic to linar in broad class of applications.
+     *  @param a the array to sort
+     *  @param lo the left
+     *  @param hi the right
      */
     private static void sort(final Comparable[] a,
                              final int lo,
