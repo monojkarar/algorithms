@@ -3,7 +3,7 @@
 
 ##Sorting Applications
 
-####Sorting algorithms are essential in a broad varitiety of applications.
+####Sorting algorithms are essential in a broad variety of applications.
 Obvious Applications
 * Sort a list of names.
 * Organize an mp3 library.
@@ -30,7 +30,8 @@ Arrays.sorts(). Import java.util.Arrays.
 * Uses tuned quicksort for primitive types; tuned mergesort for object.
 
 ####System Sort: Which algorithm to use?
-Appliations have diverse attributes.
+Applications have diverse attributes. Many more combinations of attributes 
+than algorithms.
 * Stable?
 * Parallel?
 * Deterministic?
