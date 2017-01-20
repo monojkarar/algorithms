@@ -97,12 +97,15 @@ public final class QuickSort {
             return;         // Everything is sorted
         }
 
-        // performance improvement
+        // performance improvement. Use insertion sort for small arrays.
         if (hi <= lo + CUTOFF - 1) {
             Insertion.sort(array, lo, hi);
         } else {
-            // performance improvement.
-            int pivot = medianOf3(array, lo, hi);
+            // performance improvement. Median of sample.
+            // - Best choice of pivot item = median
+            // - Estimate true median by taking median of sample
+            // - Median-of-3 (random) items
+            int pivot = medianOf3(array, lo, lo + (hi - lo) >>> 1,  hi);
             exch(array, lo, pivot);
 
             int j = partition(array, lo, hi);
@@ -215,12 +218,12 @@ public final class QuickSort {
      * Returns the median array.
      * @param array the array to sort
      * @param left the left endpoint of array
+     * @param center the center of array
      * @param right the right endpoint of array
      * @return the median of the array
      */
     private static int medianOf3(final Comparable[] array, final int left,
-                                       final int right) {
-        int center = (left + right) >>> 1;
+                                 final int center, final int right) {
 
         if (less(array[center], array[left])) {
             exch(array, left, center);
