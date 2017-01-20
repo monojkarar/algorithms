@@ -134,14 +134,13 @@ public final class QuickSort {
         int j = hi + 1;
 
         while (true) {
-            // find item on lo to swap
-            while (less(array[++i], array[lo])) {
+            while (less(array[++i], array[lo])) {   // find item on lo to swap
+
                 if (i == hi) {
                     break;
                 }
             }
-            // find item on hi to swap
-            while (less(array[lo], array[--j])) {
+            while (less(array[lo], array[--j])) {   // find item on hi to swap
                 if (j == lo) {  // redundant since a[lo] acts as a sentinal.
                     break;
                 }
