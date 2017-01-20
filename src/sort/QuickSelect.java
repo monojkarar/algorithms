@@ -46,9 +46,27 @@ import java.util.Arrays;
 import static sort.SortUtility.generateRandomArray;
 
 /**
- *  The {@code QuickSelect} class provides static methods for sorting an
- *  array using selection sort.
- *  <p>
+ *  The QuickSelect class provides static methods for sorting an array using
+ *  selection sort.
+ *
+ *  Goal. Given an array of N items, find the kth largest.
+ *  Ex. Min(k=0), max(k=N-1), median(k=N/2)
+ *
+ *  Applications
+ *  order statistics
+ *  Find the 'top k'
+ *
+ *  - Easy N log N upper bound. How?
+ *  - Eay N upper bound for k = 1, 2, 3. How?
+ *  - Easy n lower bound. Why?
+ *
+ *  Partition array so that:
+ *  - Entry a[j] is in place.
+ *  - No larger entry to the left of j.
+ *  - No smaller entry to the right of j.
+ *
+ * Repeat in one sub-array, depending on j; finished when j equals k.
+ *
  *  For additional documentation, see
  *  <a href="http://algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
  *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
@@ -57,6 +75,7 @@ import static sort.SortUtility.generateRandomArray;
  *  @author Kevin Wayne
  */
 public final class QuickSelect {
+
     /** The array to sort. */
     private  Comparable[] theArray;
 
@@ -75,13 +94,14 @@ public final class QuickSelect {
      *  - No larger entry to the left of j.
      *  - No smaller entry to the right of j.
      *
-     *  Repeat in one subarray, depending on j; finished when j equals k.
+     *  Repeat in one sub-array, depending on j; finished when j equals k.
      *
      * @param a the array
      * @param k the item to select
      * @return the item selected
      */
-    public static Comparable select(final Comparable[] a, final int k) {
+    private static Comparable select(final Comparable[] a, final int k) {
+
         StdRandom.shuffle(a);
         int lo = 0;
         int hi = a.length - 1;
@@ -177,8 +197,8 @@ public final class QuickSelect {
         QuickSelect selection = new QuickSelect(Integer.parseInt(args[0]));
         System.out.println(Arrays.toString(selection.theArray));
         long startTime = System.currentTimeMillis();
-        System.out.println("QuickSelect: " +
-                QuickSelect.select(selection.theArray, (selection.theArray
+        System.out.println("QuickSelect: "
+                + QuickSelect.select(selection.theArray, (selection.theArray
                         .length - 1) / 2).toString());
         long endTime = System.currentTimeMillis();
         System.out.println(Arrays.toString(selection.theArray));
