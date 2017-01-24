@@ -353,7 +353,7 @@ public class MinPQ<Key> implements Iterable<Key> {
             if (!item.equals("-")) {
                 pq.insert(item);
             } else if (!pq.isEmpty()) {
-                StdOut.print(pq.delMin() + " ");
+                StdOut.print("The minimum value is " + pq.delMin() + " ");
             }
         }
         StdOut.println("(" + pq.size() + " left on pq)");
