@@ -22,24 +22,23 @@ package priorityqueues;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- *  The {@code MinPQ} class represents a priority queue of generic keys.
- *  It supports the usual <em>insert</em> and <em>delete-the-minimum</em>
- *  operations, along with methods for peeking at the minimum key,
- *  testing if the priority queue is empty, and iterating through
- *  the keys.
- *  <p>
+ *  The MinPQ class represents a priority queue of generic keys.
+ *  It supports the usual insert and delete-the-minimum operations, along
+ *  with methods for peeking at the minimum key, testing if the priority
+ *  queue is empty, and iterating through the keys.
+ *
  *  This implementation uses a binary heap.
- *  The <em>insert</em> and <em>delete-the-minimum</em> operations take
- *  logarithmic amortized time.
- *  The <em>min</em>, <em>size</em>, and <em>is-empty</em> operations take
- *  constant time. Construction takes time proportional to the specified
- *  capacity or the number of items used to initialize the data structure.
- *  <p>
+ *  The insert and delete-the-minimum operations take logarithmic amortized
+ *  time. The min, size, and is-empty operations take constant time.
+ *  Construction takes time proportional to the specified capacity or the
+ *  number of items used to initialize the data structure.
+ *
  *  For additional documentation, see
  *  <a href="http://algs4.cs.princeton.edu/24pq">Section 2.4</a> of
  *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
@@ -50,6 +49,7 @@ import java.util.NoSuchElementException;
  *  @param <Key> the generic type of key on this priority queue
  */
 public class MinPQ<Key> implements Iterable<Key> {
+
     /** Store items at indices 1 to n. */
     private Key[] pq;
     /** Number of items on priority queue. */
@@ -59,7 +59,6 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     /**
      * Initializes an empty priority queue with the given initial capacity.
-     *
      * @param  initCapacity the initial capacity of this priority queue
      */
     MinPQ(final int initCapacity) {
@@ -315,9 +314,9 @@ public class MinPQ<Key> implements Iterable<Key> {
          */
         HeapIterator() {
             if (comparator == null) {
-                copy = new MinPQ<>(size());
+                copy = new MinPQ<Key>(size());
             } else {
-                copy = new MinPQ<>(size(), comparator);
+                copy = new MinPQ<Key>(size(), comparator);
             }
             for (int i = 1; i <= n; i++) {
                 copy.insert(pq[i]);
@@ -352,13 +351,12 @@ public class MinPQ<Key> implements Iterable<Key> {
     }
 
     /**
-     * Unit tests the {@code MinPQ} data type.
-     *
+     * Unit tests the MinPQ data type.
      * @param args the command-line arguments
      */
     public static void main(final String[] args) {
 
-        MinPQ<String> pq = new MinPQ<>();
+        MinPQ<String> pq = new MinPQ<String>();
         while (!StdIn.isEmpty()) {
             String item = StdIn.readString();
             if (!item.equals("-")) {
