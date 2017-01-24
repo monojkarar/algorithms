@@ -76,7 +76,6 @@ public class MinPQ<Key> implements Iterable<Key> {
     /**
      * Initializes an empty priority queue with the given initial capacity,
      * using the given comparator.
-     *
      * @param  initCapacity the initial capacity of this priority queue
      * @param  newComparator the order to use when comparing keys
      */
@@ -88,7 +87,6 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     /**
      * Initializes an empty priority queue using the given comparator.
-     *
      * @param  newComparator the order to use when comparing keys
      */
     public MinPQ(final Comparator<Key> newComparator) {
@@ -98,7 +96,6 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     /**
      * Initializes a priority queue from the array of keys.
-     *
      * Takes time proportional to the number of keys, using sink-based heap
      * construction.
      *
@@ -118,7 +115,6 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     /**
      * Returns true if this priority queue is empty.
-     *
      * @return {@code true} if this priority queue is empty;
      *         {@code false} otherwise
      */
@@ -129,7 +125,6 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     /**
      * Returns the number of keys on this priority queue.
-     *
      * @return the number of keys on this priority queue
      */
     public int size() {
@@ -139,7 +134,6 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     /**
      * Returns a smallest key on this priority queue.
-     *
      * @return a smallest key on this priority queue
      * @throws NoSuchElementException if this priority queue is empty
      */
@@ -165,7 +159,6 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     /**
      * Adds a new key to this priority queue.
-     *
      * @param  x the key to add to this priority queue
      */
     public void insert(final Key x) {
@@ -182,7 +175,6 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     /**
      * Removes and returns a smallest key on this priority queue.
-     *
      * @return a smallest key on this priority queue
      * @throws NoSuchElementException if this priority queue is empty
      */
@@ -292,9 +284,8 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     /**
      * Returns an iterator that iterates over the keys on this priority queue
-     * in ascending order.
-     * <p>
-     * The iterator doesn't implement {@code remove()} since it's optional.
+     * in ascending order. The iterator doesn't implement remove()
+     * since it's optional.
      *
      * @return an iterator that iterates over the keys in ascending order
      */
