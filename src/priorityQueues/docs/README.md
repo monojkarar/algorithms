@@ -1,7 +1,7 @@
 Priority queue application
 ------------------------------
 * Event-driven simulatiion. [customers in a line, colliding particles]
-* Numerical computation.    [reducing roundoff error] 
+* Numerical computation.    [reducing round off error] 
 * Data compression.         [Huffman codes]
 * Graph searching.          [Dijkstra's algorithm, Prim's algorithm]
 * Number theory.            [sum of powers]
