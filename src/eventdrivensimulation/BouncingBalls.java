@@ -17,12 +17,12 @@ public final class BouncingBalls {
     public static void main(final String[] args) {
 
         int n = Integer.parseInt(args[0]);
-        Particle[] balls = new Particle[n];
+        Ball[] balls = new Ball[n];
         for (int i = 0; i < n; i++) {
-            balls[i] = new Particle();
+            balls[i] = new Ball();
         }
         while (true) {
-            //StdDraw.clear();
+            StdDraw.clear();
             for (int j = 0; j < n; j++) {
                 balls[j].move(0.5);
                 balls[j].draw();
