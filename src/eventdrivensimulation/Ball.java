@@ -1,6 +1,7 @@
 package eventdrivensimulation;
 
 import edu.princeton.cs.algs4.StdDraw;
+import edu.princeton.cs.algs4.StdRandom;
 
 /**
  * Ball class.
@@ -16,6 +17,10 @@ public final class Ball {
 
     /** Constructor. */
     Ball() {
+        rx     = StdRandom.uniform(0.0, 1.0);
+        ry     = StdRandom.uniform(0.0, 1.0);
+        vx     = StdRandom.uniform(-0.005, 0.005);
+        vy     = StdRandom.uniform(-0.005, 0.005);
         radius = 0.01;
     }
 
