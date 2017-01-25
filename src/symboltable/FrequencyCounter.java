@@ -31,11 +31,11 @@ import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
 /**
- *  The {@code FrequencyCounter} class provides a client for
- *  reading in a sequence of words and printing a word (exceeding
- *  a given length) that occurs most frequently. It is useful as
- *  a test client for various symbol table implementations.
- *  <p>
+ *  The FrequencyCounter class provides a client for reading in a sequence of
+ *  words and printing a word (exceeding a given length) that occurs most
+ *  frequently. It is useful as a test client for various symbol table
+ *  implementations.
+ *
  *  For additional documentation, see
  *  <a href="http://algs4.cs.princeton.edu/31elementary">Section 3.1</a> of
  *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
@@ -49,11 +49,11 @@ public final class FrequencyCounter {
     private FrequencyCounter() { }
 
     /**
-     * Reads in a command-line integer and sequence of words from
-     * standard input and prints out a word (whose length exceeds
-     * the threshold) that occurs most frequently to standard output.
-     * It also prints out the number of words whose length exceeds
-     * the threshold and the number of distinct such words.
+     * Reads in a command-line integer and sequence of words from standard
+     * input and prints out a word (whose length exceeds the threshold) that
+     * occurs most frequently to standard output. It also prints out the
+     * number of words whose length exceeds the threshold and the number of
+     * distinct such words.
      *
      * @param args the command-line arguments
      */
