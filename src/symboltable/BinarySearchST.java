@@ -516,11 +516,11 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
     }
     /**
      * Unit tests the {@code BinarySearchST} data type.
-     *
      * @param args the command-line arguments
      */
     public static void main(final String[] args) {
 
+        // Try keys: S E A R C H E X A M P L E
         BinarySearchST<String, Integer> st = new BinarySearchST<>();
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
