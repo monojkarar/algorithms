@@ -82,9 +82,8 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
     private Value[] vals;
     /** Number of items. */
     private int n = 0;
-    /**
-     * Initializes an empty symbol table.
-     */
+
+    /**Initializes an empty symbol table.*/
     private BinarySearchST() {
         this(INIT_CAPACITY);
     }
@@ -97,6 +96,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
         keys = (Key[]) new Comparable[capacity];
         vals = (Value[]) new Object[capacity];
     }
+
     /**
      * Resize the underlying arrays.
      * @param capacity the capacity
@@ -113,14 +113,15 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
         vals = tempv;
         keys = tempk;
     }
+
     /**
      * Returns the number of key-value pairs in this symbol table.
-     *
      * @return the number of key-value pairs in this symbol table
      */
     public int size() {
         return n;
     }
+
     /**
      * Returns true if this symbol table is empty.
      *
@@ -130,6 +131,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
     public boolean isEmpty() {
         return size() == 0;
     }
+
     /**
      * Does this symbol table contain the given key?
      *
@@ -144,6 +146,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
         }
         return get(key) != null;
     }
+
     /**
      * Returns the value associated with the given key in this symbol table.
      *
@@ -167,6 +170,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
         }
         return null;
     }
+
     /**
      * Returns the number of keys in this symbol table strictly less than key.
      *
@@ -193,6 +197,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
         }
         return lo;
     }
+
     /**
      * Removes the specified key and its associated value from this symbol table
      * (if the key is in this symbol table).
@@ -236,6 +241,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
 
         assert check();
     }
+
     /**
      * Removes the specified key and associated value from this symbol table
      * (if the key is in the symbol table).
@@ -275,6 +281,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
         }
         assert check();
     }
+
     /**
      * Removes the smallest key and associated value from this symbol table.
      *
@@ -320,7 +327,6 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
 
     /**
      * Returns the largest key in this symbol table.
-     *
      * @return the largest key in this symbol table
      * @throws NoSuchElementException if this symbol table is empty
      */
@@ -334,7 +340,6 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
 
     /**
      * Return the kth smallest key in this symbol table.
-     *
      * @param  k the order statistic
      * @return the kth smallest key in this symbol table
      * @throws IllegalArgumentException unless {@code k} is between 0 and
@@ -350,7 +355,6 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
 
     /**
      * Returns the largest key in this symbol table less than or equal to key}.
-     *
      * @param  key the key
      * @return the largest key in this symbol table less than or equal to key
      * @throws NoSuchElementException if there is no such key
@@ -375,7 +379,6 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
     /**
      * Returns the smallest key in this symbol table greater than or equal to
      * key.
-     *
      * @param  key the key
      * @return  the smallest key in this symbol table greater than or equal to
      *          key
@@ -397,7 +400,6 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
 
     /**
      * Returns the number of keys in this symbol table in the specified range.
-     *
      * @param lo minimum endpoint
      * @param hi maximum endpoint
      * @return the number of keys in this symbol table between {@code lo}
@@ -439,8 +441,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
 
     /**
      * Returns all keys in this symbol table in the given range,
-     * as an {@code Iterable}.
-     *
+     * as an Iterable.
      * @param lo minimum endpoint
      * @param hi maximum endpoint
      * @return all keys in this symbol table between {@code lo}
@@ -496,6 +497,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
         }
         return true;
     }
+
     /**
      * Check that rank(select(i) = 1.
      * @return true if rank(select(i) = 1; false otherwise
