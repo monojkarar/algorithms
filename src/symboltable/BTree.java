@@ -51,40 +51,26 @@ import edu.princeton.cs.algs4.StdOut;
  * @param <Value> the Value
  */
 public final class BTree<Key extends Comparable<Key>, Value> {
-    /**
-     * max children per B-tree node = M-1(must be even and greater than 2).
-     */
-    private static final int M = 4;
 
-    /**
-     * Root of the B-tree.
-     */
+    /** max children per B-tree node = M-1(must be even and greater than 2).*/
+    private static final int M = 4;
+    /** Root of the B-tree. */
     private Node root;
-    /**
-     * Height of the B-tree.
-     */
+    /** Height of the B-tree. */
     private int height;
-    /**
-     * Number of key-value pairs in the B-tree.
-     */
+    /** Number of key-value pairs in the B-tree. */
     private int n;
 
-    /**
-     * Helper B-tree node data type.
-     */
+    /** Helper B-tree node data type. */
     private static final class Node {
-        /**
-         * Number of children.
-         */
+
+        /** Number of children. */
         private int m;
-        /**
-         * The array of children.
-         */
+        /** The array of children. */
         private Entry[] children = new Entry[M];
 
         /**
          * Create a node with k children.
-         *
          * @param k the number of children
          */
         private Node(final int k) {
@@ -92,25 +78,16 @@ public final class BTree<Key extends Comparable<Key>, Value> {
         }
     }
 
-    // internal nodes: only use key and next
-    // external nodes: only use key and value
-
     /**
      * Internal nodes: only use key and next.
      * External nodes: only use key and value.
      */
     private static class Entry {
-        /**
-         * Key.
-         */
+        /** Key. */
         private Comparable key;
-        /**
-         * Value.
-         */
+        /** Value. */
         private final Object val;
-        /**
-         * Helper field to iterate over array entries.
-         */
+        /** Helper field to iterate over array entries. */
         private Node next;
 
         /**
@@ -119,17 +96,14 @@ public final class BTree<Key extends Comparable<Key>, Value> {
          * @param newVal the value
          * @param newNext the next key
          */
-        Entry(final Comparable newKey, final Object newVal, final Node
-                newNext) {
+        Entry(final Comparable newKey, final Object newVal, final Node newNext) {
             this.key = newKey;
             this.val = newVal;
             this.next = newNext;
         }
     }
 
-    /**
-     * Initializes an empty B-tree.
-     */
+    /** Initializes an empty B-tree. */
     private BTree() {
 
         root = new Node(0);
@@ -137,7 +111,6 @@ public final class BTree<Key extends Comparable<Key>, Value> {
 
     /**
      * Returns true if this symbol table is empty.
-     *
      * @return true if this symbol table is empty; false otherwise
      */
     public boolean isEmpty() {
@@ -147,7 +120,6 @@ public final class BTree<Key extends Comparable<Key>, Value> {
 
     /**
      * Returns the number of key-value pairs in this symbol table.
-     *
      * @return the number of key-value pairs in this symbol table
      */
     public int size() {
@@ -157,7 +129,6 @@ public final class BTree<Key extends Comparable<Key>, Value> {
 
     /**
      * Returns the height of this B-tree (for debugging).
-     *
      * @return the height of this B-tree
      */
     private int height() {
@@ -210,7 +181,6 @@ public final class BTree<Key extends Comparable<Key>, Value> {
      * Inserts the key-value pair into the symbol table, overwriting the old
      * value with the new value if the key is already in the symbol table.
      * If value is null, this effectively deletes the key from the symbol table.
-     *
      * @param key the key
      * @param val the value
      * @throws IllegalArgumentException if {@code key} is {@code null}
@@ -356,7 +326,6 @@ public final class BTree<Key extends Comparable<Key>, Value> {
 
     /**
      * Unit tests the {@code BTree} data type.
-     *
      * @param args the command-line arguments
      */
     public static void main(final String[] args) {
