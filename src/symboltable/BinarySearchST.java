@@ -78,6 +78,7 @@ import java.util.NoSuchElementException;
  * @param <Value> the value
  */
 public final class BinarySearchST<Key extends Comparable<Key>, Value> {
+
     /** Initial capacity. */
     private static final int INIT_CAPACITY = 2;
     /** Array of keys. */
@@ -97,6 +98,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
      * @param capacity the maximum capacity
      */
     private BinarySearchST(final int capacity) {
+
         keys = (Key[]) new Comparable[capacity];
         vals = (Value[]) new Object[capacity];
     }
@@ -105,6 +107,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
      * @param capacity the capacity
      */
     private void resize(final int capacity) {
+
         assert capacity >= n;
         Key[]   tempk = (Key[])   new Comparable[capacity];
         Value[] tempv = (Value[]) new Object[capacity];
@@ -156,6 +159,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
     public Value get(final Key key) {
+
         if (key == null) {
             throw new IllegalArgumentException("argument to get() is null");
         }
@@ -176,6 +180,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
     private int rank(final Key key) {
+
         if (key == null) {
             throw new IllegalArgumentException("argument to rank() is null");
         }
@@ -202,6 +207,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
     private void put(final Key key, final Value val)  {
+
         if (key == null) {
             throw new IllegalArgumentException("first argument to "
                     + "put() is null");
@@ -243,6 +249,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
     private void delete(final Key key) {
+
         if (key == null) {
             throw new IllegalArgumentException("argument to delete() is null");
         }
@@ -279,6 +286,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
      * @throws NoSuchElementException if the symbol table is empty
      */
     public void deleteMin() {
+
         if (isEmpty()) {
             throw new NoSuchElementException("Symbol table underflow error");
         }
@@ -291,6 +299,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
      * @throws NoSuchElementException if the symbol table is empty
      */
     public void deleteMax() {
+
         if (isEmpty()) {
             throw new NoSuchElementException("Symbol table underflow error");
         }
@@ -307,6 +316,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
      * @throws NoSuchElementException if this symbol table is empty
      */
     private Key min() {
+
         if (isEmpty()) {
             return null;
         }
@@ -320,6 +330,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
      * @throws NoSuchElementException if this symbol table is empty
      */
     public Key max() {
+
         if (isEmpty()) {
             return null;
         }
@@ -335,6 +346,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
      *        <em>n</em> &minus; 1
      */
     private Key select(final int k) {
+
         if (k < 0 || k >= n) {
             return null;
         }
@@ -350,6 +362,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
     public Key floor(final Key key) {
+
         if (key == null) {
             throw new IllegalArgumentException("argument to floor() is null");
         }
@@ -375,6 +388,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
      * @throws  IllegalArgumentException if {@code key} is {@code null}
      */
     public Key ceiling(final Key key) {
+
         if (key == null) {
             throw new IllegalArgumentException("argument to ceiling() is null");
         }
@@ -397,6 +411,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
      *         is {@code null}
      */
     public int size(final Key lo, final Key hi) {
+
         if (lo == null) {
             throw new IllegalArgumentException("first argument to size() is "
                     + "null");
@@ -439,6 +454,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
      *         is {@code null}
      */
     private Iterable<Key> keys(final Key lo, final Key hi) {
+
         if (lo == null) {
             throw new IllegalArgumentException("first argument to keys() is "
                     + "null");
@@ -477,6 +493,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
      * @return true if array in ascending order; false otherwise.
      */
     private boolean isSorted() {
+
         for (int i = 1; i < size(); i++) {
             if (keys[i].compareTo(keys[i - 1]) < 0) {
                 return false;
@@ -489,6 +506,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
      * @return true if rank(select(i) = 1; false otherwise
      */
     private boolean rankCheck() {
+
         for (int i = 0; i < size(); i++) {
             if (i != rank(select(i))) {
                 return false;
@@ -507,6 +525,7 @@ public final class BinarySearchST<Key extends Comparable<Key>, Value> {
      * @param args the command-line arguments
      */
     public static void main(final String[] args) {
+
         BinarySearchST<String, Integer> st = new BinarySearchST<>();
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
