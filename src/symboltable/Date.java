@@ -22,7 +22,7 @@ import edu.princeton.cs.algs4.StdOut;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
-public class Date implements Comparable<Date> {
+public final class Date implements Comparable<Date> {
     /** A sample array. */
     private static final int[] DAYS = {0, 31, 29, 31, 30, 31, 30, 31, 31, 30,
             31, 30, 31 };
@@ -148,7 +148,7 @@ public class Date implements Comparable<Date> {
      * @param  that the other date
      * @return {@code true} if this date is after that date; false otherwise
      */
-    public boolean isAfter(final Date that) {
+    private boolean isAfter(final Date that) {
         return compareTo(that) > 0;
     }
 
