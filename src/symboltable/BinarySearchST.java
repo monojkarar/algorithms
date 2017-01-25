@@ -53,7 +53,7 @@ import java.util.NoSuchElementException;
  *
  *  operation           running time
  *  search              lg N
- *  insert/delete       N*
+ *  insert/delete       N (To insert, need to shift all greater keys over)
  *  min/max             1
  *  floor/ceiling       lg N
  *  rank                lg N
