@@ -311,7 +311,7 @@ public final class BST<Key extends Comparable<Key>, Value> {
     }
 
     /**
-     * The delete.
+     * The delete using Hibbard deletion.
      * @param x the x
      * @param key the key
      * @return the Node
@@ -322,23 +322,23 @@ public final class BST<Key extends Comparable<Key>, Value> {
         }
 
         int cmp = key.compareTo(x.key);
-        if      (cmp < 0) {
+        if (cmp < 0) {                          // search for key.
             x.left  = delete(x.left,  key);
         } else if (cmp > 0) {
             x.right = delete(x.right, key);
         } else {
-            if (x.right == null) {
+            if (x.right == null) {              // no right child.
                 return x.left;
             }
-            if (x.left  == null) {
+            if (x.left  == null) {              // no left child.
                 return x.right;
             }
             Node t = x;
-            x = min(t.right);
+            x = min(t.right);                   // replace with successor.
             x.right = deleteMin(t.right);
             x.left = t.left;
         }
-        x.size = size(x.left) + size(x.right) + 1;
+        x.size = size(x.left) + size(x.right) + 1; // update subtree counts.
         return x;
     }
     /**
