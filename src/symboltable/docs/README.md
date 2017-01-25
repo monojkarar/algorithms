@@ -1,33 +1,17 @@
- Immutability: implementing in Java
- ----------------------------------
- Data type. Set values and operations on those values.
- Immutable data type. Can't change teh data type value once created.
- 
- Immutable 
- * String
- * Integer
- * Double 
- * Color 
- * Vector 
- * Transaction 
- * Point2D
- * java.io.File
- 
- Mutable 
- * StringBuilder
- * Stack
- * Counter
- * Java array
- * java.net.URL 
- 
- Advantages.
- * Simplifies debugging.
- * Safer in presence of hostile code.
- * Simplifies concurrent programming.
- * Safe to use as key in priority queue or symbol table.
- 
- Disadvantage 
-* Must create new object for each data type value.
+####Symbol table applications
+
+Application         Purpose of search       key         value
+dictionary          find definition         word        definition
+book index          find relevant pages     term        list of page numbers
+file share          find song to download   song        computer id
+financial account   process transactions    account #   transaction details
+web search          find relevant web pages keyword     list of page names
+compiler            find properties of vars var name    type and value
+routing table       route Internet packets  destination best route
+DNS                 find IP addr given URl  URL         IP address
+reverse DNS         find URL given address  IP address  URL
+genomics            find markers            DNA string  known positions
+file system         find file on disk       filename    location on disk
 
 Equality Test
 -------------
