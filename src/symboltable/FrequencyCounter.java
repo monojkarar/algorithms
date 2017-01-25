@@ -70,6 +70,7 @@ public final class FrequencyCounter {
 
         // compute frequency counts
         while (!StdIn.isEmpty()) {
+            // read string and update frequency
             String key = StdIn.readString();
             if (key.length() < minlen) {
                 continue;
@@ -91,7 +92,7 @@ public final class FrequencyCounter {
                 max = word;
             }
         }
-
+        // print a string with max frequency
         StdOut.println(max + " " + st.get(max));
         StdOut.println("distinct = " + distinct);
         StdOut.println("words    = " + words);
