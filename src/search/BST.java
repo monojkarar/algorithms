@@ -311,7 +311,9 @@ public final class BST<Key extends Comparable<Key>, Value> {
     }
 
     /**
-     * The delete using Hibbard deletion. Not symmetric.
+     * The delete using Hibbard deletion. Not symmetric. Height of tree
+     * becomes sqrt(N). Longstanding open problem. Simple and efficient
+     * delete for BSTs.
      * @param x the x
      * @param key the key
      * @return the Node
