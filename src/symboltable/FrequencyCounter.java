@@ -55,9 +55,15 @@ public final class FrequencyCounter {
      * number of words whose length exceeds the threshold and the number of
      * distinct such words.
      *
+     * java FrequencyCounter 1 < tinyTale.txt (60 words, 20 distinct)
+     * java FrequencyCounter 8 < tale.txt (135, 635 words, 19, 769 distinct)
+     * java FrequencyCounter 1 < tinyTale.txt (21, 191, 455 words, 534, 580
+     * distinct)
+     *
      * @param args the command-line arguments
      */
     public static void main(final String[] args) {
+
         int distinct = 0, words = 0;
         int minlen = Integer.parseInt(args[0]);
         ST<String, Integer> st = new ST<>();
