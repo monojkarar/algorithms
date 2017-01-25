@@ -311,7 +311,7 @@ public final class BST<Key extends Comparable<Key>, Value> {
     }
 
     /**
-     * The delete using Hibbard deletion.
+     * The delete using Hibbard deletion. Not symmetric.
      * @param x the x
      * @param key the key
      * @return the Node
