@@ -226,6 +226,7 @@ public final class BST<Key extends Comparable<Key>, Value> {
      * @return the Node
      */
     private Node put(final Node h, final Key key, final Value val) {
+
         if (h == null) {
             return new Node(key, val, 1);
         }
@@ -243,7 +244,6 @@ public final class BST<Key extends Comparable<Key>, Value> {
 
     /**
      * Removes the smallest key and associated value from the symbol table.
-     *
      * @throws NoSuchElementException if the symbol table is empty
      */
     public void deleteMin() {
