@@ -220,25 +220,25 @@ public final class BST<Key extends Comparable<Key>, Value> {
 
     /**
      * Put.
-     * @param x the x
+     * @param h the x
      * @param key the key
      * @param val the val
      * @return the Node
      */
-    private Node put(final Node x, final Key key, final Value val) {
-        if (x == null) {
+    private Node put(final Node h, final Key key, final Value val) {
+        if (h == null) {
             return new Node(key, val, 1);
         }
-        int cmp = key.compareTo(x.key);
+        int cmp = key.compareTo(h.key);
         if (cmp < 0) {
-            x.left  = put(x.left,  key, val);
+            h.left  = put(h.left,  key, val);
         } else if (cmp > 0) {
-            x.right = put(x.right, key, val);
+            h.right = put(h.right, key, val);
         } else {
-            x.val   = val;
+            h.val   = val;
         }
-        x.size = 1 + size(x.left) + size(x.right);
-        return x;
+        h.size = 1 + size(h.left) + size(h.right);
+        return h;
     }
 
     /**
