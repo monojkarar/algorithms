@@ -37,7 +37,7 @@ public final class SparseVector {
     /** Dimension. */
     private int d;
     /** The vector, represented by index-value pairs. */
-    private ST<Integer, Double> st; // Hash becasue order not important
+    private ST<Integer, Double> st; // Hash because order not important
 
    /**
      * Initializes a d-dimensional zero vector.Empty ST represents all 0
