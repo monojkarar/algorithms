@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- *  The BagArray claas represents an unordered collection of generic objects
+ *  The BagArray class represents an unordered collection of generic objects
  *  of the same type.  It supports iterating over items in an arbitrary way.
  *
  *  Implemented using a fixed size array. This implementation uses a resizing
