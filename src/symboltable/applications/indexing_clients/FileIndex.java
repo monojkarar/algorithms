@@ -64,16 +64,17 @@ public final class FileIndex {
     public static void main(final String[] args) {
 
         // key = word, value = set of files containing that word (symbol table)
-        ST<String, SET<File>> st = new ST<>();
+        ST<String, SET<File>> st = new ST<>();      // symbol table
 
         // create inverted index of all files from command line
         StdOut.println("Indexing files");
         for (String filename : args) {
             StdOut.println("  " + filename);
-            File file = new File(filename);
+            File file = new File(filename);         // list of file names
             In in = new In(file);
             // for each word in file, add file to corresponding set
             while (!in.isEmpty()) {
+                // for each word in file, add file to corresponding list
                 String word = in.readString();
                 if (!st.contains(word)) {
                     st.put(word, new SET<>());
@@ -86,7 +87,7 @@ public final class FileIndex {
 
         // read queries from standard input, one per line
         while (!StdIn.isEmpty()) {
-            String query = StdIn.readString();
+            String query = StdIn.readString();      // process queries
             if (st.contains(query)) {
                 SET<File> set = st.get(query);
                 for (File file : set) {
