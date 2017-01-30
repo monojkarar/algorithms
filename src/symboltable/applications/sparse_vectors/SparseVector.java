@@ -34,6 +34,7 @@ import edu.princeton.cs.algs4.Vector;
  *  @author Kevin Wayne
  */
 public final class SparseVector {
+
     /** Dimension. */
     private int d;
     /** The vector, represented by index-value pairs. */
@@ -46,7 +47,7 @@ public final class SparseVector {
      */
     private SparseVector(final int newd) {
         this.d  = newd;
-        this.st = new ST<>();
+        this.st = new ST<>();   // empty ST represents all 0s vector
     }
 
    /**
@@ -63,7 +64,7 @@ public final class SparseVector {
         if (value == 0.0) {
             st.delete(i);
         } else {
-            st.put(i, value);
+            st.put(i, value);   // a[i] = value
         }
     }
 
@@ -79,7 +80,7 @@ public final class SparseVector {
             throw new IndexOutOfBoundsException("Illegal index");
         }
         if (st.contains(i)) {
-            return st.get(i);
+            return st.get(i);   // return a[i]
         } else {
             return 0.0;
         }
@@ -87,7 +88,6 @@ public final class SparseVector {
 
    /**
      * Returns the number of nonzero entries in this vector.
-     *
      * @return the number of nonzero entries in this vector
      */
     public int nnz() {
@@ -96,7 +96,6 @@ public final class SparseVector {
 
    /**
      * Returns the dimension of this vector.
-     *
      * @return the dimension of this vector
      * @deprecated Replaced by {@link #dimension()}.
      */
@@ -107,7 +106,6 @@ public final class SparseVector {
 
    /**
      * Returns the dimension of this vector.
-     *
      * @return the dimension of this vector
      */
     private int dimension() {
@@ -129,7 +127,8 @@ public final class SparseVector {
         }
         double sum = 0.0;
 
-        // iterate over the vector with the fewest nonzeros
+        // iterate over the vector with the fewest non-zeroes
+        // dot product is constant time for sparse vectors.
         if (this.st.size() <= that.st.size()) {
             for (int i : this.st.keys()) {
                 if (that.st.contains(i)) {
@@ -148,7 +147,6 @@ public final class SparseVector {
 
     /**
      * Returns the inner product of this vector with the specified array.
-     *
      * @param  that the array
      * @return the dot product between this vector and that array
      * @throws IllegalArgumentException if the dimensions of the vector and the
@@ -165,7 +163,6 @@ public final class SparseVector {
     /**
      * Returns the magnitude of this vector.
      * This is also known as the L2 norm or the Euclidean norm.
-     *
      * @return the magnitude of this vector
      */
     private double magnitude() {
@@ -174,7 +171,6 @@ public final class SparseVector {
 
     /**
      * Returns the Euclidean norm of this vector.
-     *
      * @return the Euclidean norm of this vector
      * @deprecated Replaced by {@link #magnitude()}.
      */
@@ -186,7 +182,6 @@ public final class SparseVector {
     /**
      * Returns the scalar-vector product of this vector with the specified
      * scalar.
-     *
      * @param  alpha the scalar
      * @return the scalar-vector product of this vector with the specified
      *         scalar
@@ -201,7 +196,6 @@ public final class SparseVector {
 
     /**
      * Returns the sum of this vector and the specified vector.
-     *
      * @param  that the vector to add to this vector
      * @return the sum of this vector and that vector
      * @throws IllegalArgumentException if the dimensions of the two vectors are
@@ -236,7 +230,6 @@ public final class SparseVector {
 
     /**
      * Unit tests the {@code SparseVector} data type.
-     *
      * @param args the command-line arguments
      */
     public static void main(final String[] args) {
